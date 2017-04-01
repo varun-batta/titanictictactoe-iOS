@@ -7,27 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */; };
 		8BAB4A1F1E725F5A00B64D6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A1E1E725F5A00B64D6D /* AppDelegate.swift */; };
 		8BAB4A211E725F5A00B64D6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A201E725F5A00B64D6D /* GameScene.sks */; };
 		8BAB4A231E725F5A00B64D6D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A221E725F5A00B64D6D /* Actions.sks */; };
 		8BAB4A251E725F5A00B64D6D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A241E725F5A00B64D6D /* GameScene.swift */; };
-		8BAB4A271E725F5A00B64D6D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A261E725F5A00B64D6D /* GameViewController.swift */; };
-		8BAB4A2A1E725F5A00B64D6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A281E725F5A00B64D6D /* Main.storyboard */; };
+		8BAB4A271E725F5A00B64D6D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A261E725F5A00B64D6D /* Index.swift */; };
 		8BAB4A2C1E725F5A00B64D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */; };
 		8BAB4A2F1E725F5A00B64D6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */; };
+		8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A361E78AECB00B64D6D /* MainMenu.swift */; };
+		8BAB4A391E78E87900B64D6D /* LevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A381E78E87900B64D6D /* LevelMenu.swift */; };
+		8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3A1E7A08EA00B64D6D /* Board.swift */; };
+		8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */; };
+		8BAB4A401E7B7B1200B64D6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */; };
+		8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A411E80CA2100B64D6D /* Winner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_titanictictactoe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		8BAB4A1B1E725F5900B64D6D /* titanictictactoe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = titanictictactoe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAB4A1E1E725F5A00B64D6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BAB4A201E725F5A00B64D6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8BAB4A221E725F5A00B64D6D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		8BAB4A241E725F5A00B64D6D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		8BAB4A261E725F5A00B64D6D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		8BAB4A291E725F5A00B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8BAB4A261E725F5A00B64D6D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BAB4A2E1E725F5A00B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BAB4A301E725F5A00B64D6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BAB4A361E78AECB00B64D6D /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		8BAB4A381E78E87900B64D6D /* LevelMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMenu.swift; sourceTree = "<group>"; };
+		8BAB4A3A1E7A08EA00B64D6D /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardAdapter.swift; sourceTree = "<group>"; };
+		8BAB4A3F1E7B7B1200B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8BAB4A411E80CA2100B64D6D /* Winner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
+		FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +49,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7ED88939497EA16BD639A8FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84C3456FA68AD96678B3D9BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */,
+				72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8BAB4A121E725F5900B64D6D = {
 			isa = PBXGroup;
 			children = (
 				8BAB4A1D1E725F5A00B64D6D /* titanictictactoe */,
 				8BAB4A1C1E725F5900B64D6D /* Products */,
+				84C3456FA68AD96678B3D9BF /* Pods */,
+				7ED88939497EA16BD639A8FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,8 +98,13 @@
 				8BAB4A201E725F5A00B64D6D /* GameScene.sks */,
 				8BAB4A221E725F5A00B64D6D /* Actions.sks */,
 				8BAB4A241E725F5A00B64D6D /* GameScene.swift */,
-				8BAB4A261E725F5A00B64D6D /* GameViewController.swift */,
-				8BAB4A281E725F5A00B64D6D /* Main.storyboard */,
+				8BAB4A261E725F5A00B64D6D /* Index.swift */,
+				8BAB4A361E78AECB00B64D6D /* MainMenu.swift */,
+				8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */,
+				8BAB4A411E80CA2100B64D6D /* Winner.swift */,
+				8BAB4A3A1E7A08EA00B64D6D /* Board.swift */,
+				8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */,
+				8BAB4A381E78E87900B64D6D /* LevelMenu.swift */,
 				8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */,
 				8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */,
 				8BAB4A301E725F5A00B64D6D /* Info.plist */,
@@ -80,9 +119,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BAB4A331E725F5A00B64D6D /* Build configuration list for PBXNativeTarget "titanictictactoe" */;
 			buildPhases = (
+				535652F29DFBC932018FA8BE /* [CP] Check Pods Manifest.lock */,
 				8BAB4A171E725F5900B64D6D /* Sources */,
 				8BAB4A181E725F5900B64D6D /* Frameworks */,
 				8BAB4A191E725F5900B64D6D /* Resources */,
+				B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */,
+				3D8D8363E105F66F39E3C1BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,8 +175,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BAB4A2A1E725F5A00B64D6D /* Main.storyboard in Resources */,
 				8BAB4A211E725F5A00B64D6D /* GameScene.sks in Resources */,
+				8BAB4A401E7B7B1200B64D6D /* Main.storyboard in Resources */,
 				8BAB4A2C1E725F5A00B64D6D /* Assets.xcassets in Resources */,
 				8BAB4A2F1E725F5A00B64D6D /* LaunchScreen.storyboard in Resources */,
 				8BAB4A231E725F5A00B64D6D /* Actions.sks in Resources */,
@@ -143,34 +185,87 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3D8D8363E105F66F39E3C1BF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		535652F29DFBC932018FA8BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8BAB4A171E725F5900B64D6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAB4A391E78E87900B64D6D /* LevelMenu.swift in Sources */,
 				8BAB4A251E725F5A00B64D6D /* GameScene.swift in Sources */,
-				8BAB4A271E725F5A00B64D6D /* GameViewController.swift in Sources */,
+				8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */,
+				8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */,
+				8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */,
+				8BAB4A271E725F5A00B64D6D /* Index.swift in Sources */,
 				8BAB4A1F1E725F5A00B64D6D /* AppDelegate.swift in Sources */,
+				8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8BAB4A281E725F5A00B64D6D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BAB4A291E725F5A00B64D6D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8BAB4A2E1E725F5A00B64D6D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BAB4A3F1E7B7B1200B64D6D /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -271,11 +366,16 @@
 		};
 		8BAB4A341E725F5A00B64D6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E2P9B5XE6Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta.titanictictactoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -285,11 +385,16 @@
 		};
 		8BAB4A351E725F5A00B64D6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E2P9B5XE6Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta.titanictictactoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -316,6 +421,7 @@
 				8BAB4A351E725F5A00B64D6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
