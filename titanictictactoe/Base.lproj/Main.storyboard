@@ -399,6 +399,14 @@
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="Waa-Dp-eQe"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" tag="309" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gG-qd-Wrh">
+                                        <rect key="frame" x="41" y="414" width="331" height="36"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Invite Friends">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -422,10 +430,13 @@
                                     <constraint firstItem="gbk-Uk-q95" firstAttribute="centerY" secondItem="9va-Bv-3SA" secondAttribute="centerY" multiplier="0.2" id="c5h-NF-eMw"/>
                                     <constraint firstItem="atw-s3-1GN" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="c8F-0U-fC8"/>
                                     <constraint firstItem="atw-s3-1GN" firstAttribute="width" secondItem="9va-Bv-3SA" secondAttribute="width" multiplier="0.8" id="dJn-K2-TxP"/>
+                                    <constraint firstItem="4gG-qd-Wrh" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="eXB-cx-P2X"/>
                                     <constraint firstItem="naZ-sM-4Nd" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="hk0-ib-XmP"/>
+                                    <constraint firstItem="4gG-qd-Wrh" firstAttribute="top" secondItem="grG-mA-UHz" secondAttribute="bottom" constant="10" id="nDC-Qr-kOp"/>
                                     <constraint firstItem="grG-mA-UHz" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="tMo-SM-zuM"/>
                                     <constraint firstItem="pM8-si-ATK" firstAttribute="top" secondItem="naZ-sM-4Nd" secondAttribute="bottom" constant="10" id="tNj-k9-zqP"/>
                                     <constraint firstItem="K4D-51-foM" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="vqg-dm-Tff"/>
+                                    <constraint firstItem="4gG-qd-Wrh" firstAttribute="width" secondItem="9va-Bv-3SA" secondAttribute="width" multiplier="0.8" id="xEG-dd-6gL"/>
                                 </constraints>
                             </view>
                         </subviews>

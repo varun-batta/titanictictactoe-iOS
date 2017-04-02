@@ -13,7 +13,7 @@ import FacebookShare
 import FacebookCore
 import FBSDKShareKit
 
-class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate {
+class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInviteDialogDelegate {
     var multiplayer = false
     var caller = ""
     var instructions = false
@@ -28,21 +28,54 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate {
         // Do any additional setup after loading the view.
         let titleLabel = self.view.viewWithTag(301) as! UILabel
         let savedGamesButton = self.view.viewWithTag(307) as! UIButton
-        let loginButton = LoginButton(readPermissions: [ .publicProfile, .userFriends ])
-        loginButton.frame = CGRect(origin: CGPoint(x: self.view.frame.width * 0.1, y: self.view.frame.height / 1.7), size: CGSize(width: self.view.frame.width * 0.8, height: self.view.frame.height * 0.05))
+        let inviteFriendsButton : UIButton = self.view.viewWithTag(309) as! UIButton
+
+        // Multiplayer vs. non-Multiplayer views
         if (multiplayer) {
+            let loginButton = LoginButton(readPermissions: [ .publicProfile, .userFriends ])
+            
+            // Constraints for loginButton
+            loginButton.translatesAutoresizingMaskIntoConstraints = false
+            let widthConstraint = NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 0.8, constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: -20)
+            let centerXConstraint = NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
+            
             titleLabel.text = "WiFi Game"
             savedGamesButton.setTitle("Current Games", for: .normal)
             self.view.addSubview(loginButton)
+            inviteFriendsButton.addTarget(self, action: #selector(self.inviteFriends), for: UIControlEvents.touchUpInside)
+            
+            // Adding constraints for loginButton
+            self.view.addConstraint(widthConstraint)
+            self.view.addConstraint(bottomConstraint)
+            self.view.addConstraint(centerXConstraint)
+
         } else {
             titleLabel.text = "Pass-by-Pass Game"
             savedGamesButton.setTitle("Saved Games", for: .normal)
+            inviteFriendsButton.isHidden = true
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func inviteFriends() {
+        let inviteDialog : FBSDKAppInviteDialog = FBSDKAppInviteDialog()
+        
+        if inviteDialog.canShow() {
+            let appLinkURL : NSURL = NSURL(string: "https://fb.me.272886266489420")!
+            
+            let inviteContent : FBSDKAppInviteContent = FBSDKAppInviteContent()
+            inviteContent.appLinkURL = appLinkURL as URL!
+            
+            inviteDialog.content = inviteContent
+            inviteDialog.delegate = self
+            inviteDialog.show()
+        }
     }
     
     @IBAction func levelSelect(_ sender: UIButton) {
@@ -68,10 +101,18 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate {
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
+//                var gameRequest = GameRequest(title: "New Match", message: "Let's play Titanic Tic Tac Toe!")
+//                gameRequest.actionType = .turn
+//                do {
+//                    try GameRequest.Dialog.show(gameRequest, completion: nil)
+//                } catch is exception {
+//                    print("Exception thrown")
+//                }
                 let gameRequest = FBSDKGameRequestContent()
                 gameRequest.message = "New Match"
                 gameRequest.actionType = .turn
-//                let gameRequestDialog = FBSDKGameRequestDialog()
+                gameRequest.filters = .appUsers
+                
                 FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
             }
             
@@ -147,5 +188,19 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate {
 
     func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
         print("didCancel")
+    }
+    
+    //MARK: FBSDKAppInviteDialogDelegate
+    
+    func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        let resultObject = NSDictionary(dictionary: results)
+        
+        for key in resultObject {
+            print(key)
+        }
+    }
+    
+    func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: Error!) {
+        print("Error tool place in appInviteDialog \(error)")
     }
 }
