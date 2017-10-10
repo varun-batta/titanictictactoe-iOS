@@ -18,6 +18,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     var currentPlayer : String!
     static var player1 : String = "Player 1"
     static var player2 : String = "Player 2"
+    var recipientID : String!
     var playerTurn : String!
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!
@@ -28,6 +29,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     static var background : UIView!
     var levelMenu : LevelMenu!
     var mainMenu : MainMenu!
+    var multiplayer : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,6 +140,8 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             boardAdapter?.board = self
             //        boardAdapter?.metaRow = row
             //        boardAdapter?.metaColumn = column
+            boardAdapter?.multiplayer = self.multiplayer
+            boardAdapter?.recipientID = self.recipientID
             
             miniBoard.dataSource = boardAdapter
             miniBoard.delegate = boardAdapter

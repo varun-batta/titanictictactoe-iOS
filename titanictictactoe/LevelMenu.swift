@@ -155,8 +155,12 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             board.level = extras[0] as! Int
             Board.player1 = extras[1] as! String
             Board.player2 = extras[2] as! String
+            if extras.count > 3 {
+                board.recipientID = extras[3] as! String
+            }
             board.levelMenu = self
             board.mainMenu = self.mainMenu
+            board.multiplayer = self.multiplayer
         }
         // Pass the selected object to the new view controller.
     }
@@ -177,9 +181,39 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
             } else {
+                let connection = GraphRequestConnection()
+                connection.add(GraphRequest(graphPath: "/me")) { httpResponse, result in
+                    switch result {
+                    case .success(let response):
+                        print("Graph Request Succeeded: \(response.dictionaryValue?["name"])")
+                        self.player1 = response.dictionaryValue?["name"] as! String
+                        print("Graph Request Recipients \(recipients)")
+                        let connection2 = GraphRequestConnection()
+                        connection2.add(GraphRequest(graphPath: "/\(recipients[0])")) { httpResponse, result in
+                            switch result {
+                            case .success(let response):
+                                print("Graph Request Succeeded: \(response.dictionaryValue?["name"])")
+                                self.player2 = response.dictionaryValue?["name"] as! String
+                                
+                                let extras = [self.level, self.player1, self.player2, recipients[0]] as [Any]
+                                self.performSegue(withIdentifier: "ToGame", sender: extras)
+                            case .failed(let error):
+                                print("Graph Request Failed: \(error)")
+                            }
+                        }
+                        connection2.start()
+                    case .failed(let error):
+                        print("Graph Request Failed: \(error)")
+                    }
+                }
+                connection.start()
                 print("Good!")
             }
         }
+    }
+    
+    func getNames() {
+        
     }
     
     func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {

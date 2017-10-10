@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import FacebookCore
+import FBSDKCoreKit
+import FBSDKShareKit
 
 private let reuseIdentifier = "Cell"
 
-class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, FBSDKGameRequestDialogDelegate {
 
     var level : Int!
     var dimension : Int!
     static var metaRow : Int = -1
     static var metaColumn : Int = -1
+    var multiplayer : Bool!
+    var recipientID : String!
     var zeroCount : Int = -1
     var currentTurn : String = "X"
     var turn : String!
@@ -246,6 +251,10 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
             boardChanger(row: row, column: column, level: level, clickable: true)
         }
         
+        if self.multiplayer! {
+            saveGame()
+        }
+        
         let winOrTie : Bool = winChecker(row: row, column: column, level: level, actual: level, winchecker: BoardAdapter.wincheck, turnValue: turn)
     }
 
@@ -420,4 +429,33 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         return winOrTie
     }
     
+    func saveGame() {
+        let gameRequestContent = FBSDKGameRequestContent()
+        gameRequestContent.message = Board.player1 + " has just played their turn"
+        gameRequestContent.recipients = [self.recipientID]
+        gameRequestContent.actionType = FBSDKGameRequestActionType.turn
+        
+        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
+    }
+    
+    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+        //Fall back as if no move was made
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
+        print("Error!")
+        //Fall back as if no move was made, or ask for retry
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        for i in 0...2 {
+            for j in 0...2 {
+                let key : Int = i*3 + j
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.isEnabled = false
+            }
+        }
+        print("Success! \(results)")
+    }
 }
