@@ -52,7 +52,7 @@ class MainMenu: UIViewController {
         if (segue.identifier == "GameTypeSelection") {
             let levelMenu = segue.destination as! LevelMenu
             let extras = sender as! [Any]
-            levelMenu.multiplayer = extras[0] as! Bool
+            LevelMenu.multiplayer = extras[0] as! Bool
             levelMenu.caller = extras[1] as! String
             levelMenu.instructions = extras[2] as! Bool
             levelMenu.mainMenu = self

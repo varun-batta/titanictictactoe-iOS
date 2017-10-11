@@ -18,6 +18,8 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     var currentPlayer : String!
     static var player1 : String = "Player 1"
     static var player2 : String = "Player 2"
+    static var player1ID : Int = 0
+    static var player2ID : Int = 0
     var playerTurn : String!
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!

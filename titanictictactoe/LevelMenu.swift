@@ -14,11 +14,13 @@ import FacebookCore
 import FBSDKShareKit
 
 class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInviteDialogDelegate {
-    var multiplayer = false
+    static var multiplayer = false
     var caller = ""
     var instructions = false
-    var player1 : String = "Player 1"
-    var player2 : String = "Player 2"
+    static var player1 : String = "Player 1"
+    static var player2 : String = "Player 2"
+    static var player1ID : Int = 0
+    static var player2ID : Int = 0
     var level : Int = 1
     var mainMenu : MainMenu!
     
@@ -31,7 +33,7 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
         let inviteFriendsButton : UIButton = self.view.viewWithTag(309) as! UIButton
 
         // Multiplayer vs. non-Multiplayer views
-        if (multiplayer) {
+        if (LevelMenu.multiplayer) {
             let loginButton = LoginButton(readPermissions: [ .publicProfile, .userFriends ])
             
             // Constraints for loginButton
@@ -83,7 +85,7 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
         case 303:
             self.level = 1
             
-            if !multiplayer {
+            if !LevelMenu.multiplayer {
                 let alert = UIAlertController(title: "Player Names", message: "Please Enter the Player Names:", preferredStyle: UIAlertControllerStyle.alert)
             
                 alert.addTextField(configurationHandler: {(textField) in textField.placeholder = "Player 1" })
@@ -91,11 +93,11 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                     let player1TextField = alert!.textFields![0]
-                    self.player1 = player1TextField.text!
+                    LevelMenu.player1 = player1TextField.text!
                     let player2TextField = alert!.textFields![1]
-                    self.player2 = player2TextField.text!
+                    LevelMenu.player2 = player2TextField.text!
                 
-                    let extras = [self.level, self.player1, self.player2] as [Any]
+                    let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
                 
                     self.performSegue(withIdentifier: "ToGame", sender: extras)
                 }))
@@ -127,11 +129,11 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 let player1TextField = alert!.textFields![0]
-                self.player1 = player1TextField.text!
+                LevelMenu.player1 = player1TextField.text!
                 let player2TextField = alert!.textFields![1]
-                self.player2 = player2TextField.text!
+                LevelMenu.player2 = player2TextField.text!
                 
-                let extras = [self.level, self.player1, self.player2] as [Any]
+                let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
                 
                 self.performSegue(withIdentifier: "ToGame", sender: extras)
             }))
@@ -155,6 +157,8 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             board.level = extras[0] as! Int
             Board.player1 = extras[1] as! String
             Board.player2 = extras[2] as! String
+            Board.player1ID = extras[3] as! Int
+            Board.player2ID = extras[4] as! Int
             board.levelMenu = self
             board.mainMenu = self.mainMenu
         }
@@ -177,7 +181,34 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                print("Good!")
+                let connection = GraphRequestConnection()
+                connection.add(GraphRequest(graphPath: "/me", parameters: ["fields" : "id, name"])) { httpResponse, result in
+                    switch result {
+                    case .success(let response):
+                        let player1FullName = response.dictionaryValue?["name"] as! String
+                        let player1FullNameArr = player1FullName.characters.split(separator: " ")
+                        LevelMenu.player1 = String(player1FullNameArr[0])
+                        LevelMenu.player1ID = Int(response.dictionaryValue?["id"] as! String)!
+                        let connection2 = GraphRequestConnection()
+                        connection2.add(GraphRequest(graphPath: "/?id=\(recipients[0])", parameters: ["fields" : "id, name"])) { httpResponse, result in
+                            switch result {
+                            case .success(let response):
+                                let player2FullName = response.dictionaryValue?["name"] as! String
+                                let player2FullNameArr = player2FullName.characters.split(separator: " ")
+                                LevelMenu.player2 = String(player2FullNameArr[0])
+                                LevelMenu.player2ID = Int(response.dictionaryValue?["id"] as! String)!
+                                let extras = [self.level, LevelMenu.player1, LevelMenu.player2, LevelMenu.player1ID, LevelMenu.player2ID] as [Any]
+                                self.performSegue(withIdentifier: "ToGame", sender: extras)
+                            case .failed(let error):
+                                print("Error! \(error)")
+                            }
+                        }
+                        connection2.start()
+                    case .failed(let error):
+                        print("Error! \(error)")
+                    }
+                }
+                connection.start()
             }
         }
     }

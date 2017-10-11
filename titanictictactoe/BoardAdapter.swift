@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FacebookCore
+import FacebookShare
 
 private let reuseIdentifier = "Cell"
 
@@ -22,6 +24,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     var board : Board!
     static var wincheck = Array(repeating: Array(repeating: "", count: 9), count: 10)
     static var metawincheck = Array(repeating: Array(repeating: "", count: 3), count: 3)
+    static var firstTurn : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -247,6 +250,39 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         }
         
         let winOrTie : Bool = winChecker(row: row, column: column, level: level, actual: level, winchecker: BoardAdapter.wincheck, turnValue: turn)
+        
+        if LevelMenu.multiplayer {
+            var toID = 0
+            var fromID = 0
+            if turn == "X" {
+                toID = Board.player2ID
+                fromID = Board.player1ID
+            } else {
+                toID = Board.player1ID
+                fromID = Board.player2ID
+            }
+            var messageText = ""
+            if BoardAdapter.firstTurn {
+                messageText = "@[\(fromID)] has challenged you to a game, play now!"
+            } else {
+                messageText = "@[\(fromID)] has played and now it is your turn!"
+            }
+            let game = createGameString()
+            let params : [String : Any] = ["action_type" : OpenGraphAction.init(type: "TURN"), "data" : game, "from" : Int(fromID), "message" : messageText]
+            makeTurn(to: toID, params: params)
+        }
+    }
+    
+    func createGameString() -> String {
+        var game = ""
+        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
+        for i in 0...(size - 1) {
+            for j in 0...(size - 1) {
+                game += BoardAdapter.wincheck[i][j] + ","
+            }
+            game += ";"
+        }
+        return game
     }
 
     func boardChanger( row : Int, column : Int, level : Int, clickable : Bool) {
@@ -418,6 +454,21 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         
         
         return winOrTie
+    }
+    
+    //MARK: Multiplayer Functions
+    
+    func makeTurn(to : Int, params : [String : Any]) {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(to)/apprequests", parameters: params, httpMethod: .POST)) { httpResponse, result in
+            switch result {
+            case .success(let response):
+                print("Sent!")
+            case .failed(let error):
+                print("Sorry, unable to send turn \(error)")
+            }
+        }
+        connection.start()
     }
     
 }
