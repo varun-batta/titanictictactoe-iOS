@@ -30,6 +30,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     static var background : UIView!
     var levelMenu : LevelMenu!
     var mainMenu : MainMenu!
+    var multiplayer : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,6 +141,8 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             boardAdapter?.board = self
             //        boardAdapter?.metaRow = row
             //        boardAdapter?.metaColumn = column
+            boardAdapter?.multiplayer = self.multiplayer
+            boardAdapter?.recipientID = self.recipientID
             
             miniBoard.dataSource = boardAdapter
             miniBoard.delegate = boardAdapter

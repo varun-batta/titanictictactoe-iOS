@@ -161,6 +161,7 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             Board.player2ID = extras[4] as! Int
             board.levelMenu = self
             board.mainMenu = self.mainMenu
+            board.multiplayer = self.multiplayer
         }
         // Pass the selected object to the new view controller.
     }
@@ -211,6 +212,10 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 connection.start()
             }
         }
+    }
+    
+    func getNames() {
+        
     }
     
     func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
