@@ -12,14 +12,12 @@ import FacebookShare
 
 private let reuseIdentifier = "Cell"
 
-class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, FBSDKGameRequestDialogDelegate {
+class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var level : Int!
     var dimension : Int!
     static var metaRow : Int = -1
     static var metaColumn : Int = -1
-    var multiplayer : Bool!
-    var recipientID : String!
     var zeroCount : Int = -1
     var currentTurn : String = "X"
     var turn : String!
@@ -249,10 +247,6 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         
         if level >= 2 {
             boardChanger(row: row, column: column, level: level, clickable: true)
-        }
-        
-        if self.multiplayer! {
-            saveGame()
         }
         
         let winOrTie : Bool = winChecker(row: row, column: column, level: level, actual: level, winchecker: BoardAdapter.wincheck, turnValue: turn)
