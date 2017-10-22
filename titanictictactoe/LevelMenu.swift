@@ -181,30 +181,35 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
             } else {
+                let connection = GraphRequestConnection()
                 connection.add(GraphRequest(graphPath: "/me", parameters: ["fields" : "id, name"])) { httpResponse, result in
                     switch result {
+                    case .success(let response):
                         let player1FullName = response.dictionaryValue?["name"] as! String
                         let player1FullNameArr = player1FullName.characters.split(separator: " ")
                         LevelMenu.player1 = String(player1FullNameArr[0])
-                        LevelMenu.player1ID = Int(response.dictionaryValue?["id"] as! String)!
-                        LevelMenu.player1ID = Int(response.dictionaryValue?["id"] as! String)!
-                        connection2.add(GraphRequest(graphPath: "/?id=\(recipients[0])", parameters: ["fields" : "id, name"])) { httpResponse, result in
+                        let player1IDString = response.dictionaryValue?["id"] as! String
+                        LevelMenu.player1ID = Int(player1IDString)!
+                        let connection2 = GraphRequestConnection()
                         connection2.add(GraphRequest(graphPath: "/?id=\(recipients[0])", parameters: ["fields" : "id, name"])) { httpResponse, result in
                             switch result {
+                            case .success(let response):
                                 let player2FullName = response.dictionaryValue?["name"] as! String
                                 let player2FullNameArr = player2FullName.characters.split(separator: " ")
                                 LevelMenu.player2 = String(player2FullNameArr[0])
                                 LevelMenu.player2ID = Int(response.dictionaryValue?["id"] as! String)!
                                 let extras = [self.level, LevelMenu.player1, LevelMenu.player2, LevelMenu.player1ID, LevelMenu.player2ID] as [Any]
-                                let extras = [self.level, LevelMenu.player1, LevelMenu.player2, LevelMenu.player1ID, LevelMenu.player2ID] as [Any]
                                 self.performSegue(withIdentifier: "ToGame", sender: extras)
+                            case .failed(let error):
                                 print("Error! \(error)")
                             }
                         }
                         connection2.start()
+                    case .failed(let error):
                         print("Error! \(error)")
                     }
                 }
+                connection.start()
                 print("Good!")
             }
         }
@@ -229,6 +234,6 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
     }
     
     func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: Error!) {
-        print("Error tool place in appInviteDialog \(error)")
+        print("Error took place in appInviteDialog \(error)")
     }
 }

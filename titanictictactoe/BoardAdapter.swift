@@ -9,10 +9,12 @@
 import UIKit
 import FacebookCore
 import FacebookShare
+import FBSDKCoreKit
+import FBSDKShareKit
 
 private let reuseIdentifier = "Cell"
 
-class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, FBSDKGameRequestDialogDelegate {
 
     var level : Int!
     var dimension : Int!
@@ -268,7 +270,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
                 messageText = "@[\(fromID)] has played and now it is your turn!"
             }
             let game = createGameString()
-            let params : [String : Any] = ["action_type" : OpenGraphAction.init(type: "TURN"), "data" : game, "from" : Int(fromID), "message" : messageText]
+            let params : [String : Any] = ["data" : game, "message" : messageText]
             makeTurn(to: toID, params: params)
         }
     }
@@ -459,16 +461,33 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     //MARK: Multiplayer Functions
     
     func makeTurn(to : Int, params : [String : Any]) {
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(to)/apprequests", parameters: params, httpMethod: .POST)) { httpResponse, result in
-            switch result {
-            case .success(let response):
-                print("Sent!")
-            case .failed(let error):
-                print("Sorry, unable to send turn \(error)")
-            }
-        }
-        connection.start()
+        let gameRequestContent = FBSDKGameRequestContent()
+        gameRequestContent.recipients = [String(to)]
+        gameRequestContent.message = params["message"] as! String
+        gameRequestContent.data = params["data"] as! String
+        gameRequestContent.actionType = FBSDKGameRequestActionType.turn
+    
+        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
     }
     
+    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+        //Fall back as if no move was made
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
+        print("Error!")
+        //Fall back as if no move was made
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        for i in 0...2 {
+            for j in 0...2 {
+                let key : Int = i*3 + j
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.isEnabled = false
+            }
+        }
+        print("Success! \(results)")
+    }
 }
