@@ -298,8 +298,9 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
                     button.backgroundColor = .white
                 }
             }
-            
-            if BoardAdapter.metawincheck[abs(row - 8)%3][abs(column - 8)%3] == "" {
+            let metaRow = abs(row - 8)%3;
+            let metaColumn = abs(column - 8)%3;
+            if BoardAdapter.metawincheck[metaRow][metaColumn] == "" {
                 for k in 0...2 {
                     for l in 0...2 {
                         let key : Int = abs(((row % 3)*27 + k*9 + (column % 3)*3 + l) - 80)

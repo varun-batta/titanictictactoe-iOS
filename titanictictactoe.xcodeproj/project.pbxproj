@@ -21,6 +21,7 @@
 		8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */; };
 		8BAB4A401E7B7B1200B64D6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */; };
 		8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A411E80CA2100B64D6D /* Winner.swift */; };
+		8BE5E7741F9D6BB8003571BA /* Roboto in Resources */ = {isa = PBXBuildFile; fileRef = 8BE5E7731F9D6BB7003571BA /* Roboto */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardAdapter.swift; sourceTree = "<group>"; };
 		8BAB4A3F1E7B7B1200B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8BAB4A411E80CA2100B64D6D /* Winner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
+		8BE5E7731F9D6BB7003571BA /* Roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Roboto; sourceTree = "<group>"; };
 		FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */,
 				8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */,
 				8BAB4A301E725F5A00B64D6D /* Info.plist */,
+				8BE5E7731F9D6BB7003571BA /* Roboto */,
 			);
 			path = titanictictactoe;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				8BAB4A2C1E725F5A00B64D6D /* Assets.xcassets in Resources */,
 				8BAB4A2F1E725F5A00B64D6D /* LaunchScreen.storyboard in Resources */,
 				8BAB4A231E725F5A00B64D6D /* Actions.sks in Resources */,
+				8BE5E7741F9D6BB8003571BA /* Roboto in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
