@@ -14,7 +14,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     var gaps : Double = 30
     var level : Int = 1
-    var dimension : Int!
+    var dimension : CGFloat!
     var currentPlayer : String!
     static var player1 : String = "Player 1"
     static var player2 : String = "Player 2"
@@ -31,6 +31,13 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     var levelMenu : LevelMenu!
     var mainMenu : MainMenu!
     
+    @IBOutlet var background: UIView!
+    @IBOutlet var boardCollectionView: UICollectionView!
+    @IBOutlet var playersTurnLabel: UILabel!
+    @IBOutlet var saveButton: UIButton!
+    @IBOutlet var menuButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,13 +51,23 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         if level == 1 {
-            Board.titleLabel.text = "Tic"
+            titleLabel.text = "Tic"
         } else {
-            Board.titleLabel.text = "Tic Tac"
+            titleLabel.text = "Tic Tac"
         }
         
         Board.playerTurnLabel.text = Board.player1 + "'s Turn"
-
+        Board.playerTurnLabel.textColor = Style.mainColorBlack
+        
+        // UI Setup
+        background.backgroundColor = Style.mainColorGreen;
+        boardCollectionView.backgroundColor = Style.mainColorBlack;
+        playersTurnLabel.textColor = Style.mainColorBlack;
+        saveButton.backgroundColor = Style.mainColorBlack;
+        saveButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        menuButton.backgroundColor = Style.mainColorBlack;
+        menuButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        titleLabel.textColor = Style.mainColorBlack;
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +85,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = Double(self.view.frame.size.width);
-        dimension = Int(0.9 * width - gaps)/3;
+        dimension = CGFloat(0.9 * width - gaps)/3.0;
         return CGSize(width: dimension, height: dimension);
     }
     
@@ -137,12 +154,13 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             
             miniBoard.dataSource = boardAdapter
             miniBoard.delegate = boardAdapter
+            miniBoard.backgroundColor = Style.mainColorBlack
         } else {
             let label = UILabel()
             label.text = BoardAdapter.metawincheck[abs(row - 2)][abs(column - 2)]
             label.textColor = .orange
             label.frame = CGRect(x: 0, y: 0, width: self.dimension, height: self.dimension)
-            label.font = Style.globalFont?.withSize(100)
+            label.font = Style.globalFont?.withSize(90)
             label.textAlignment = .center
             label.backgroundColor = .black
             

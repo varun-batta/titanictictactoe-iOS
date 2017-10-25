@@ -15,20 +15,39 @@ class Winner: UIViewController {
     var levelMenu : LevelMenu!
     var board : Board!
     
+    @IBOutlet var background: UIView!
+    @IBOutlet var playerWinsLabel: UILabel!
+    @IBOutlet var congratsLabel: UILabel!
+    @IBOutlet var mainMenuButton: UIButton!
+    @IBOutlet var viewGameButton: UIButton!
+    @IBOutlet var newGameButton: UIButton!
+    @IBOutlet var newWifiGameButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let winnerLabel : UILabel = self.view.viewWithTag(502) as! UILabel
-        let congratsLabel : UILabel = self.view.viewWithTag(503) as! UILabel
         if winnerName != nil {
             if winnerName == "Tie" {
-                winnerLabel.text = "It's a Tie!"
+                playerWinsLabel.text = "It's a Tie!"
                 congratsLabel.isHidden = true
             } else {
-                winnerLabel.text = winnerName + " WINS!!!"
+                playerWinsLabel.text = winnerName + " WINS!!!"
             }
         }
+        
+        // UI Setup
+        background.backgroundColor = Style.mainColorGreen;
+        playerWinsLabel.textColor = Style.mainColorBlack;
+        congratsLabel.textColor = Style.mainColorBlack;
+        mainMenuButton.backgroundColor = Style.mainColorBlack;
+        mainMenuButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        viewGameButton.backgroundColor = Style.mainColorBlack;
+        viewGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        newGameButton.backgroundColor = Style.mainColorBlack;
+        newGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        newWifiGameButton.backgroundColor = Style.mainColorBlack;
+        newWifiGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
     }
 
     override func didReceiveMemoryWarning() {

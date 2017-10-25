@@ -11,10 +11,26 @@ import UIKit
 class MainMenu: UIViewController {
     var caller = "MainMenu"
     
+    @IBOutlet var background: UIView!
+    @IBOutlet var mainMenuLabel: UILabel!
+    @IBOutlet var instructionsButton: UIButton!
+    @IBOutlet var passByPassGameButton: UIButton!
+    @IBOutlet var wifiGameButton: UIButton!
+    @IBOutlet var welcomeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // UI Setup
+        background.backgroundColor = Style.mainColorGreen;
+        mainMenuLabel.textColor = Style.mainColorBlack;
+        instructionsButton.backgroundColor = Style.mainColorBlack;
+        instructionsButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        passByPassGameButton.backgroundColor = Style.mainColorBlack;
+        passByPassGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        wifiGameButton.backgroundColor = Style.mainColorBlack;
+        wifiGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        welcomeLabel.textColor = Style.mainColorBlack;
     }
 
     override func didReceiveMemoryWarning() {

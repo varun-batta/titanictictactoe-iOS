@@ -11,9 +11,12 @@ import SpriteKit
 import GameplayKit
 import FacebookCore
 
-class Index: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //MARK: Properties
+    @IBOutlet var background: UIView!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var playButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,10 @@ class Index: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             // Fallback on earlier versions
         }
         
-        self.background.backgroundColor = Style.mainColorBlue;
+        background.backgroundColor = Style.mainColorBlue;
+        collectionView.backgroundColor = Style.mainColorBlue;
+        playButton.backgroundColor = Style.mainColorWhite;
+        playButton.setTitleColor(Style.mainColorBlack, for: .normal);
     }
 
     override var shouldAutorotate: Bool {
@@ -96,12 +102,15 @@ class Index: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCellDescription", for: indexPath)
             let titleCellTextView : UITextView = titleCell .viewWithTag(102) as! UITextView;
             titleCellTextView.text = titleLabels[indexPath.item];
+            titleCellTextView.backgroundColor = Style.mainColorGreen;
+            titleCellTextView.textColor = Style.mainColorBlack;
             titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         } else {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath);
             let titleCellLabel : UILabel = titleCell .viewWithTag(101) as! UILabel;
             titleCellLabel.text = titleLabels[indexPath.item];
+            titleCellLabel.textColor = Style.mainColorBlack;
             titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         }

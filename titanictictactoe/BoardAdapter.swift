@@ -17,7 +17,7 @@ private let reuseIdentifier = "Cell"
 class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, FBSDKGameRequestDialogDelegate {
 
     var level : Int!
-    var dimension : Int!
+    var dimension : CGFloat!
     static var metaRow : Int = -1
     static var metaColumn : Int = -1
     var zeroCount : Int = -1
@@ -71,9 +71,9 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var dimension : Int = self.dimension
+        var dimension : CGFloat = self.dimension
         if level == 2 {
-            dimension = (self.dimension - 10)/3
+            dimension = CGFloat(self.dimension - 10)/3.0
         }
         return CGSize(width: dimension, height: dimension);
     }
@@ -90,9 +90,9 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
             }
         }
         
-        var dimension : Int = self.dimension
+        var dimension : CGFloat = self.dimension
         if level == 2 {
-            dimension = (self.dimension - 10)/3
+            dimension = CGFloat(self.dimension - 10)/3.0
         }
         
         var row : Int = -1

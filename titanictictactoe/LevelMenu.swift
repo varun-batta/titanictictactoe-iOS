@@ -24,13 +24,19 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
     var level : Int = 1
     var mainMenu : MainMenu!
     
+    @IBOutlet var background: UIView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var pleaseSelectLevelLabel: UILabel!
+    @IBOutlet var level1Button: UIButton!
+    @IBOutlet var level2Button: UIButton!
+    @IBOutlet var level3Button: UIButton!
+    @IBOutlet var level4Button: UIButton!
+    @IBOutlet var savedGamesButton: UIButton!
+    @IBOutlet var mainMenuButton: UIButton!
+    @IBOutlet var inviteFriendsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        let titleLabel = self.view.viewWithTag(301) as! UILabel
-        let savedGamesButton = self.view.viewWithTag(307) as! UIButton
-        let inviteFriendsButton : UIButton = self.view.viewWithTag(309) as! UIButton
 
         // Multiplayer vs. non-Multiplayer views
         if (LevelMenu.multiplayer) {
@@ -56,8 +62,27 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             titleLabel.text = "Pass-by-Pass Game"
             savedGamesButton.setTitle("Saved Games", for: .normal)
             inviteFriendsButton.isHidden = true
+            inviteFriendsButton.isEnabled = false
         }
         
+        // UI Setup
+        background.backgroundColor = Style.mainColorGreen;
+        titleLabel.textColor = Style.mainColorBlack;
+        pleaseSelectLevelLabel.textColor = Style.mainColorBlack;
+        level1Button.backgroundColor = Style.mainColorBlack;
+        level1Button.setTitleColor(Style.mainColorWhite, for: .normal);
+        level2Button.backgroundColor = Style.mainColorBlack;
+        level2Button.setTitleColor(Style.mainColorWhite, for: .normal);
+        level3Button.backgroundColor = Style.mainColorBlack;
+        level3Button.setTitleColor(Style.mainColorWhite, for: .normal);
+        level4Button.backgroundColor = Style.mainColorBlack;
+        level4Button.setTitleColor(Style.mainColorWhite, for: .normal);
+        savedGamesButton.backgroundColor = Style.mainColorBlack;
+        savedGamesButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        mainMenuButton.backgroundColor = Style.mainColorBlack;
+        mainMenuButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        inviteFriendsButton.backgroundColor = Style.mainColorBlack;
+        inviteFriendsButton.setTitleColor(Style.mainColorWhite, for: .normal);
     }
 
     override func didReceiveMemoryWarning() {

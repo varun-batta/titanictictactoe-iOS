@@ -26,15 +26,15 @@
 		8BAB4A211E725F5A00B64D6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A201E725F5A00B64D6D /* GameScene.sks */; };
 		8BAB4A231E725F5A00B64D6D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A221E725F5A00B64D6D /* Actions.sks */; };
 		8BAB4A251E725F5A00B64D6D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A241E725F5A00B64D6D /* GameScene.swift */; };
-		8BAB4A271E725F5A00B64D6D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A261E725F5A00B64D6D /* Index.swift */; };
+		8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A261E725F5A00B64D6D /* Start.swift */; };
 		8BAB4A2C1E725F5A00B64D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */; };
 		8BAB4A2F1E725F5A00B64D6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */; };
 		8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A361E78AECB00B64D6D /* MainMenu.swift */; };
 		8BAB4A391E78E87900B64D6D /* LevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A381E78E87900B64D6D /* LevelMenu.swift */; };
 		8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3A1E7A08EA00B64D6D /* Board.swift */; };
 		8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */; };
-		8BAB4A401E7B7B1200B64D6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */; };
 		8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A411E80CA2100B64D6D /* Winner.swift */; };
+		8BEDB7621FA0345F002C42F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,7 @@
 		8BAB4A201E725F5A00B64D6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8BAB4A221E725F5A00B64D6D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		8BAB4A241E725F5A00B64D6D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		8BAB4A261E725F5A00B64D6D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		8BAB4A261E725F5A00B64D6D /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BAB4A2E1E725F5A00B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BAB4A301E725F5A00B64D6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				8BAB4A201E725F5A00B64D6D /* GameScene.sks */,
 				8BAB4A221E725F5A00B64D6D /* Actions.sks */,
 				8BAB4A241E725F5A00B64D6D /* GameScene.swift */,
-				8BAB4A261E725F5A00B64D6D /* Index.swift */,
+				8BAB4A261E725F5A00B64D6D /* Start.swift */,
 				8BAB4A361E78AECB00B64D6D /* MainMenu.swift */,
 				8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */,
 				8BAB4A411E80CA2100B64D6D /* Winner.swift */,
@@ -230,9 +230,9 @@
 				8B9B66DD1F9DAFFD0070B58F /* Roboto-ThinItalic.ttf in Resources */,
 				8B9B66DE1F9DAFFD0070B58F /* Roboto-Black.ttf in Resources */,
 				8BAB4A211E725F5A00B64D6D /* GameScene.sks in Resources */,
-				8BAB4A401E7B7B1200B64D6D /* Main.storyboard in Resources */,
 				8BAB4A2C1E725F5A00B64D6D /* Assets.xcassets in Resources */,
 				8B9B66C31F9D794F0070B58F /* TitanicTicTacToeLogo.png in Resources */,
+				8BEDB7621FA0345F002C42F6 /* Main.storyboard in Resources */,
 				8BAB4A2F1E725F5A00B64D6D /* LaunchScreen.storyboard in Resources */,
 				8BAB4A231E725F5A00B64D6D /* Actions.sks in Resources */,
 			);
@@ -298,7 +298,7 @@
 				8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */,
 				8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */,
 				8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */,
-				8BAB4A271E725F5A00B64D6D /* Index.swift in Sources */,
+				8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */,
 				8BAB4A1F1E725F5A00B64D6D /* AppDelegate.swift in Sources */,
 				8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */,
 				8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */,

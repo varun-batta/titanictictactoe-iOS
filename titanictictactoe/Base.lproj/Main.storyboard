@@ -20,7 +20,7 @@
         <!--Index-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" userLabel="Index" customClass="Index" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" userLabel="Index" customClass="Start" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -209,6 +209,11 @@
                             <constraint firstItem="3eT-mo-e3k" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="xCS-hj-tdy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="3eT-mo-e3k" id="G67-ib-yGr"/>
+                        <outlet property="collectionView" destination="C8p-Py-6DF" id="JP8-Ve-f2C"/>
+                        <outlet property="playButton" destination="zS9-3z-gg4" id="4TD-Lj-dIp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
@@ -322,6 +327,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="background" destination="QJh-K4-Gdg" id="gzl-kf-TG0"/>
+                        <outlet property="instructionsButton" destination="ZXY-zi-jzU" id="2aN-wb-tMK"/>
+                        <outlet property="mainMenuLabel" destination="r9x-uH-Avq" id="siO-eT-YeS"/>
+                        <outlet property="passByPassGameButton" destination="JBn-J0-xYv" id="H9G-MH-pTN"/>
+                        <outlet property="welcomeLabel" destination="F1l-q3-b0v" id="ZKe-Qh-jsH"/>
+                        <outlet property="wifiGameButton" destination="qi5-bQ-5qr" id="vGZ-F3-Lcb"/>
                         <segue destination="Mru-xP-AXb" kind="show" identifier="GameTypeSelection" id="ehn-UN-GnY"/>
                     </connections>
                 </viewController>
@@ -470,6 +481,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="background" destination="9va-Bv-3SA" id="2B6-L1-ZL3"/>
+                        <outlet property="inviteFriendsButton" destination="4gG-qd-Wrh" id="azF-aP-UiD"/>
+                        <outlet property="level1Button" destination="naZ-sM-4Nd" id="TI0-L2-kTo"/>
+                        <outlet property="level2Button" destination="pM8-si-ATK" id="sw9-A2-Hto"/>
+                        <outlet property="level3Button" destination="atw-s3-1GN" id="fqu-2r-Dn9"/>
+                        <outlet property="level4Button" destination="DDL-sc-zDL" id="Wev-v0-XU4"/>
+                        <outlet property="mainMenuButton" destination="grG-mA-UHz" id="EMk-Ag-P6u"/>
+                        <outlet property="pleaseSelectLevelLabel" destination="K4D-51-foM" id="tBG-Aa-Yhf"/>
+                        <outlet property="savedGamesButton" destination="wiR-wU-ORs" id="ePs-8w-W0P"/>
+                        <outlet property="titleLabel" destination="gbk-Uk-q95" id="hSp-qL-KpX"/>
                         <segue destination="85Z-43-oKX" kind="show" identifier="ToGame" id="nsR-wa-C6u"/>
                     </connections>
                 </viewController>
@@ -514,7 +535,6 @@
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="405" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-Mt-a17" userLabel="Mini Board">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Mv1-vv-lqV">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -534,7 +554,6 @@
                                                         </collectionView>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="pe4-Mt-a17" firstAttribute="width" secondItem="M8r-kI-Hgc" secondAttribute="width" id="5du-6d-BeP"/>
                                                     <constraint firstItem="pe4-Mt-a17" firstAttribute="height" secondItem="M8r-kI-Hgc" secondAttribute="height" id="SFX-vJ-CGU"/>
@@ -609,6 +628,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="background" destination="X4X-RP-JJ3" id="QQC-UP-6Xb"/>
+                        <outlet property="boardCollectionView" destination="qOw-FX-Xbi" id="3yV-t7-iMG"/>
+                        <outlet property="menuButton" destination="wks-j5-jHt" id="J9J-mg-t45"/>
+                        <outlet property="playersTurnLabel" destination="LkU-rm-Q6o" id="oCM-9a-9hg"/>
+                        <outlet property="saveButton" destination="ycv-z1-FGT" id="z5i-HD-1vv"/>
+                        <outlet property="titleLabel" destination="dyP-9u-ILQ" id="APw-WA-XUk"/>
                         <segue destination="yiN-Ug-hlq" kind="show" identifier="ToWinner" id="4m8-M6-TcK"/>
                     </connections>
                 </viewController>
@@ -717,6 +742,15 @@
                             <constraint firstItem="kwK-ZJ-kFI" firstAttribute="centerY" secondItem="a4I-E7-U37" secondAttribute="centerY" id="yj5-rU-OSb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="kwK-ZJ-kFI" id="e9l-ti-5i5"/>
+                        <outlet property="congratsLabel" destination="lxn-j9-vn1" id="Gc4-xf-bWO"/>
+                        <outlet property="mainMenuButton" destination="6Qt-93-cPT" id="9g9-42-OZi"/>
+                        <outlet property="newGameButton" destination="tfV-cd-Bhs" id="y2L-xt-WSk"/>
+                        <outlet property="newWifiGameButton" destination="rJm-Xu-xdt" id="oZX-hJ-OMe"/>
+                        <outlet property="playerWinsLabel" destination="tLj-Gz-B2C" id="ej6-gg-1WQ"/>
+                        <outlet property="viewGameButton" destination="CiO-9D-Tld" id="Kh2-Xl-oXT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAW-ee-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
