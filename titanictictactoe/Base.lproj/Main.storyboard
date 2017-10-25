@@ -9,7 +9,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -35,7 +34,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C8p-Py-6DF">
                                         <rect key="frame" x="21" y="34" width="372" height="372.33333333333331"/>
-                                        <color key="backgroundColor" name="MainColorBlue"/>
+                                        <color key="backgroundColor" red="0.0" green="0.031326614119999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="C8p-Py-6DF" secondAttribute="height" multiplier="1:1" id="2Cd-yx-hJE"/>
                                         </constraints>
@@ -56,12 +55,11 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-lu-bvu">
                                                             <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="32"/>
-                                                            <color key="textColor" name="MainColorBlack"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="qxj-lu-bvu" firstAttribute="centerX" secondItem="RP0-0o-pSk" secondAttribute="centerX" id="6Ys-9g-I1F"/>
                                                     <constraint firstItem="qxj-lu-bvu" firstAttribute="height" secondItem="RP0-0o-pSk" secondAttribute="height" id="Dmi-5f-N2Q"/>
@@ -81,12 +79,11 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="32"/>
-                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dummyTitleCell2" id="kYJ-oR-Jry" userLabel="topRightTitleCell">
                                                 <rect key="frame" x="260" y="0.0" width="112" height="112"/>
@@ -104,7 +101,7 @@
                                                         </label>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dummyTitleCell3" id="bVA-CF-tLT" userLabel="centerLeftCell">
                                                 <rect key="frame" x="0.0" y="122" width="112" height="112"/>
@@ -113,7 +110,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="titleCellDescription" id="RWZ-tb-apE" userLabel="titleCellDescriptionCell">
                                                 <rect key="frame" x="130" y="122" width="112" height="112"/>
@@ -124,13 +121,14 @@
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="102" contentMode="scaleToFill" text="This is the enhanced version of Tic Tac Toe! Enjoy!" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VKt-Nz-bIl">
                                                             <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
-                                                            <color key="backgroundColor" name="MainColorGreen"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="VKt-Nz-bIl" firstAttribute="width" secondItem="RWZ-tb-apE" secondAttribute="width" id="0PW-Nc-a6G"/>
                                                     <constraint firstItem="VKt-Nz-bIl" firstAttribute="height" secondItem="RWZ-tb-apE" secondAttribute="height" id="0ze-8P-b5r"/>
@@ -145,7 +143,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dummyTitleCell5" id="LSe-K1-4NA" userLabel="bottomLeftCell">
                                                 <rect key="frame" x="0.0" y="244" width="112" height="112"/>
@@ -154,7 +152,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dummyTitleCell6" id="gTT-Ca-a8W" userLabel="bottomMiddleCell">
                                                 <rect key="frame" x="130" y="244" width="112" height="112"/>
@@ -163,7 +161,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dummyTitleCell7" id="Nzw-gL-2FK" userLabel="bottomRightCell">
                                                 <rect key="frame" x="260" y="244" width="112" height="112"/>
@@ -172,7 +170,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorGreen"/>
+                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </collectionViewCell>
                                         </cells>
                                         <connections>
@@ -181,7 +179,7 @@
                                         </connections>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" name="MainColorBlue"/>
+                                <color key="backgroundColor" red="0.0" green="0.031326614119999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="C8p-Py-6DF" firstAttribute="centerX" secondItem="3eT-mo-e3k" secondAttribute="centerX" id="LfE-pC-es2"/>
                                     <constraint firstItem="C8p-Py-6DF" firstAttribute="width" secondItem="3eT-mo-e3k" secondAttribute="width" multiplier="0.9" id="Yn3-2e-pwH"/>
@@ -190,10 +188,10 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zS9-3z-gg4">
                                 <rect key="frame" x="21" y="460" width="373" height="36"/>
-                                <color key="backgroundColor" name="MainColorWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <state key="normal" title="Play">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <segue destination="20Z-GJ-IRb" kind="show" id="gq3-7f-cYw"/>
@@ -234,18 +232,18 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r9x-uH-Avq">
                                         <rect key="frame" x="0.0" y="528" width="414" height="24"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="201" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXY-zi-jzU">
                                         <rect key="frame" x="16" y="560" width="382" height="40"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="VCW-kG-Op0"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Instructions">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="buttonPressed:" destination="20Z-GJ-IRb" eventType="touchUpInside" id="6fx-Jw-1OB"/>
@@ -253,13 +251,13 @@
                                     </button>
                                     <button opaque="NO" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBn-J0-xYv">
                                         <rect key="frame" x="16" y="616" width="382" height="40"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="aw2-sh-DYd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Pass-by-Pass Game">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="buttonPressed:" destination="20Z-GJ-IRb" eventType="touchUpInside" id="4bi-ca-bXE"/>
@@ -267,36 +265,46 @@
                                     </button>
                                     <button opaque="NO" tag="203" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qi5-bQ-5qr">
                                         <rect key="frame" x="16" y="672" width="382" height="40"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="SDD-UU-Nct"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="WiFi Game">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="buttonPressed:" destination="20Z-GJ-IRb" eventType="touchUpInside" id="lvb-ie-vZM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-q3-b0v">
-                                        <rect key="frame" x="141" y="90" width="132.33333333333337" height="35.333333333333343"/>
+                                        <rect key="frame" x="141" y="90" width="132.33333333333337" height="35"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Xhr-JX-lvJ">
+                                        <rect key="frame" x="16" y="133" width="382" height="140"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Xhr-JX-lvJ" secondAttribute="height" multiplier="191:70" id="rZz-TI-jlh"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" name="MainColorGreen"/>
+                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="JBn-J0-xYv" firstAttribute="top" secondItem="ZXY-zi-jzU" secondAttribute="bottom" constant="16" id="1MC-ba-gmV"/>
                                     <constraint firstAttribute="bottom" secondItem="qi5-bQ-5qr" secondAttribute="bottom" constant="24" id="7yO-pL-Tdf"/>
                                     <constraint firstItem="JBn-J0-xYv" firstAttribute="leading" secondItem="QJh-K4-Gdg" secondAttribute="leading" constant="16" id="M2P-CM-H7Q"/>
+                                    <constraint firstItem="Xhr-JX-lvJ" firstAttribute="centerX" secondItem="QJh-K4-Gdg" secondAttribute="centerX" id="NVD-88-Sxt"/>
                                     <constraint firstItem="F1l-q3-b0v" firstAttribute="centerX" secondItem="QJh-K4-Gdg" secondAttribute="centerX" id="O8g-YN-7YV"/>
                                     <constraint firstItem="F1l-q3-b0v" firstAttribute="top" secondItem="QJh-K4-Gdg" secondAttribute="top" constant="90" id="PJz-Us-6vM"/>
+                                    <constraint firstItem="Xhr-JX-lvJ" firstAttribute="leading" secondItem="QJh-K4-Gdg" secondAttribute="leading" constant="16" id="RhF-ow-ZMd"/>
                                     <constraint firstItem="qi5-bQ-5qr" firstAttribute="leading" secondItem="QJh-K4-Gdg" secondAttribute="leading" constant="16" id="STX-AE-qZ0"/>
+                                    <constraint firstItem="Xhr-JX-lvJ" firstAttribute="top" secondItem="F1l-q3-b0v" secondAttribute="bottom" constant="8" id="UOh-lQ-sx9"/>
                                     <constraint firstAttribute="trailing" secondItem="ZXY-zi-jzU" secondAttribute="trailing" constant="16" id="VKK-vR-oxO"/>
                                     <constraint firstAttribute="trailing" secondItem="JBn-J0-xYv" secondAttribute="trailing" constant="16" id="Yug-tJ-Kay"/>
                                     <constraint firstItem="ZXY-zi-jzU" firstAttribute="leading" secondItem="QJh-K4-Gdg" secondAttribute="leading" constant="16" id="dX9-2y-5nm"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xhr-JX-lvJ" secondAttribute="trailing" constant="16" id="fnF-7x-vCV"/>
                                     <constraint firstAttribute="trailing" secondItem="qi5-bQ-5qr" secondAttribute="trailing" constant="16" id="j1S-b1-beg"/>
                                     <constraint firstItem="r9x-uH-Avq" firstAttribute="centerX" secondItem="QJh-K4-Gdg" secondAttribute="centerX" id="obM-xd-yvv"/>
                                     <constraint firstItem="ZXY-zi-jzU" firstAttribute="top" secondItem="r9x-uH-Avq" secondAttribute="bottom" constant="8" id="sod-u9-Mxc"/>
@@ -337,93 +345,91 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="301" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gbk-Uk-q95">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="0.0" y="56.666666666666657" width="414" height="35.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="302" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Level:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4D-51-foM">
-                                        <rect key="frame" x="0.0" y="98" width="414" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="0.0" y="92" width="414" height="23.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="303" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naZ-sM-4Nd">
-                                        <rect key="frame" x="41" y="138" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="125.66666666666669" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Level 1">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="bA6-0m-Brq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="304" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pM8-si-ATK">
-                                        <rect key="frame" x="41" y="184" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="169.66666666666666" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Level 2">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="aiC-Ye-6oU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="305" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atw-s3-1GN">
-                                        <rect key="frame" x="41" y="230" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="213.66666666666666" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Level 3">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="Khk-zx-zrJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="307" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiR-wU-ORs">
-                                        <rect key="frame" x="41" y="322" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="301.66666666666669" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Saved Games">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="ckC-sA-6VK"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="306" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDL-sc-zDL">
-                                        <rect key="frame" x="41" y="276" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="257.66666666666669" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Level 4">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="L9P-dd-DqH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="308" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grG-mA-UHz">
-                                        <rect key="frame" x="41" y="368" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="345.66666666666669" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Main Menu">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="levelSelect:" destination="Mru-xP-AXb" eventType="touchUpInside" id="Waa-Dp-eQe"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="309" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gG-qd-Wrh">
-                                        <rect key="frame" x="41" y="414" width="331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="41" y="389.66666666666669" width="331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Invite Friends">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="MainColorGreen"/>
+                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="DDL-sc-zDL" firstAttribute="centerX" secondItem="9va-Bv-3SA" secondAttribute="centerX" id="0ix-Z5-dSU"/>
                                     <constraint firstItem="grG-mA-UHz" firstAttribute="width" secondItem="9va-Bv-3SA" secondAttribute="width" multiplier="0.8" id="1Ga-TV-AXE"/>
@@ -487,8 +493,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="403" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qOw-FX-Xbi" userLabel="Board">
-                                        <rect key="frame" x="21" y="71" width="373" height="373"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="21" y="108" width="373" height="373"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qOw-FX-Xbi" secondAttribute="height" multiplier="1:1" id="RIQ-S3-nYg"/>
                                         </constraints>
@@ -508,7 +514,7 @@
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="405" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-Mt-a17" userLabel="Mini Board">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <color key="backgroundColor" name="MainColorBlack"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Mv1-vv-lqV">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -528,7 +534,7 @@
                                                         </collectionView>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" name="MainColorBlack"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="pe4-Mt-a17" firstAttribute="width" secondItem="M8r-kI-Hgc" secondAttribute="width" id="5du-6d-BeP"/>
                                                     <constraint firstItem="pe4-Mt-a17" firstAttribute="height" secondItem="M8r-kI-Hgc" secondAttribute="height" id="SFX-vJ-CGU"/>
@@ -543,39 +549,38 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="407" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-rm-Q6o">
-                                        <rect key="frame" x="34" y="459" width="98" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="32.666666666666664" y="496" width="101.33333333333334" height="21.333333333333371"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="408" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycv-z1-FGT">
-                                        <rect key="frame" x="142" y="454" width="82.666666666666686" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="144" y="491" width="82.666666666666686" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Save">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="85Z-43-oKX" eventType="touchUpInside" id="nZO-Vu-NLu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="409" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wks-j5-jHt">
-                                        <rect key="frame" x="235.33333333333337" y="454" width="83" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="237.33333333333337" y="491" width="83" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Menu">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="85Z-43-oKX" eventType="touchUpInside" id="jgT-p6-mev"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="MainColorGreen"/>
+                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="LkU-rm-Q6o" firstAttribute="top" secondItem="qOw-FX-Xbi" secondAttribute="bottom" constant="15" id="68Y-5a-Y6h"/>
                                     <constraint firstItem="wks-j5-jHt" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" multiplier="0.2" id="Czw-nq-lbm"/>
-                                    <constraint firstItem="qOw-FX-Xbi" firstAttribute="centerY" secondItem="X4X-RP-JJ3" secondAttribute="centerY" multiplier="0.7" id="E1i-wQ-0kS"/>
+                                    <constraint firstItem="qOw-FX-Xbi" firstAttribute="centerY" secondItem="X4X-RP-JJ3" secondAttribute="centerY" multiplier="0.8" id="E1i-wQ-0kS"/>
                                     <constraint firstItem="wks-j5-jHt" firstAttribute="leading" secondItem="ycv-z1-FGT" secondAttribute="trailing" constant="10" id="Fi5-ut-DWY"/>
                                     <constraint firstItem="qOw-FX-Xbi" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" multiplier="0.9" id="J2j-dd-6fs"/>
                                     <constraint firstItem="LkU-rm-Q6o" firstAttribute="centerX" secondItem="X4X-RP-JJ3" secondAttribute="centerX" multiplier="0.4" id="MiT-vu-TV9"/>
@@ -587,9 +592,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" tag="402" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyP-9u-ILQ">
-                                <rect key="frame" x="0.0" y="45" width="414" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <color key="textColor" name="MainColorBlack"/>
+                                <rect key="frame" x="0.0" y="45" width="414" height="35.333333333333343"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -628,63 +632,61 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player WINS!!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLj-Gz-B2C">
-                                        <rect key="frame" x="0.0" y="301.33333333333331" width="414" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="0.0" y="302" width="414" height="58.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="50"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="503" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congrats!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxn-j9-vn1">
-                                        <rect key="frame" x="0.0" y="371" width="414" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                        <color key="textColor" name="MainColorBlack"/>
+                                        <rect key="frame" x="0.0" y="370.33333333333331" width="414" height="35.333333333333314"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="504" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qt-93-cPT">
-                                        <rect key="frame" x="20.666666666666664" y="435" width="124.33333333333334" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="20.666666666666664" y="415.66666666666669" width="124.33333333333334" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Main Menu">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="yiN-Ug-hlq" eventType="touchUpInside" id="oOH-dz-Jvg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="505" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-9D-Tld">
-                                        <rect key="frame" x="269" y="435" width="124.33333333333331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="269" y="415.66666666666669" width="124.33333333333331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="View Game">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="yiN-Ug-hlq" eventType="touchUpInside" id="TtC-HX-g21"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="506" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfV-cd-Bhs">
-                                        <rect key="frame" x="19.999999999999993" y="481" width="124.33333333333331" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="19.999999999999993" y="459.66666666666669" width="124.33333333333331" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="New Game">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="yiN-Ug-hlq" eventType="touchUpInside" id="kO5-V4-2i4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="507" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJm-Xu-xdt">
-                                        <rect key="frame" x="227.66666666666669" y="481" width="165.66666666666669" height="36"/>
-                                        <color key="backgroundColor" name="MainColorBlack"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="227.66666666666669" y="459.66666666666669" width="165.66666666666669" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="New WiFi Game">
-                                            <color key="titleColor" name="MainColorWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="bottomPanelListener:" destination="yiN-Ug-hlq" eventType="touchUpInside" id="aoF-2l-HJL"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="MainColorGreen"/>
+                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="CiO-9D-Tld" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" multiplier="1.6" id="69c-e8-iKM"/>
                                     <constraint firstItem="6Qt-93-cPT" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" multiplier="0.3" id="79a-FZ-62l"/>
@@ -722,17 +724,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="MainColorBlack">
-            <color red="0.11800000071525574" green="0.10199999809265137" blue="0.067000001668930054" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="MainColorBlue">
-            <color red="0.11400000005960464" green="0.3059999942779541" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="MainColorGreen">
-            <color red="0.57599997520446777" green="0.88200002908706665" blue="0.84700000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="MainColorWhite">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="Logo" width="127" height="46"/>
     </resources>
 </document>

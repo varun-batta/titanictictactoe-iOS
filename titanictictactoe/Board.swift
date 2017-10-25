@@ -48,12 +48,6 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         } else {
             Board.titleLabel.text = "Tic Tac"
         }
-
-        if level == 1 {
-            Board.background.backgroundColor = .yellow
-        } else {
-            Board.background.backgroundColor = .red
-        }
         
         Board.playerTurnLabel.text = Board.player1 + "'s Turn"
 
@@ -148,7 +142,7 @@ class Board: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             label.text = BoardAdapter.metawincheck[abs(row - 2)][abs(column - 2)]
             label.textColor = .orange
             label.frame = CGRect(x: 0, y: 0, width: self.dimension, height: self.dimension)
-            label.font = UIFont(name: "Times New Roman", size: 100)
+            label.font = Style.globalFont?.withSize(100)
             label.textAlignment = .center
             label.backgroundColor = .black
             

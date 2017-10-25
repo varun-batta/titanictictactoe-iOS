@@ -154,11 +154,11 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         button.setTitleColor(.black, for: .disabled)
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         button.contentVerticalAlignment = UIControlContentVerticalAlignment.center
-        button.backgroundColor = .orange
+        button.backgroundColor = Style.mainColorGreen
         if level == 1 {
-            button.titleLabel!.font = UIFont(name: "Times New Roman", size: 100)
+            button.titleLabel!.font = Style.globalFont?.withSize(100)
         } else {
-            button.titleLabel!.font = UIFont(name: "Times New Roman", size: 15)
+            button.titleLabel!.font = Style.globalFont?.withSize(15)
         }
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         button.tag = tag

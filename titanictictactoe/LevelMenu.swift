@@ -69,7 +69,7 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
         let inviteDialog : FBSDKAppInviteDialog = FBSDKAppInviteDialog()
         
         if inviteDialog.canShow() {
-            let appLinkURL : NSURL = NSURL(string: "https://fb.me.272886266489420")!
+            let appLinkURL : NSURL = NSURL(string: "https://fb.me/358256697952376")!
             
             let inviteContent : FBSDKAppInviteContent = FBSDKAppInviteContent()
             inviteContent.appLinkURL = appLinkURL as URL!
@@ -157,8 +157,10 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             board.level = extras[0] as! Int
             Board.player1 = extras[1] as! String
             Board.player2 = extras[2] as! String
-            Board.player1ID = extras[3] as! Int
-            Board.player2ID = extras[4] as! Int
+            if (LevelMenu.multiplayer) {
+                Board.player1ID = extras[3] as! Int
+                Board.player2ID = extras[4] as! Int
+            }
             board.levelMenu = self
             board.mainMenu = self.mainMenu
         }
