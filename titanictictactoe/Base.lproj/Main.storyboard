@@ -513,67 +513,19 @@
                             <view tag="401" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4X-RP-JJ3" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="403" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qOw-FX-Xbi" userLabel="Board">
-                                        <rect key="frame" x="21" y="108" width="373" height="373"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-hz-ClG">
+                                        <rect key="frame" x="0.0" y="87.333333333333314" width="414" height="414"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="qOw-FX-Xbi" secondAttribute="height" multiplier="1:1" id="RIQ-S3-nYg"/>
+                                            <constraint firstAttribute="width" secondItem="O8r-hz-ClG" secondAttribute="height" multiplier="1:1" id="EIP-cB-JNO"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EBH-An-wNg">
-                                            <size key="itemSize" width="50" height="50"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="404" contentMode="center" reuseIdentifier="boardCell" id="M8r-kI-Hgc" userLabel="Board Cell">
-                                                <rect key="frame" x="5" y="5" width="50" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="405" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-Mt-a17" userLabel="Mini Board">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Mv1-vv-lqV">
-                                                                <size key="itemSize" width="50" height="50"/>
-                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            </collectionViewFlowLayout>
-                                                            <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="406" contentMode="center" reuseIdentifier="miniBoardCell" id="Uzb-Vh-eiz">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                    </view>
-                                                                </collectionViewCell>
-                                                            </cells>
-                                                        </collectionView>
-                                                    </subviews>
-                                                </view>
-                                                <constraints>
-                                                    <constraint firstItem="pe4-Mt-a17" firstAttribute="width" secondItem="M8r-kI-Hgc" secondAttribute="width" id="5du-6d-BeP"/>
-                                                    <constraint firstItem="pe4-Mt-a17" firstAttribute="height" secondItem="M8r-kI-Hgc" secondAttribute="height" id="SFX-vJ-CGU"/>
-                                                    <constraint firstItem="pe4-Mt-a17" firstAttribute="centerY" secondItem="M8r-kI-Hgc" secondAttribute="centerY" id="Tb9-vG-7fH"/>
-                                                    <constraint firstItem="pe4-Mt-a17" firstAttribute="centerX" secondItem="M8r-kI-Hgc" secondAttribute="centerX" id="eFe-nq-h2e"/>
-                                                </constraints>
-                                            </collectionViewCell>
-                                        </cells>
-                                        <connections>
-                                            <outlet property="dataSource" destination="85Z-43-oKX" id="Wtp-eB-Da7"/>
-                                            <outlet property="delegate" destination="85Z-43-oKX" id="SxI-rq-9WA"/>
-                                        </connections>
-                                    </collectionView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="407" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-rm-Q6o">
-                                        <rect key="frame" x="32.666666666666664" y="496" width="101.33333333333334" height="21.333333333333371"/>
+                                        <rect key="frame" x="31.999999999999993" y="516.33333333333337" width="101.33333333333331" height="21"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="408" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycv-z1-FGT">
-                                        <rect key="frame" x="144" y="491" width="82.666666666666686" height="34"/>
+                                        <rect key="frame" x="143.33333333333334" y="511.33333333333326" width="82.666666666666657" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Save">
@@ -584,7 +536,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="409" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wks-j5-jHt">
-                                        <rect key="frame" x="237.33333333333337" y="491" width="83" height="34"/>
+                                        <rect key="frame" x="236.66666666666663" y="511.33333333333326" width="83" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <state key="normal" title="Menu">
@@ -597,21 +549,21 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="LkU-rm-Q6o" firstAttribute="top" secondItem="qOw-FX-Xbi" secondAttribute="bottom" constant="15" id="68Y-5a-Y6h"/>
+                                    <constraint firstItem="LkU-rm-Q6o" firstAttribute="top" secondItem="O8r-hz-ClG" secondAttribute="bottom" constant="15" id="68Y-5a-Y6h"/>
+                                    <constraint firstItem="O8r-hz-ClG" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" id="8zK-8u-74n"/>
                                     <constraint firstItem="wks-j5-jHt" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" multiplier="0.2" id="Czw-nq-lbm"/>
-                                    <constraint firstItem="qOw-FX-Xbi" firstAttribute="centerY" secondItem="X4X-RP-JJ3" secondAttribute="centerY" multiplier="0.8" id="E1i-wQ-0kS"/>
                                     <constraint firstItem="wks-j5-jHt" firstAttribute="leading" secondItem="ycv-z1-FGT" secondAttribute="trailing" constant="10" id="Fi5-ut-DWY"/>
-                                    <constraint firstItem="qOw-FX-Xbi" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" multiplier="0.9" id="J2j-dd-6fs"/>
                                     <constraint firstItem="LkU-rm-Q6o" firstAttribute="centerX" secondItem="X4X-RP-JJ3" secondAttribute="centerX" multiplier="0.4" id="MiT-vu-TV9"/>
-                                    <constraint firstItem="wks-j5-jHt" firstAttribute="top" secondItem="qOw-FX-Xbi" secondAttribute="bottom" constant="10" id="Uaz-3l-LBd"/>
+                                    <constraint firstItem="O8r-hz-ClG" firstAttribute="centerY" secondItem="X4X-RP-JJ3" secondAttribute="centerY" multiplier="0.8" id="Ow7-EP-o4I"/>
+                                    <constraint firstItem="O8r-hz-ClG" firstAttribute="centerX" secondItem="X4X-RP-JJ3" secondAttribute="centerX" id="PSo-Fl-fFE"/>
+                                    <constraint firstItem="wks-j5-jHt" firstAttribute="top" secondItem="O8r-hz-ClG" secondAttribute="bottom" constant="10" id="Uaz-3l-LBd"/>
                                     <constraint firstItem="ycv-z1-FGT" firstAttribute="leading" secondItem="LkU-rm-Q6o" secondAttribute="trailing" constant="10" id="WEa-PL-KZ2"/>
-                                    <constraint firstItem="qOw-FX-Xbi" firstAttribute="centerX" secondItem="X4X-RP-JJ3" secondAttribute="centerX" id="fpl-9S-ZJ5"/>
                                     <constraint firstItem="ycv-z1-FGT" firstAttribute="width" secondItem="X4X-RP-JJ3" secondAttribute="width" multiplier="0.2" id="mkY-iB-MiU"/>
-                                    <constraint firstItem="ycv-z1-FGT" firstAttribute="top" secondItem="qOw-FX-Xbi" secondAttribute="bottom" constant="10" id="myb-vl-dKY"/>
+                                    <constraint firstItem="ycv-z1-FGT" firstAttribute="top" secondItem="O8r-hz-ClG" secondAttribute="bottom" constant="10" id="myb-vl-dKY"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" tag="402" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyP-9u-ILQ">
-                                <rect key="frame" x="0.0" y="45" width="414" height="35.333333333333343"/>
+                                <rect key="frame" x="0.0" y="45" width="414" height="35"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -629,12 +581,12 @@
                     </view>
                     <connections>
                         <outlet property="background" destination="X4X-RP-JJ3" id="QQC-UP-6Xb"/>
-                        <outlet property="boardCollectionView" destination="qOw-FX-Xbi" id="3yV-t7-iMG"/>
+                        <outlet property="board" destination="O8r-hz-ClG" id="AY7-Te-Lr2"/>
                         <outlet property="menuButton" destination="wks-j5-jHt" id="J9J-mg-t45"/>
                         <outlet property="playersTurnLabel" destination="LkU-rm-Q6o" id="oCM-9a-9hg"/>
                         <outlet property="saveButton" destination="ycv-z1-FGT" id="z5i-HD-1vv"/>
                         <outlet property="titleLabel" destination="dyP-9u-ILQ" id="APw-WA-XUk"/>
-                        <segue destination="yiN-Ug-hlq" kind="show" identifier="ToWinner" id="4m8-M6-TcK"/>
+                        <segue destination="yiN-Ug-hlq" kind="show" identifier="ToWinner" id="PDx-GG-4pe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umf-dV-e96" userLabel="First Responder" sceneMemberID="firstResponder"/>

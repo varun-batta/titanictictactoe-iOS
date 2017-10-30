@@ -151,7 +151,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
         button.setTitle("", for: .normal)
-        button.setTitleColor(.black, for: .disabled)
+        button.setTitleColor(Style.mainColorBlack, for: .disabled)
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         button.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         button.backgroundColor = Style.mainColorGreen
@@ -167,6 +167,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         Board.keys.setObject(button, forKey: NSNumber.init(value: button.tag))
 
         cell.addSubview(button)
+        cell.alpha = 1;
         
         return cell
 
@@ -223,7 +224,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         
         sender.setTitle(turn, for: .disabled)
         sender.isEnabled = false
-        sender.backgroundColor = .white
+        sender.backgroundColor = .clear
         
         let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
         
@@ -448,7 +449,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
                 break
             case 2:
                 BoardAdapter.metawincheck[f/3][g/3] = x
-                board.winningBoardChanger(boardAdapter: self, row: f, column: g, level: level, clickable: true, x: x)
+//                board.winningBoardChanger(boardAdapter: self, row: f, column: g, level: level, clickable: true, x: x)
                 break
             default:
                 return false
