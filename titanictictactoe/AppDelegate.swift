@@ -10,26 +10,38 @@ import UIKit
 
 import FBSDKCoreKit
 import FacebookCore
+import FacebookShare
+import FBSDKShareKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-//        let request_ids = getQueryStringParameter(url: url.absoluteString, param: "request_ids")
-        print(url.absoluteString.removingPercentEncoding)
-        let urlComponents = URLComponents(string: url.absoluteString.removingPercentEncoding!)
-        let request_ids = urlComponents?.queryItems?.first(where: { $0.name == "request_ids"})?.value
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+
+        let urlString = url.absoluteString.removingPercentEncoding!
+        let targetURL = urlString.components(separatedBy: "#")[1]
+        let request_ids_with_key = targetURL.components(separatedBy: "&")[1]
+        let request_ids = request_ids_with_key.components(separatedBy: "=")[1]
+        let request_ids_list = (request_ids.replacingOccurrences(of: "%2C", with: ",")).components(separatedBy: ",")
+        
+        self.getListOfOpponents(request_ids_list: request_ids_list)
+        
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let start = main.instantiateInitialViewController()
+        
+        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = start
+        self.window?.makeKeyAndVisible()
         
         return handled
     }
@@ -56,7 +68,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func getListOfOpponents(request_ids_list : [String]) {
+//        var opponentNames = [String](repeating: "", count: request_ids_list.count)
+//        let accessToken = FBSDKAccessToken.current().tokenString
+        var games = [Game](repeating: Game(), count: request_ids_list.count)
+        let myGroup = DispatchGroup()
+        let concurrentQueue = DispatchQueue(label: "com.varunbatta.opponentNamesWorker")
+        for i in 0...request_ids_list.count - 1 {
+            concurrentQueue.async(group: myGroup) {
+                myGroup.enter()
+                let connection = GraphRequestConnection()
+                connection.add(GraphRequest(graphPath: "/\(request_ids_list[i])", parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { httpResponse, result in
+                    switch(result) {
+                    case .success(let response):
+                        print("\(response)")
+                        if (response.dictionaryValue!["data"] != nil) {
+                            let game : Game = Game()
+                            game.initWithGameRequest(request: response)
+                            games[i] = game
+//                            let from : [String: String] = response.dictionaryValue?["from"] as! [String: String]
+//                            let name = from["name"]
+//                            opponentNames[i] = name!
+                        } else {
+                            self.deleteGameRequest(request_id: request_ids_list[i])
+                        }
+//                        print("\(name)")
+                    case .failed(let error):
+                        print("Error! \(error)")
+                    }
+                    myGroup.leave()
+                }
+                connection.start()
+            }
+        }
+        myGroup.notify(queue: DispatchQueue.main) {
+            let gamesReady : Notification = Notification(name: Notification.Name(rawValue: "gamesReady"), object: games)
+            NotificationCenter.default.post(gamesReady)
+        }
+    }
+    
+    func deleteGameRequest(request_id: String) {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
+    }
 }
 

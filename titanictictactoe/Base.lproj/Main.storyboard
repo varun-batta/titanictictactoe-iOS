@@ -20,7 +20,7 @@
         <!--Index-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" userLabel="Index" customClass="Start" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Start" id="BV1-FR-VrT" userLabel="Index" customClass="Start" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -222,7 +222,7 @@
         <!--Main Menu-->
         <scene sceneID="wGj-jD-RQm">
             <objects>
-                <viewController id="20Z-GJ-IRb" userLabel="Main Menu" customClass="MainMenu" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenu" id="20Z-GJ-IRb" userLabel="Main Menu" customClass="MainMenu" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HCR-ut-fpG"/>
                         <viewControllerLayoutGuide type="bottom" id="gaY-do-Z6h"/>
@@ -343,7 +343,7 @@
         <!--Level Menu-->
         <scene sceneID="Oty-GJ-Zkd">
             <objects>
-                <viewController id="Mru-xP-AXb" userLabel="Level Menu" customClass="LevelMenu" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelMenu" id="Mru-xP-AXb" userLabel="Level Menu" customClass="LevelMenu" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mQ1-4m-bkg"/>
                         <viewControllerLayoutGuide type="bottom" id="oAX-Km-M4Y"/>
@@ -501,7 +501,7 @@
         <!--Board-->
         <scene sceneID="9CL-sO-G4K">
             <objects>
-                <viewController id="85Z-43-oKX" customClass="Board" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Board" id="85Z-43-oKX" customClass="Board" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KH7-JE-Ias"/>
                         <viewControllerLayoutGuide type="bottom" id="knR-sv-K1P"/>
@@ -596,7 +596,7 @@
         <!--Winner-->
         <scene sceneID="C0E-vb-n8O">
             <objects>
-                <viewController id="yiN-Ug-hlq" userLabel="Winner" customClass="Winner" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Winner" id="yiN-Ug-hlq" userLabel="Winner" customClass="Winner" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yKV-oI-1LA"/>
                         <viewControllerLayoutGuide type="bottom" id="ZJj-26-Fhc"/>

@@ -35,8 +35,8 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     static var currentTurn : String = "X"
     var turn : String!
     var board : Board!
-    static var wincheck = Array(repeating: Array(repeating: "", count: 9), count: 10)
-    static var metawincheck = Array(repeating: Array(repeating: "", count: 3), count: 3)
+    static var wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+    static var metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
     static var firstTurn : Bool = true
     static var metaBoard : [[BasicBoard]] = [[BasicBoard]](repeating: [BasicBoard](repeating: BasicBoard(), count: 3), count: 3)
     
@@ -114,7 +114,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                 }
                 let button = UIButton()
                 button.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
-                button.setTitle("", for: .normal)
+//                button.setTitle("", for: .normal)
+                button.setTitle(BasicBoard.wincheck[row][column], for: .normal)
+                if (BasicBoard.wincheck[row][column] != "") {
+                    button.isEnabled = false
+                }
                 button.setTitleColor(Style.mainColorBlack, for: .disabled)
                 button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
                 button.contentVerticalAlignment = UIControlContentVerticalAlignment.center
@@ -208,6 +212,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                 }
             }
         }
+        if (BasicBoard.wincheck[9][2] != "" && metaLevel >= 2) {
+            let row : Int = Int(BasicBoard.wincheck[9][0])!
+            let column : Int = Int(BasicBoard.wincheck[9][1])!
+            boardChanger(row: row, column: column, level: metaLevel, clickable: true)
+        }
     }
     
     func dimensionForButton(width: CGFloat, gaps: CGFloat) -> CGFloat {
@@ -222,13 +231,13 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         if BasicBoard.currentTurn == "X" {
             turn = "X"
             
-            Board.playerTurnLabel.text = Board.player2 + "'s Turn"
+            Board.playerTurnLabel.text = Board.player2.playerName + "'s Turn"
             
             BasicBoard.currentTurn = "O"
         } else {
             turn = "O"
             
-            Board.playerTurnLabel.text = Board.player1 + "'s Turn"
+            Board.playerTurnLabel.text = Board.player1.playerName + "'s Turn"
             
             BasicBoard.currentTurn = "X"
         }
@@ -259,6 +268,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         
         BasicBoard.wincheck[row][column] = turn
         
+        BasicBoard.wincheck[9][0] = String(row)
+        BasicBoard.wincheck[9][1] = String(column)
+        BasicBoard.wincheck[9][2] = turn
+        BasicBoard.wincheck[9][3] = String(metaLevel)
+        
         if metaLevel >= 2 {
             boardChanger(row: row, column: column, level: metaLevel, clickable: true)
         }
@@ -266,32 +280,40 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         let winOrTie : Bool = winChecker(row: row, column: column, level: metaLevel, actual: level, winchecker: BasicBoard.wincheck, turnValue: turn)
 
         if LevelMenu.multiplayer {
-            var toID = 0
-            var fromID = 0
+//            var toID : Int64 = 0
+//            var fromID : Int64 = 0
+            var toPlayer : Player = Player()
+            var fromPlayer : Player = Player()
             if turn == "X" {
-                toID = Board.player2ID
-                fromID = Board.player1ID
+//                toID = Board.player2ID
+//                fromID = Board.player1ID
+                toPlayer = Board.player2
+                fromPlayer = Board.player1
             } else {
-                toID = Board.player1ID
-                fromID = Board.player2ID
+//                toID = Board.player1ID
+//                fromID = Board.player2ID
+                toPlayer = Board.player1
+                fromPlayer = Board.player2
             }
             var messageText = ""
             if BasicBoard.firstTurn {
-                messageText = "@[\(fromID)] has challenged you to a game, play now!"
+                messageText = "\(fromPlayer.playerName) has challenged you to a game, play now!"
             } else {
-                messageText = "@[\(fromID)] has played and now it is your turn!"
+                messageText = "\(fromPlayer.playerName) has played and now it is your turn!"
             }
             let game = createGameString()
             let params : [String : Any] = ["data" : game, "message" : messageText]
-            makeTurn(to: toID, params: params)
+            makeTurn(to: toPlayer.playerFBID, params: params)
         }
     }
     
     func createGameString() -> String {
         var game = ""
-        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
-        for i in 0...(size - 1) {
-            for j in 0...(size - 1) {
+//        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
+//        for i in 0...(size - 1) {
+//            for j in 0...(size - 1) {
+        for i in 0..<10 {
+            for j in 0..<9 {
                 game += BasicBoard.wincheck[i][j] + ","
             }
             game += ";"
@@ -320,7 +342,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                         
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
-                            button.backgroundColor = .clear
+                            button.backgroundColor = Style.mainColorBlue
                         }
                     }
                 }
@@ -332,7 +354,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                         
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
-                            button.backgroundColor = .clear
+                            button.backgroundColor = Style.mainColorBlue
                         }
                     }
                 }
@@ -444,11 +466,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         var winningPlayer : String = ""
         var winningLetter : UILabel = UILabel()
         if x == "X" {
-            winningPlayer = Board.player1
+            winningPlayer = Board.player1.playerName
             winningLetter.text = "X"
         }
         if x == "O" {
-            winningPlayer = Board.player2
+            winningPlayer = Board.player2.playerName
             winningLetter.text = "O"
         }
         
@@ -478,7 +500,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     
     //MARK: Multiplayer Functions
     
-    func makeTurn(to : Int, params : [String : Any]) {
+    func makeTurn(to : Int64, params : [String : Any]) {
         let gameRequestContent = FBSDKGameRequestContent()
         gameRequestContent.recipients = [String(to)]
         gameRequestContent.message = params["message"] as! String

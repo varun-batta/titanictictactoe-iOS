@@ -16,10 +16,12 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     var level : Int = 1
     var dimension : CGFloat!
     var currentPlayer : String!
-    static var player1 : String = "Player 1"
-    static var player2 : String = "Player 2"
-    static var player1ID : Int = 0
-    static var player2ID : Int = 0
+//    static var player1 : String = "Player 1"
+//    static var player2 : String = "Player 2"
+//    static var player1ID : Int64 = 0
+//    static var player2ID : Int64 = 0
+    static var player1 : Player = Player()
+    static var player2 : Player = Player()
     var playerTurn : String!
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!
@@ -59,7 +61,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             titleLabel.text = "Tic Tac"
         }
         
-        Board.playerTurnLabel.text = Board.player1 + "'s Turn"
+        Board.playerTurnLabel.text = Board.player1.playerName + "'s Turn"
         Board.playerTurnLabel.textColor = Style.mainColorBlack
         
         // UI Setup

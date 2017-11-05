@@ -57,10 +57,16 @@ class Winner: UIViewController {
     
 
     @IBAction func bottomPanelListener(_ sender: UIButton) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
         switch (sender.tag) {
         case 504:
             print("Dismissing levelMenu")
-            mainMenu.dismiss(animated: true, completion: nil)
+            if (self.mainMenu == nil) {
+                let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
+                self.present(mainMenu, animated: true, completion: nil)
+            } else {
+                self.mainMenu.dismiss(animated: true, completion: nil)
+            }
             break
         case 505:
             print("Dismissing Winner.self")
@@ -68,11 +74,21 @@ class Winner: UIViewController {
             break
         case 506:
             print("Dismissing board")
-            levelMenu.dismiss(animated: true, completion: nil)
+            if (self.levelMenu == nil) {
+                let levelMenu = main.instantiateViewController(withIdentifier: "LevelMenu")
+                self.present(levelMenu, animated: true, completion: nil)
+            } else {
+                self.levelMenu.dismiss(animated: true, completion: nil)
+            }
             break
         case 507:
             print("Dismissing board")
-            levelMenu.dismiss(animated: true, completion: nil)
+            if (self.levelMenu == nil) {
+                let levelMenu = main.instantiateViewController(withIdentifier: "LevelMenu") as! LevelMenu
+                self.present(levelMenu, animated: true, completion: nil)
+            } else {
+                self.levelMenu.dismiss(animated: true, completion: nil)
+            }
             break
         default:
             return

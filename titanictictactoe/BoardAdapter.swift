@@ -211,13 +211,13 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         if self.currentTurn == "X" {
             turn = "X"
             
-            Board.playerTurnLabel.text = Board.player2 + "'s Turn"
+            Board.playerTurnLabel.text = Board.player2.playerName + "'s Turn"
             
             currentTurn = "O"
         } else {
             turn = "O"
             
-            Board.playerTurnLabel.text = Board.player1 + "'s Turn"
+            Board.playerTurnLabel.text = Board.player1.playerName + "'s Turn"
             
             currentTurn = "X"
         }
@@ -254,26 +254,26 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         
         let winOrTie : Bool = winChecker(row: row, column: column, level: level, actual: level, winchecker: BoardAdapter.wincheck, turnValue: turn)
         
-        if LevelMenu.multiplayer {
-            var toID = 0
-            var fromID = 0
-            if turn == "X" {
-                toID = Board.player2ID
-                fromID = Board.player1ID
-            } else {
-                toID = Board.player1ID
-                fromID = Board.player2ID
-            }
-            var messageText = ""
-            if BoardAdapter.firstTurn {
-                messageText = "@[\(fromID)] has challenged you to a game, play now!"
-            } else {
-                messageText = "@[\(fromID)] has played and now it is your turn!"
-            }
-            let game = createGameString()
-            let params : [String : Any] = ["data" : game, "message" : messageText]
-            makeTurn(to: toID, params: params)
-        }
+//        if LevelMenu.multiplayer {
+//            var toID : Int64 = 0
+//            var fromID : Int64 = 0
+//            if turn == "X" {
+//                toID = Board.player2ID
+//                fromID = Board.player1ID
+//            } else {
+//                toID = Board.player1ID
+//                fromID = Board.player2ID
+//            }
+//            var messageText = ""
+//            if BoardAdapter.firstTurn {
+//                messageText = "@[\(fromID)] has challenged you to a game, play now!"
+//            } else {
+//                messageText = "@[\(fromID)] has played and now it is your turn!"
+//            }
+//            let game = createGameString()
+//            let params : [String : Any] = ["data" : game, "message" : messageText]
+//            makeTurn(to: toID, params: params)
+//        }
     }
     
     func createGameString() -> String {
@@ -432,14 +432,14 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
 
         var winningPlayer : String = ""
         var winningLetter : UILabel = UILabel()
-        if x == "X" {
-            winningPlayer = Board.player1
-            winningLetter.text = "X"
-        }
-        if x == "O" {
-            winningPlayer = Board.player2
-            winningLetter.text = "O"
-        }
+//        if x == "X" {
+//            winningPlayer = Board.player1
+//            winningLetter.text = "X"
+//        }
+//        if x == "O" {
+//            winningPlayer = Board.player2
+//            winningLetter.text = "O"
+//        }
         
         if x == "X" || x == "O" {
             switch(level) {
@@ -462,7 +462,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     //MARK: Multiplayer Functions
     
-    func makeTurn(to : Int, params : [String : Any]) {
+    func makeTurn(to : Int64, params : [String : Any]) {
         let gameRequestContent = FBSDKGameRequestContent()
         gameRequestContent.recipients = [String(to)]
         gameRequestContent.message = params["message"] as! String

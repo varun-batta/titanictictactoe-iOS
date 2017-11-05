@@ -55,6 +55,8 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         collectionView.backgroundColor = Style.mainColorBlue;
         playButton.backgroundColor = Style.mainColorWhite;
         playButton.setTitleColor(Style.mainColorBlack, for: .normal);
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(promptGameToOpen(notification:)), name: NSNotification.Name(rawValue: "gamesReady"), object: nil)
     }
 
     override var shouldAutorotate: Bool {
@@ -114,5 +116,75 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         }
+    }
+    
+    // MARK : Facebook Tools
+    func promptGameToOpen(notification: Notification) {
+//        let opponentNames = notification.object as! [String]
+        let games = notification.object as! [Game]
+        let gameIndex = countGames(games: games)
+        if (gameIndex == -1) {
+            let prompt = UIAlertController(title: "Choose Game to Play", message: "Please choose an opponent whose game you wish to return to", preferredStyle: .alert)
+            //        prompt.modalPresentationStyle = .popover
+            //        for i in 0...opponentNames.count - 1 {
+            for i in 0..<games.count {
+                //            let action = UIAlertAction(title: opponentNames[i], style: .default) { (action) in
+                //                self.beginGame(index: i)
+                //            }
+                var opponent : Player = Player()
+                if (games[i].lastMove == "X") {
+                    opponent = games[i].player1
+                } else if (games[i].lastMove == "O") {
+                    opponent = games[i].player2
+                }
+                if (opponent.playerName != "") {
+                    let action = UIAlertAction(title: opponent.playerName, style: .default) { (action) in
+                        self.beginGame(game: games[i])
+                    }
+                    prompt.addAction(action)
+                }
+            }
+            //        prompt.popoverPresentationController?.sourceRect = self.view.bounds
+            //        prompt.popoverPresentationController?.sourceView = self.view
+            self.present(prompt, animated: true, completion: nil)
+        } else {
+            beginGame(game: games[gameIndex]);
+        }
+    }
+    
+    func countGames(games: [Game]) -> Int {
+        var count : Int = 0
+        var index : Int = -1
+        for i in 0..<games.count {
+            if (games[i].lastMove != "") {
+                count += 1
+                index = i
+            }
+        }
+        if (count > 1) {
+            return -1
+        } else {
+            return index
+        }
+    }
+    
+    func beginGame(game: Game) {
+        BasicBoard.wincheck = game.data
+        if (game.lastMove == "X") {
+            BasicBoard.currentTurn = "O"
+        } else {
+            BasicBoard.currentTurn = "X"
+        }
+//        Board.player1 = game.player1.playerName
+//        Board.player2 = game.player2.playerName
+//        Board.player1ID = game.player1.playerFBID
+//        Board.player2ID = game.player2.playerFBID
+        Board.player1 = game.player1
+        Board.player2 = game.player2
+        LevelMenu.multiplayer = true
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
+        board.level = game.level
+        self.present(board, animated: true, completion: nil)
     }
 }

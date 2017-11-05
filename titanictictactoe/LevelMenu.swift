@@ -17,10 +17,12 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
     static var multiplayer = false
     var caller = ""
     var instructions = false
-    static var player1 : String = "Player 1"
-    static var player2 : String = "Player 2"
-    static var player1ID : Int = 0
-    static var player2ID : Int = 0
+//    static var player1 : String = "Player 1"
+//    static var player2 : String = "Player 2"
+//    static var player1ID : Int = 0
+//    static var player2ID : Int = 0
+    static var player1 : Player = Player()
+    static var player2 : Player = Player()
     var level : Int = 1
     var mainMenu : MainMenu!
     
@@ -118,9 +120,9 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                     let player1TextField = alert!.textFields![0]
-                    LevelMenu.player1 = player1TextField.text!
+                    LevelMenu.player1.playerName = player1TextField.text!
                     let player2TextField = alert!.textFields![1]
-                    LevelMenu.player2 = player2TextField.text!
+                    LevelMenu.player2.playerName = player2TextField.text!
                 
                     let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
                 
@@ -154,9 +156,9 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 let player1TextField = alert!.textFields![0]
-                LevelMenu.player1 = player1TextField.text!
+                LevelMenu.player1.playerName = player1TextField.text!
                 let player2TextField = alert!.textFields![1]
-                LevelMenu.player2 = player2TextField.text!
+                LevelMenu.player2.playerName = player2TextField.text!
                 
                 let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
                 
@@ -180,12 +182,14 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
 //            board.level = levelSelect
             let extras = sender as! [Any]
             board.level = extras[0] as! Int
-            Board.player1 = extras[1] as! String
-            Board.player2 = extras[2] as! String
-            if (LevelMenu.multiplayer) {
-                Board.player1ID = extras[3] as! Int
-                Board.player2ID = extras[4] as! Int
-            }
+//            Board.player1 = extras[1] as! String
+//            Board.player2 = extras[2] as! String
+//            if (LevelMenu.multiplayer) {
+//                Board.player1ID = Int64(extras[3] as! String)!
+//                Board.player2ID = Int64(extras[4] as! String)!
+//            }
+            Board.player1 = extras[1] as! Player
+            Board.player2 = extras[2] as! Player
             board.levelMenu = self
             board.mainMenu = self.mainMenu
         }
@@ -214,18 +218,18 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                     case .success(let response):
                         let player1FullName = response.dictionaryValue?["name"] as! String
                         let player1FullNameArr = player1FullName.characters.split(separator: " ")
-                        LevelMenu.player1 = String(player1FullNameArr[0])
+                        LevelMenu.player1.playerName = String(player1FullNameArr[0])
                         let player1IDString = response.dictionaryValue?["id"] as! String
-                        LevelMenu.player1ID = Int(player1IDString)!
+                        LevelMenu.player1.playerFBID = Int64(player1IDString)!
                         let connection2 = GraphRequestConnection()
                         connection2.add(GraphRequest(graphPath: "/?id=\(recipients[0])", parameters: ["fields" : "id, name"])) { httpResponse, result in
                             switch result {
                             case .success(let response):
                                 let player2FullName = response.dictionaryValue?["name"] as! String
                                 let player2FullNameArr = player2FullName.characters.split(separator: " ")
-                                LevelMenu.player2 = String(player2FullNameArr[0])
-                                LevelMenu.player2ID = Int(response.dictionaryValue?["id"] as! String)!
-                                let extras = [self.level, LevelMenu.player1, LevelMenu.player2, LevelMenu.player1ID, LevelMenu.player2ID] as [Any]
+                                LevelMenu.player2.playerName = String(player2FullNameArr[0])
+                                LevelMenu.player2.playerFBID = Int64(response.dictionaryValue?["id"] as! String)!
+                                let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
                                 self.performSegue(withIdentifier: "ToGame", sender: extras)
                             case .failed(let error):
                                 print("Error! \(error)")
