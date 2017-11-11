@@ -52,6 +52,7 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             
             titleLabel.text = "WiFi Game"
             savedGamesButton.setTitle("Current Games", for: .normal)
+            savedGamesButton.addTarget(self, action: #selector(self.getCurrentGames), for: UIControlEvents.touchUpInside)
             self.view.addSubview(loginButton)
             inviteFriendsButton.addTarget(self, action: #selector(self.inviteFriends), for: UIControlEvents.touchUpInside)
             
@@ -105,6 +106,67 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             inviteDialog.delegate = self
             inviteDialog.show()
         }
+    }
+    
+    func getCurrentGames() {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/me/apprequests", parameters: ["fields" : "data, paging" ])) {httpResponse, result in
+            switch(result) {
+            case .success (let response):
+                print("\(response)")
+                let currentGamesRequests = response.dictionaryValue?["data"] as! [[String: String]]
+                var currentGames : [Game] = [Game](repeating: Game(), count: currentGamesRequests.count)
+                let myGroup = DispatchGroup()
+                let concurrentQueue = DispatchQueue(label: "com.varunbatta.currentGamesWorker")
+                for i in 0..<currentGamesRequests.count {
+                    concurrentQueue.async(group: myGroup) {
+                        if (currentGamesRequests[i]["data"] != nil) {
+                            myGroup.enter()
+                            let connection = GraphRequestConnection()
+                            let requestID = currentGamesRequests[i]["id"]
+                            let graphPath = requestID?.components(separatedBy: "_")[0]
+                            connection.add(GraphRequest(graphPath: graphPath!, parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { httpResponse, request in
+                                switch (request) {
+                                case .success (let response):
+                                    print("\(response)")
+                                    let currentGame : Game = currentGames[i]
+                                    currentGame.initWithGameRequest(request: response)
+                                    currentGames[i] = currentGame
+                                case .failed (let error):
+                                    print("\(error)")
+                                }
+                                myGroup.leave()
+                            }
+                            connection.start()
+                        } else {
+                            self.deleteGameRequest(request_id: currentGamesRequests[i]["id"]!)
+                        }
+                    }
+                }
+                myGroup.notify(queue: DispatchQueue.main) {
+//                    let currentGamesReady : Notification = Notification(name: Notification.Name(rawValue: "currentGamesReady"), object: currentGames)
+//                    NotificationCenter.default.post(currentGamesReady)
+                    let extras = [currentGames]
+                    self.performSegue(withIdentifier: "toCurrentGames", sender: extras)
+                }
+            case .failed (let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
+    }
+    
+    func deleteGameRequest(request_id: String) {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
     }
     
     @IBAction func levelSelect(_ sender: UIButton) {
@@ -192,6 +254,10 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             Board.player2 = extras[2] as! Player
             board.levelMenu = self
             board.mainMenu = self.mainMenu
+        } else if segue.identifier == "toCurrentGames" {
+            let currentGames = segue.destination as! CurrentGames
+            let extras = sender as! [Any]
+            currentGames.currentGames = extras[0] as! [Game]
         }
         // Pass the selected object to the new view controller.
     }

@@ -8,7 +8,6 @@
 
 import UIKit
 
-import FBSDKCoreKit
 import FacebookCore
 import FacebookShare
 import FBSDKShareKit
@@ -21,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-
+        
         return true
     }
     
@@ -34,7 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let request_ids = request_ids_with_key.components(separatedBy: "=")[1]
         let request_ids_list = (request_ids.replacingOccurrences(of: "%2C", with: ",")).components(separatedBy: ",")
         
-        self.getListOfOpponents(request_ids_list: request_ids_list)
+        if (request_ids_list.count > 0) {
+            self.getListOfOpponents(request_ids_list: request_ids_list)
+        }
         
         let main = UIStoryboard(name: "Main", bundle: nil)
         let start = main.instantiateInitialViewController()

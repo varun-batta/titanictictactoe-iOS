@@ -26,6 +26,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!
     var doneOnce : Bool = false
+    var willLayoutSubviewsCount : Int = 0
 //    static var boardCollectionView : UICollectionView!
     static var reload = false
     static var titleLabel : UILabel!
@@ -53,8 +54,6 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             self.doneOnce = true
         }
         
-        configureBoard()
-        
         if level == 1 {
             titleLabel.text = "Tic"
         } else {
@@ -75,6 +74,10 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
         menuButton.setTitleColor(Style.mainColorWhite, for: .normal);
         titleLabel.textColor = Style.mainColorBlack;
     }
+    
+    override func viewWillLayoutSubviews() {
+        configureBoard()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -82,17 +85,19 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     }
     
     func configureBoard() {
-        
-        if boardAdapter == nil {
-            boardAdapter = BoardAdapter.init(collectionViewLayout: UICollectionViewFlowLayout.init())
+        self.willLayoutSubviewsCount += 1
+        if (self.willLayoutSubviewsCount == 2) {
+            if boardAdapter == nil {
+                boardAdapter = BoardAdapter.init(collectionViewLayout: UICollectionViewFlowLayout.init())
+            }
+            
+            let metaBoard : BasicBoard = BasicBoard();
+            metaBoard.frame = CGRect(x: 0, y: 0, width: self.board.frame.size.width, height: self.board.frame.size.height)
+            
+            metaBoard.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
+            
+            board.addSubview(metaBoard)
         }
-        
-        let metaBoard : BasicBoard = BasicBoard();
-        metaBoard.frame = CGRect(x: 0, y: 0, width: self.board.frame.size.width, height: self.board.frame.size.height)
-        
-        metaBoard.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
-        
-        board.addSubview(metaBoard)
     }
     
     func sizeForItemAt(index : Int, width: CGFloat) {

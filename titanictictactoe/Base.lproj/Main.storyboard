@@ -492,6 +492,7 @@
                         <outlet property="savedGamesButton" destination="wiR-wU-ORs" id="ePs-8w-W0P"/>
                         <outlet property="titleLabel" destination="gbk-Uk-q95" id="hSp-qL-KpX"/>
                         <segue destination="85Z-43-oKX" kind="show" identifier="ToGame" id="nsR-wa-C6u"/>
+                        <segue destination="xQL-Z6-AhB" kind="show" identifier="toCurrentGames" id="77y-6e-F3K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KNT-0Y-LRp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -592,6 +593,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umf-dV-e96" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2547.826086956522" y="138.58695652173915"/>
+        </scene>
+        <!--Current Games-->
+        <scene sceneID="l1u-KM-ma2">
+            <objects>
+                <viewController id="xQL-Z6-AhB" customClass="CurrentGames" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q1b-aw-Iqb"/>
+                        <viewControllerLayoutGuide type="bottom" id="tz2-Xv-DGT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iyk-qc-Lg5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3U-tP-JQe">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="301" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Games" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-pI-Weh">
+                                        <rect key="frame" x="0.0" y="56" width="414" height="35.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="302" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Game:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYu-Bu-8Zp">
+                                        <rect key="frame" x="0.0" y="91.333333333333329" width="414" height="23.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.00492064748" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ntb-pI-Weh" firstAttribute="centerX" secondItem="K3U-tP-JQe" secondAttribute="centerX" id="0mP-iD-b6y"/>
+                                    <constraint firstItem="dYu-Bu-8Zp" firstAttribute="width" secondItem="K3U-tP-JQe" secondAttribute="width" id="EHJ-xq-VOM"/>
+                                    <constraint firstItem="Ntb-pI-Weh" firstAttribute="width" secondItem="K3U-tP-JQe" secondAttribute="width" id="Kfs-5o-EVn"/>
+                                    <constraint firstItem="dYu-Bu-8Zp" firstAttribute="centerX" secondItem="K3U-tP-JQe" secondAttribute="centerX" id="lbN-CK-xRy"/>
+                                    <constraint firstItem="dYu-Bu-8Zp" firstAttribute="top" secondItem="Ntb-pI-Weh" secondAttribute="bottom" id="lvr-S9-1yf"/>
+                                    <constraint firstItem="Ntb-pI-Weh" firstAttribute="centerY" secondItem="K3U-tP-JQe" secondAttribute="centerY" multiplier="0.2" id="sEB-fz-qRq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K3U-tP-JQe" firstAttribute="centerY" secondItem="iyk-qc-Lg5" secondAttribute="centerY" id="7OQ-6o-0Z8"/>
+                            <constraint firstItem="K3U-tP-JQe" firstAttribute="width" secondItem="iyk-qc-Lg5" secondAttribute="width" id="Aas-Jd-WDh"/>
+                            <constraint firstItem="K3U-tP-JQe" firstAttribute="centerX" secondItem="iyk-qc-Lg5" secondAttribute="centerX" id="YW3-A1-HpD"/>
+                            <constraint firstItem="K3U-tP-JQe" firstAttribute="height" secondItem="iyk-qc-Lg5" secondAttribute="height" id="kP3-0H-4Mc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="background" destination="K3U-tP-JQe" id="jXp-Yl-XOs"/>
+                        <outlet property="pleaseSelectGameLabel" destination="dYu-Bu-8Zp" id="L4O-QK-nSN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="927-0y-K01" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2548" y="894"/>
         </scene>
         <!--Winner-->
         <scene sceneID="C0E-vb-n8O">

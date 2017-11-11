@@ -10,6 +10,7 @@
 		571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */; };
 		8B3742751FAD4F2900889FB6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742741FAD4F2900889FB6 /* Game.swift */; };
 		8B3742771FAD50A900889FB6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742761FAD50A900889FB6 /* Player.swift */; };
+		8B460FC91FB017C500002FF6 /* CurrentGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B460FC81FB017C400002FF6 /* CurrentGames.swift */; };
 		8B9B66C31F9D794F0070B58F /* TitanicTicTacToeLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */; };
 		8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B66C41F9D8FE40070B58F /* Style.swift */; };
 		8B9B66D31F9DAFFD0070B58F /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */; };
@@ -46,6 +47,7 @@
 		72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		8B3742741FAD4F2900889FB6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8B3742761FAD50A900889FB6 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		8B460FC81FB017C400002FF6 /* CurrentGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentGames.swift; sourceTree = "<group>"; };
 		8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitanicTicTacToeLogo.png; sourceTree = "<group>"; };
 		8B9B66C41F9D8FE40070B58F /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BlackItalic.ttf"; path = "titanictictactoe/Roboto/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */,
 				8B3742741FAD4F2900889FB6 /* Game.swift */,
 				8B3742761FAD50A900889FB6 /* Player.swift */,
+				8B460FC81FB017C400002FF6 /* CurrentGames.swift */,
 			);
 			path = titanictictactoe;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				8BEDB76E1FA2BF1B002C42F6 /* BasicBoard.swift in Sources */,
 				8B3742771FAD50A900889FB6 /* Player.swift in Sources */,
 				8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */,
+				8B460FC91FB017C500002FF6 /* CurrentGames.swift in Sources */,
 				8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */,
 				8B3742751FAD4F2900889FB6 /* Game.swift in Sources */,
 				8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */,
@@ -449,7 +453,7 @@
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta.titanictictactoe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -468,7 +472,7 @@
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta.titanictictactoe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
