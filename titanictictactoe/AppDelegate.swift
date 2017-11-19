@@ -73,17 +73,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getListOfOpponents(request_ids_list : [String]) {
 //        var opponentNames = [String](repeating: "", count: request_ids_list.count)
 //        let accessToken = FBSDKAccessToken.current().tokenString
-        var games = [Game](repeating: Game(), count: request_ids_list.count)
+        var gamesCount = request_ids_list.count
+        var start = 0
+        if (request_ids_list.contains("user_friends")) {
+            gamesCount -= 1
+            start += 1
+        }
+        if (request_ids_list.contains("public_profile")) {
+            gamesCount -= 1
+            start += 1
+        }
+        var games = [Game](repeating: Game(), count: gamesCount)
         let myGroup = DispatchGroup()
         let concurrentQueue = DispatchQueue(label: "com.varunbatta.opponentNamesWorker")
-        for i in 0...request_ids_list.count - 1 {
+        for i in start..<request_ids_list.count {
             concurrentQueue.async(group: myGroup) {
                 myGroup.enter()
                 let connection = GraphRequestConnection()
                 connection.add(GraphRequest(graphPath: "/\(request_ids_list[i])", parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { httpResponse, result in
                     switch(result) {
                     case .success(let response):
-                        print("\(response)")
+                        print("GetListOfOpponentsResponse: \(response)")
                         if (response.dictionaryValue!["data"] != nil) {
                             let game : Game = Game()
                             game.initWithGameRequest(request: response)
@@ -92,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                            let name = from["name"]
 //                            opponentNames[i] = name!
                         } else {
+                            self.deleteGameRequest(request_id: request_ids_list[i])
+                        }
+                        if ((response.dictionaryValue!["message"] as! String).lowercased().contains("forfeit")) {
                             self.deleteGameRequest(request_id: request_ids_list[i])
                         }
 //                        print("\(name)")

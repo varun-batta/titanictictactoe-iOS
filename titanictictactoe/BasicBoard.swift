@@ -39,6 +39,9 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     static var metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
     static var firstTurn : Bool = true
     static var metaBoard : [[BasicBoard]] = [[BasicBoard]](repeating: [BasicBoard](repeating: BasicBoard(), count: 3), count: 3)
+    var winOrTie : Bool = false
+    static var lastMoveRow : Int = -1
+    static var lastMoveColumn : Int = -1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -115,9 +118,21 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                 let button = UIButton()
                 button.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
 //                button.setTitle("", for: .normal)
-                button.setTitle(BasicBoard.wincheck[row][column], for: .normal)
-                if (BasicBoard.wincheck[row][column] != "") {
+                button.setTitle(BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], for: .normal)
+                if (BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] != "") {
                     button.isEnabled = false
+                }
+                if (BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "X" || BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "O") {
+                    if (metaLevel >= 2 && self.winChecker(row: metaRow*3 + row, column: metaColumn*3 + column, level: metaLevel, actual: metaLevel, winchecker: BasicBoard.wincheck, turnValue: BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], recreatingGame: true)) {
+                        let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
+                        label?.text = BasicBoard.metawincheck[metaRow][metaColumn]
+                        label?.textColor = Style.mainColorBlack
+                        label?.textAlignment = .center
+                        label?.font = Style.globalFont?.withSize(100)
+                        
+                        BasicBoard.metaBoard[metaRow][metaColumn].boardBackground.alpha = 0
+                        BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
+                    }
                 }
                 button.setTitleColor(Style.mainColorBlack, for: .disabled)
                 button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
@@ -203,6 +218,17 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                 miniBoard.horizontalStackViewLeadingConstraint.constant = miniBoard.horizontalStackViewLeadingConstraint.constant/3;
                 miniBoard.horizontalStackViewTrailingConstraint.constant = miniBoard.horizontalStackViewTrailingConstraint.constant/3;
                 
+                if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "X" || BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "O") {
+                    if (self.winChecker(row: miniBoard.metaRow, column: miniBoard.metaColumn, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn], recreatingGame: true)) {
+                        if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "X") {
+                            board.finish(won: true, winnerName: Board.player1.playerName)
+                        } else if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "O") {
+                            board.finish(won: true, winnerName: Board.player2.playerName)
+                        }
+                    }
+
+                }
+                
                 if index%3 == 0 {
                     verticalLeftStackView.addArrangedSubview(miniBoard)
                 } else if index%3 == 1 {
@@ -211,11 +237,6 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                     verticalRightStackView.addArrangedSubview(miniBoard)
                 }
             }
-        }
-        if (BasicBoard.wincheck[9][2] != "" && metaLevel >= 2) {
-            let row : Int = Int(BasicBoard.wincheck[9][0])!
-            let column : Int = Int(BasicBoard.wincheck[9][1])!
-            boardChanger(row: row, column: column, level: metaLevel, clickable: true)
         }
     }
     
@@ -252,8 +273,8 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         var row : Int = -1
         var column : Int = -1
         
-        for i in 0...(size - 1) {
-            for j in 0...(size - 1) {
+        for i in 0..<size {
+            for j in 0..<size {
                 if i*size + j == sender.tag {
                     found = true
                     row = i
@@ -277,7 +298,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
             boardChanger(row: row, column: column, level: metaLevel, clickable: true)
         }
 
-        let winOrTie : Bool = winChecker(row: row, column: column, level: metaLevel, actual: level, winchecker: BasicBoard.wincheck, turnValue: turn)
+        self.winOrTie = winChecker(row: row, column: column, level: metaLevel, actual: level, winchecker: BasicBoard.wincheck, turnValue: turn, recreatingGame: false)
 
         if LevelMenu.multiplayer {
 //            var toID : Int64 = 0
@@ -296,13 +317,21 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                 fromPlayer = Board.player2
             }
             var messageText = ""
+            var titleText = ""
             if BasicBoard.firstTurn {
                 messageText = "\(fromPlayer.playerName) has challenged you to a game, play now!"
+                titleText = "New Game!"
             } else {
-                messageText = "\(fromPlayer.playerName) has played and now it is your turn!"
+                if self.winOrTie {
+                    messageText = "\(fromPlayer.playerName) has won the game!"
+                    titleText = "Game Over"
+                } else {
+                    messageText = "\(fromPlayer.playerName) has played and now it is your turn!"
+                    titleText = "Your turn"
+                }
             }
             let game = createGameString()
-            let params : [String : Any] = ["data" : game, "message" : messageText]
+            let params : [String : Any] = ["data" : game, "message" : messageText, "title" : titleText]
             makeTurn(to: toPlayer.playerFBID, params: params)
         }
     }
@@ -362,7 +391,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         }
     }
     
-    func winChecker(row: Int, column: Int, level: Int, actual: Int, winchecker: [[String]], turnValue : String) -> Bool {
+    func winChecker(row: Int, column: Int, level: Int, actual: Int, winchecker: [[String]], turnValue: String, recreatingGame: Bool) -> Bool {
         var winOrTie : Bool = false
         var value : String = ""
         var value1 : String = ""
@@ -475,14 +504,28 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         }
         
         if x == "X" || x == "O" {
+            if (recreatingGame) {
+                switch(level) {
+                case 1:
+                    return true;
+                case 2:
+                    BasicBoard.metawincheck[f/3][g/3] = x
+                    return true;
+                default:
+                    return false;
+                }
+                
+            }
             switch(level) {
             case 1:
-                board.finish(won: true, winnerName: winningPlayer)
+                if (!LevelMenu.multiplayer) {
+                    board.finish(won: true, winnerName: winningPlayer)
+                }
                 winOrTie = true
                 break
             case 2:
                 BasicBoard.metawincheck[f/3][g/3] = x
-                board.winningBoardChanger(boardAdapter: self, row: f, column: g, level: level, clickable: true, x: x)
+                winOrTie = board.winningBoardChanger(boardAdapter: self, row: f, column: g, level: level, clickable: true, x: x)
                 break
             default:
                 return false
@@ -505,7 +548,13 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         gameRequestContent.recipients = [String(to)]
         gameRequestContent.message = params["message"] as! String
         gameRequestContent.data = params["data"] as! String
-        gameRequestContent.actionType = FBSDKGameRequestActionType.turn
+        gameRequestContent.title = params["title"] as! String
+        gameRequestContent.actionType = .turn
+//        if self.winOrTie {
+//            gameRequestContent.actionType = FBSDKGameRequestActionType.none
+//        } else {
+//            gameRequestContent.actionType = FBSDKGameRequestActionType.turn
+//        }
         
         FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
     }
@@ -520,14 +569,38 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     }
     
     func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
-        for i in 0...2 {
-            for j in 0...2 {
-                let key : Int = i*3 + j
+        let size : Int = Int(NSDecimalNumber(decimal: pow(3, metaLevel)))
+        for i in 0..<size {
+            for j in 0..<size {
+                let key = i*size + j
                 let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
                 
                 button.isEnabled = false
             }
         }
+        self.deleteGameRequest()
+        
+        var winningPlayerName : String = ""
+        if turn == "X" {
+            winningPlayerName = Board.player1.playerName
+        } else {
+            winningPlayerName = Board.player2.playerName
+        }
+        board.finish(won: winOrTie, winnerName: winningPlayerName)
+        
         print("Success! \(results)")
+    }
+    
+    func deleteGameRequest() {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(Board.gameID)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
     }
 }

@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import FacebookCore
+import FacebookShare
+import FBSDKCoreKit
+import FBSDKShareKit
 
-class CurrentGames: UIViewController {
+class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
 
     @IBOutlet var background: UIView!
     @IBOutlet var pleaseSelectGameLabel: UILabel!
     
     var currentGames : [Game] = [Game]()
+    var chosenGameRequestID : Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +39,22 @@ class CurrentGames: UIViewController {
 
     func prepareCurrentGamesButtons() {
         for i in 0..<self.currentGames.count {
-            let button = UIButton()
-            var fromPlayer = Player()
-            if (self.currentGames[i].lastMove == "X") {
-                fromPlayer = self.currentGames[i].player1
-            } else if (self.currentGames[i].lastMove == "O"){
-                fromPlayer = self.currentGames[i].player2
+            if (self.currentGames[i].lastMove != "") {
+                let button = UIButton()
+                var fromPlayer = Player()
+                if (self.currentGames[i].lastMove == "X") {
+                    fromPlayer = self.currentGames[i].player1
+                } else if (self.currentGames[i].lastMove == "O"){
+                    fromPlayer = self.currentGames[i].player2
+                }
+                let buttonText = "\(fromPlayer.playerName) - Level \(self.currentGames[i].level)"
+                button.setTitle(buttonText, for: .normal)
+                button.setTitleColor(Style.mainColorWhite, for: .normal)
+                button.backgroundColor = Style.mainColorBlack
+                button.tag = i
+                button.addTarget(self, action: #selector(promptForCurrentGame), for: UIControlEvents.touchUpInside)
+                self.background.addSubview(button)
             }
-            let buttonText = "\(fromPlayer.playerName) - Level \(self.currentGames[i].level)"
-            button.setTitle(buttonText, for: .normal)
-            button.setTitleColor(Style.mainColorWhite, for: .normal)
-            button.backgroundColor = Style.mainColorBlack
-            button.tag = i
-            button.addTarget(self, action: #selector(beginGame), for: UIControlEvents.touchUpInside)
-            self.background.addSubview(button)
         }
         let button = UIButton()
         let buttonText = "Level Menu"
@@ -58,21 +65,100 @@ class CurrentGames: UIViewController {
         self.background.addSubview(button)
     }
     
-    func beginGame(sender: UIButton) {
-        let game = self.currentGames[sender.tag]
+    func promptForCurrentGame(sender: UIButton) {
+        let prompt = UIAlertController(title: "What would you like to do?", message: "Please choose an action for the chosen game", preferredStyle: .alert)
+        
+        let playAction = UIAlertAction(title: "Play", style: .default) { (action) in
+            self.beginGame(game: self.currentGames[sender.tag])
+        }
+        prompt.addAction(playAction)
+        
+        let forfeitAction = UIAlertAction(title: "Forfeit", style: .destructive) { (action) in
+            self.forfeitGame(game: self.currentGames[sender.tag])
+        }
+        prompt.addAction(forfeitAction)
+        self.present(prompt, animated: true, completion: nil)
+    }
+    
+    func beginGame(game: Game) {
         BasicBoard.wincheck = game.data
         if (game.lastMove == "X") {
             BasicBoard.currentTurn = "O"
         } else {
             BasicBoard.currentTurn = "X"
         }
+        BasicBoard.firstTurn = false
         Board.player1 = game.player1
         Board.player2 = game.player2
+        Board.gameID  = game.requestID
         LevelMenu.multiplayer = true
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
         board.level = game.level
         self.present(board, animated: true, completion: nil)
+    }
+    
+    func forfeitGame(game: Game) {
+        self.chosenGameRequestID = game.requestID;
+        
+        var toPlayer : Player = Player()
+        var fromPlayer : Player = Player()
+        if game.lastMove == "X" {
+            toPlayer = game.player1
+            fromPlayer = game.player2
+        } else {
+            toPlayer = game.player2
+            fromPlayer = game.player1
+        }
+        let messageText = "\(fromPlayer.playerName) has forfeit the game. You win!"
+        let gameString = self.createGameString()
+        
+        let gameRequestContent = FBSDKGameRequestContent()
+        gameRequestContent.recipients = [String(toPlayer.playerFBID)]
+        gameRequestContent.message = messageText
+        gameRequestContent.data = gameString
+        gameRequestContent.title = "Forfeit"
+        gameRequestContent.actionType = FBSDKGameRequestActionType.none
+        
+        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
+    }
+    
+    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+        //Fall back as if no move was made
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
+        print("Error! \(error)")
+        //Fall back as if no move was made
+    }
+    
+    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        self.deleteGameRequest()
+        print("Success! \(results)")
+    }
+    
+    func deleteGameRequest() {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(self.chosenGameRequestID)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
+    }
+    
+    func createGameString() -> String {
+        var game = ""
+        for i in 0..<10 {
+            for j in 0..<9 {
+                game += BasicBoard.wincheck[i][j] + ","
+            }
+            game += ";"
+        }
+        return game
     }
     
     func dismissView(sender: UIButton) {
@@ -82,11 +168,11 @@ class CurrentGames: UIViewController {
     func fixButtons() {
         let subviews : [UIView] = self.background.subviews
         var y = pleaseSelectGameLabel.frame.origin.y + pleaseSelectGameLabel.frame.height + 10
-        let width = self.background.frame.size.width*0.9
+        let width = self.background.frame.size.width*0.8
         for subview : UIView in subviews {
             if (subview.isKind(of: UIButton.self)) {
                 let button : UIButton = subview as! UIButton
-                button.frame = CGRect(x: 41.0, y: y, width: width, height: 34.0)
+                button.frame = CGRect(x: (self.background.frame.size.width - width)/2, y: y, width: width, height: 34.0)
                 y += 44
             }
         }

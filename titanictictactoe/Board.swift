@@ -33,6 +33,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     static var background : UIView!
     var levelMenu : LevelMenu!
     var mainMenu : MainMenu!
+    static var gameID : Int64 = 0
     
     @IBOutlet var background: UIView!
     @IBOutlet var board: UIView!
@@ -97,6 +98,12 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             metaBoard.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
             
             board.addSubview(metaBoard)
+            
+            if (BasicBoard.wincheck[9][2] != "" && level >= 2) {
+                let row : Int = Int(BasicBoard.wincheck[9][0])!
+                let column : Int = Int(BasicBoard.wincheck[9][1])!
+                metaBoard.boardChanger(row: row, column: column, level: level, clickable: true)
+            }
         }
     }
     
@@ -283,7 +290,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-    func winningBoardChanger(boardAdapter : BasicBoard, row : Int, column : Int, level : Int, clickable : Bool, x : String) {
+    func winningBoardChanger(boardAdapter : BasicBoard, row : Int, column : Int, level : Int, clickable : Bool, x : String) -> Bool {
         let metaRow = row/3
         let metaColumn = column/3
 //
@@ -300,7 +307,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
         BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
         
         boardAdapter.boardChanger(row: row, column: column, level: level, clickable: clickable)
-        boardAdapter.winChecker(row: row, column: column, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: x)
+        return boardAdapter.winChecker(row: row, column: column, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: x, recreatingGame: false)
     }
     
     func finish(won : Bool, winnerName : String) {
@@ -328,14 +335,4 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
 //            Board.playerTurnLabel.text = player2 + "'s Turn"
 //        }
 //    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -122,8 +122,8 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     func promptGameToOpen(notification: Notification) {
 //        let opponentNames = notification.object as! [String]
         let games = notification.object as! [Game]
-        let gameIndex = countGames(games: games)
-        if (gameIndex == -1) {
+        let gameCount = countGames(games: games)
+        if (gameCount > 1) {
             let prompt = UIAlertController(title: "Choose Game to Play", message: "Please choose an opponent whose game you wish to return to", preferredStyle: .alert)
             //        prompt.modalPresentationStyle = .popover
             //        for i in 0...opponentNames.count - 1 {
@@ -147,25 +147,19 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             //        prompt.popoverPresentationController?.sourceRect = self.view.bounds
             //        prompt.popoverPresentationController?.sourceView = self.view
             self.present(prompt, animated: true, completion: nil)
-        } else {
-            beginGame(game: games[gameIndex]);
+        } else if (gameCount == 1){
+            beginGame(game: games[0]);
         }
     }
     
     func countGames(games: [Game]) -> Int {
-        var count : Int = 0
-        var index : Int = -1
+        var count : Int = -1
         for i in 0..<games.count {
             if (games[i].lastMove != "") {
                 count += 1
-                index = i
             }
         }
-        if (count > 1) {
-            return -1
-        } else {
-            return index
-        }
+        return count+1;
     }
     
     func beginGame(game: Game) {
@@ -175,12 +169,14 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         } else {
             BasicBoard.currentTurn = "X"
         }
+        BasicBoard.firstTurn = false
 //        Board.player1 = game.player1.playerName
 //        Board.player2 = game.player2.playerName
 //        Board.player1ID = game.player1.playerFBID
 //        Board.player2ID = game.player2.playerFBID
         Board.player1 = game.player1
         Board.player2 = game.player2
+        Board.gameID  = game.requestID
         LevelMenu.multiplayer = true
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board

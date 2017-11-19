@@ -129,9 +129,13 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                                 switch (request) {
                                 case .success (let response):
                                     print("\(response)")
-                                    let currentGame : Game = currentGames[i]
-                                    currentGame.initWithGameRequest(request: response)
-                                    currentGames[i] = currentGame
+                                    if ((response.dictionaryValue!["message"] as! String).lowercased().contains("forfeit")) {
+                                        self.deleteGameRequest(request_id: graphPath!)
+                                    } else {
+                                        let currentGame : Game = currentGames[i]
+                                        currentGame.initWithGameRequest(request: response)
+                                        currentGames[i] = currentGame
+                                    }
                                 case .failed (let error):
                                     print("\(error)")
                                 }
@@ -192,13 +196,6 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-//                var gameRequest = GameRequest(title: "New Match", message: "Let's play Titanic Tic Tac Toe!")
-//                gameRequest.actionType = .turn
-//                do {
-//                    try GameRequest.Dialog.show(gameRequest, completion: nil)
-//                } catch is exception {
-//                    print("Exception thrown")
-//                }
                 let gameRequest = FBSDKGameRequestContent()
                 gameRequest.message = "New Match"
                 gameRequest.actionType = .turn
@@ -211,22 +208,31 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
         case 304:
             self.level = 2
             
-            let alert = UIAlertController(title: "Player Names", message: "Please Enter the Player Names:", preferredStyle: UIAlertControllerStyle.alert)
-            
-            alert.addTextField(configurationHandler: {(textField) in textField.placeholder = "Player 1" })
-            alert.addTextField(configurationHandler: {(textField) in textField.placeholder = "Player 2" })
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                let player1TextField = alert!.textFields![0]
-                LevelMenu.player1.playerName = player1TextField.text!
-                let player2TextField = alert!.textFields![1]
-                LevelMenu.player2.playerName = player2TextField.text!
+            if !LevelMenu.multiplayer {
+                let alert = UIAlertController(title: "Player Names", message: "Please Enter the Player Names:", preferredStyle: UIAlertControllerStyle.alert)
                 
-                let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
+                alert.addTextField(configurationHandler: {(textField) in textField.placeholder = "Player 1" })
+                alert.addTextField(configurationHandler: {(textField) in textField.placeholder = "Player 2" })
                 
-                self.performSegue(withIdentifier: "ToGame", sender: extras)
-            }))
-            self.present(alert, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                    let player1TextField = alert!.textFields![0]
+                    LevelMenu.player1.playerName = player1TextField.text!
+                    let player2TextField = alert!.textFields![1]
+                    LevelMenu.player2.playerName = player2TextField.text!
+                    
+                    let extras = [self.level, LevelMenu.player1, LevelMenu.player2] as [Any]
+                    
+                    self.performSegue(withIdentifier: "ToGame", sender: extras)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let gameRequest = FBSDKGameRequestContent()
+                gameRequest.message = "New Match"
+                gameRequest.actionType = .turn
+                gameRequest.filters = .appUsers
+                
+                FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
+            }
             
             break
         case 308:

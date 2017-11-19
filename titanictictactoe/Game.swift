@@ -33,10 +33,18 @@ class Game: NSObject {
     func initWithGameRequest(request: GraphResponse) {
         let data = request.dictionaryValue?["data"] as! String
         initData(data: data)
-        self.lastMoveRow = Int(self.data[9][0])!
-        self.lastMoveColumn = Int(self.data[9][1])!
-        self.lastMove = self.data[9][2]
-        self.level = Int(self.data[9][3])!
+        if (self.data[9][0] != "") {
+            self.lastMoveRow = Int(self.data[9][0])!
+        }
+        if (self.data[9][1] != "") {
+            self.lastMoveColumn = Int(self.data[9][1])!
+        }
+        if (self.data[9][2] != "") {
+            self.lastMove = self.data[9][2]
+        }
+        if (self.data[9][3] != "") {
+            self.level = Int(self.data[9][3])!
+        }
         self.requestID = Int64(request.dictionaryValue?["id"] as! String)!
         
         let from = request.dictionaryValue?["from"] as! [String:String]
