@@ -12,6 +12,7 @@ import FacebookLogin
 import FacebookShare
 import FacebookCore
 import FBSDKShareKit
+import FBSDKCoreKit
 
 class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInviteDialogDelegate {
     static var multiplayer = false
@@ -174,6 +175,9 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
     }
     
     @IBAction func levelSelect(_ sender: UIButton) {
+        BasicBoard.currentTurn = "X"
+        BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+        BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
         switch sender.tag {
         case 303:
             self.level = 1
@@ -196,12 +200,18 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let gameRequest = FBSDKGameRequestContent()
-                gameRequest.message = "New Match"
-                gameRequest.actionType = .turn
-                gameRequest.filters = .appUsers
-                
-                FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
+                if ((AccessToken.current) != nil) {
+                    let gameRequest = FBSDKGameRequestContent()
+                    gameRequest.message = "New Match"
+                    gameRequest.actionType = .turn
+                    gameRequest.filters = .appUsers
+                    FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
+                } else {
+                    let warning = UIAlertController(title: "Not Connected", message: "You must login to Facebook before you can play a game over WiFi", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    warning.addAction(defaultAction)
+                    self.present(warning, animated: true, completion: nil)
+                }
             }
             
             break
@@ -226,15 +236,36 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let gameRequest = FBSDKGameRequestContent()
-                gameRequest.message = "New Match"
-                gameRequest.actionType = .turn
-                gameRequest.filters = .appUsers
-                
-                FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
+                if ((AccessToken.current) != nil) {
+                    let gameRequest = FBSDKGameRequestContent()
+                    gameRequest.message = "New Match"
+                    gameRequest.actionType = .turn
+                    gameRequest.filters = .appUsers
+                    FBSDKGameRequestDialog.show(with: gameRequest, delegate: self)
+                } else {
+                    let warning = UIAlertController(title: "Not Connected", message: "You must login to Facebook before you can play a game over WiFi", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    warning.addAction(defaultAction)
+                    self.present(warning, animated: true, completion: nil)
+                }
             }
             
             break
+        case 305:
+            let warning = UIAlertController(title: "Sorry!", message: "The level you have selected is currently unavailable", preferredStyle: .alert)
+            warning.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                warning.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(warning, animated: true, completion: nil)
+            break
+        case 306:
+            let warning = UIAlertController(title: "Sorry!", message: "The level you have selected is currently unavailable", preferredStyle: .alert)
+            warning.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                warning.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(warning, animated: true, completion: nil)
         case 308:
             self.dismiss(animated: true, completion: nil)
             break

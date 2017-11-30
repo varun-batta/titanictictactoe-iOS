@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FacebookCore
+import FacebookShare
+import FBSDKShareKit
 
 class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -22,6 +25,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
 //    static var player2ID : Int64 = 0
     static var player1 : Player = Player()
     static var player2 : Player = Player()
+    static var currentPlayer : Player = Player()
     var playerTurn : String!
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!
@@ -94,6 +98,8 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             
             let metaBoard : BasicBoard = BasicBoard();
             metaBoard.frame = CGRect(x: 0, y: 0, width: self.board.frame.size.width, height: self.board.frame.size.height)
+            metaBoard.metaRow = 0
+            metaBoard.metaColumn = 0
             
             metaBoard.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
             
@@ -327,6 +333,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             winner.mainMenu = self.mainMenu
         }
     }
+    
 //    func playerTurnLabelChanger( player : Int ) {
 ////        let playerTurnLabel : UILabel = self.view.viewWithTag(407) as! UILabel
 //        if player == 1 {
@@ -335,4 +342,17 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
 //            Board.playerTurnLabel.text = player2 + "'s Turn"
 //        }
 //    }
+    
+    func deleteGameRequest(request_id: String) {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
+    }
 }
