@@ -85,9 +85,16 @@ class Winner: UIViewController {
         BasicBoard.currentTurn = "X"
         BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
         BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let board = main.instantiateViewController(withIdentifier: "Board")
-        self.present(board, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "rematch", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "rematch" {
+            let board = segue.destination as! Board
+            board.level = self.board.level
+            board.levelMenu = self.levelMenu
+            board.mainMenu = self.mainMenu
+        }
     }
     
     func mainMenuButtonTapped(sender: UIButton) {
@@ -119,48 +126,6 @@ class Winner: UIViewController {
             self.levelMenu.dismiss(animated: true, completion: nil)
         }
     }
-    
-//    @IBAction func bottomPanelListener(_ sender: UIButton) {
-//        let main = UIStoryboard(name: "Main", bundle: nil)
-//        switch (sender.tag) {
-//        case 504:
-//            print("Dismissing levelMenu")
-//            self.deleteGameRequest(request_id: String(Board.gameID))
-//            if (self.mainMenu == nil) {
-//                let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
-//                self.present(mainMenu, animated: true, completion: nil)
-//            } else {
-//                self.mainMenu.dismiss(animated: true, completion: nil)
-//            }
-//            break
-//        case 505:
-//            print("Dismissing Winner.self")
-//            self.dismiss(animated: true, completion: nil)
-//            break
-//        case 506:
-//            print("Dismissing board")
-//            self.deleteGameRequest(request_id: String(Board.gameID))
-//            if (self.levelMenu == nil) {
-//                let levelMenu = main.instantiateViewController(withIdentifier: "LevelMenu")
-//                self.present(levelMenu, animated: true, completion: nil)
-//            } else {
-//                self.levelMenu.dismiss(animated: true, completion: nil)
-//            }
-//            break
-//        case 507:
-//            print("Dismissing board")
-//            self.deleteGameRequest(request_id: String(Board.gameID))
-//            if (self.levelMenu == nil) {
-//                let levelMenu = main.instantiateViewController(withIdentifier: "LevelMenu") as! LevelMenu
-//                self.present(levelMenu, animated: true, completion: nil)
-//            } else {
-//                self.levelMenu.dismiss(animated: true, completion: nil)
-//            }
-//            break
-//        default:
-//            return
-//        }
-//    }
     
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()

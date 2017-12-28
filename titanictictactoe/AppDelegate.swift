@@ -21,6 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        let currentiCloudToken = FileManager.default.ubiquityIdentityToken
+        
+        if (currentiCloudToken != nil) {
+            let newTokenData = NSKeyedArchiver.archivedData(withRootObject: currentiCloudToken)
+            UserDefaults.standard.set(newTokenData, forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
+        }
+        
         return true
     }
     

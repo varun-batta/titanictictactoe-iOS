@@ -58,6 +58,25 @@ class Game: NSObject {
         }
     }
     
+    func initWithSavedGame(savedGameData: String, savedGameName: String) {
+        initData(data: savedGameData)
+        if (self.data[9][0] != "") {
+            self.lastMoveRow = Int(self.data[9][0])!
+        }
+        if (self.data[9][1] != "") {
+            self.lastMoveColumn = Int(self.data[9][1])!
+        }
+        if (self.data[9][2] != "") {
+            self.lastMove = self.data[9][2]
+        }
+        if (self.data[9][3] != "") {
+            self.level = Int(self.data[9][3])!
+        }
+        
+        self.player1.initForSavedGameName(playerName: String(savedGameName.split(separator: " ")[0]), turn: "X")
+        self.player2.initForSavedGameName(playerName: String(savedGameName.split(separator: " ")[2]), turn: "O")
+    }
+    
     func initData(data: String) {
         var row = 0
         var column = 0

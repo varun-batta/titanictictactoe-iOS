@@ -16,6 +16,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var boardBackground: UIImageView!
+    @IBOutlet var boardBackgroundRed: UIImageView!
     @IBOutlet var horizontalStackView: UIStackView!
     @IBOutlet var horizontalStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet var horizontalStackViewBottomConstraint: NSLayoutConstraint!
@@ -66,6 +67,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         self.metaLevel = metaLevel
         let gaps : CGFloat = 20.0
         self.board = board
+        self.boardBackgroundRed.alpha = 0;
         
         let dimension = dimensionForButton(width: width, gaps: gaps)
         
@@ -359,6 +361,9 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                     
                     button.isEnabled = false
                     button.backgroundColor = .clear
+                    if BasicBoard.metawincheck[i%3][j%3] == "" {
+                        BasicBoard.metaBoard[i%3][j%3].boardBackgroundRed.alpha = 0.5
+                    }
                 }
             }
             let metaRow = row%3 //abs(row - 8)%3;
@@ -371,10 +376,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                         
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
-                            button.backgroundColor = Style.mainColorBlue
+                            button.backgroundColor = .clear
                         }
                     }
                 }
+                BasicBoard.metaBoard[metaRow][metaColumn].boardBackgroundRed.alpha = 0
             } else {
                 for i in 0...8 {
                     for j in 0...8 {
@@ -383,7 +389,11 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                         
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
-                            button.backgroundColor = Style.mainColorBlue
+                            button.backgroundColor = .clear
+                        }
+                        
+                        if BasicBoard.metawincheck[i%3][j%3] == "" {
+                            BasicBoard.metaBoard[i%3][j%3].boardBackgroundRed.alpha = 0;
                         }
                     }
                 }

@@ -19,6 +19,11 @@ class Player: NSObject {
         self.turn = ""
     }
     
+    func initForSavedGameName(playerName: String, turn: String) {
+        self.playerName = playerName
+        self.turn = turn
+    }
+    
     func initWithPlayerData(playerData: [String:String], turn: String) {
         self.playerName = playerData["name"]!
         let playerID = playerData["id"]!

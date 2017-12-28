@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import FacebookCore
+import GameKit
 
 class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -55,6 +56,8 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         collectionView.backgroundColor = Style.mainColorBlue;
         playButton.backgroundColor = Style.mainColorWhite;
         playButton.setTitleColor(Style.mainColorBlack, for: .normal);
+        
+        self.authenticateLocalPlayer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(promptGameToOpen(notification:)), name: NSNotification.Name(rawValue: "gamesReady"), object: nil)
     }
@@ -106,6 +109,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             titleCellTextView.text = titleLabels[indexPath.item];
             titleCellTextView.backgroundColor = Style.mainColorGreen;
             titleCellTextView.textColor = Style.mainColorBlack;
+            titleCellTextView.isEditable = false
             titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         } else {
@@ -182,5 +186,14 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
         board.level = game.level
         self.present(board, animated: true, completion: nil)
+    }
+    
+    func authenticateLocalPlayer() {
+        let localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            if (viewController != nil) {
+                self.present(viewController!, animated: true, completion: nil)
+            }
+        }
     }
 }

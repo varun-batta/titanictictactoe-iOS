@@ -10,6 +10,7 @@ import UIKit
 import FacebookCore
 import FacebookShare
 import FBSDKShareKit
+import GameKit
 
 class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -73,8 +74,14 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
 //        boardCollectionView.backgroundColor = Style.mainColorGreen;
 //        boardCollectionView.alpha = 0.3;
         playersTurnLabel.textColor = Style.mainColorBlack;
+        
+        if (LevelMenu.multiplayer) {
+            saveButton.isEnabled = false
+            saveButton.isHidden = true
+        }
         saveButton.backgroundColor = Style.mainColorBlack;
         saveButton.setTitleColor(Style.mainColorWhite, for: .normal);
+        
         menuButton.backgroundColor = Style.mainColorBlack;
         menuButton.setTitleColor(Style.mainColorWhite, for: .normal);
         titleLabel.textColor = Style.mainColorBlack;
@@ -286,14 +293,44 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     
     @IBAction func bottomPanelListener(_ sender: UIButton) {
         switch sender.tag {
+        case 408:
+            let localPlayer = GKLocalPlayer.localPlayer()
+            let gameData = createGameString().data(using: .utf8)
+            let gameName = Board.player1.playerName + " vs. " + Board.player2.playerName + " - Level \(level)"
+            localPlayer.saveGameData(gameData!, withName: gameName) {(savedGame, error) -> Void in
+                if (error == nil) {
+                    print("Successfully saved!")
+                } else {
+                    print("\(error)")
+                }
+            }
+            break
         case 409:
-            BoardAdapter.metaRow = -1
-            BoardAdapter.metaColumn = -1
+            BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+            BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+            BasicBoard.firstTurn = true
+            BasicBoard.metaBoard = [[BasicBoard]](repeating: [BasicBoard](repeating: BasicBoard(), count: 3), count: 3)
+            BasicBoard.lastMoveRow = -1
+            BasicBoard.lastMoveColumn = -1
             self.dismiss(animated: true, completion: nil)
             break
         default:
             return
         }
+    }
+    
+    func createGameString() -> String {
+        var game = ""
+        //        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
+        //        for i in 0...(size - 1) {
+        //            for j in 0...(size - 1) {
+        for i in 0..<10 {
+            for j in 0..<9 {
+                game += BasicBoard.wincheck[i][j] + ","
+            }
+            game += ";"
+        }
+        return game
     }
     
     func winningBoardChanger(boardAdapter : BasicBoard, row : Int, column : Int, level : Int, clickable : Bool, x : String) -> Bool {
@@ -310,6 +347,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
         label?.font = Style.globalFont?.withSize(100)
         
         BasicBoard.metaBoard[metaRow][metaColumn].boardBackground.alpha = 0
+        BasicBoard.metaBoard[metaRow][metaColumn].boardBackgroundRed.alpha = 0
         BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
         
         boardAdapter.boardChanger(row: row, column: column, level: level, clickable: clickable)

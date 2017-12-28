@@ -10,7 +10,7 @@
 		571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */; };
 		8B3742751FAD4F2900889FB6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742741FAD4F2900889FB6 /* Game.swift */; };
 		8B3742771FAD50A900889FB6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742761FAD50A900889FB6 /* Player.swift */; };
-		8B460FC91FB017C500002FF6 /* CurrentGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B460FC81FB017C400002FF6 /* CurrentGames.swift */; };
+		8B460FC91FB017C500002FF6 /* Current&SavedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */; };
 		8B9B66C31F9D794F0070B58F /* TitanicTicTacToeLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */; };
 		8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B66C41F9D8FE40070B58F /* Style.swift */; };
 		8B9B66D31F9DAFFD0070B58F /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */; };
@@ -47,7 +47,7 @@
 		72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		8B3742741FAD4F2900889FB6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8B3742761FAD50A900889FB6 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		8B460FC81FB017C400002FF6 /* CurrentGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentGames.swift; sourceTree = "<group>"; };
+		8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Current&SavedGames.swift"; sourceTree = "<group>"; };
 		8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitanicTicTacToeLogo.png; sourceTree = "<group>"; };
 		8B9B66C41F9D8FE40070B58F /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BlackItalic.ttf"; path = "titanictictactoe/Roboto/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -62,6 +62,7 @@
 		8B9B66D01F9DAFFD0070B58F /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "titanictictactoe/Roboto/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		8B9B66D11F9DAFFD0070B58F /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-ThinItalic.ttf"; path = "titanictictactoe/Roboto/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		8B9B66D21F9DAFFD0070B58F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "titanictictactoe/Roboto/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		8BA93F7E1FD65C0E00043A74 /* titanictictactoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = titanictictactoe.entitlements; sourceTree = "<group>"; };
 		8BAB4A1B1E725F5900B64D6D /* titanictictactoe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = titanictictactoe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAB4A1E1E725F5A00B64D6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BAB4A201E725F5A00B64D6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		8BAB4A1D1E725F5A00B64D6D /* titanictictactoe */ = {
 			isa = PBXGroup;
 			children = (
+				8BA93F7E1FD65C0E00043A74 /* titanictictactoe.entitlements */,
 				8BAB4A1E1E725F5A00B64D6D /* AppDelegate.swift */,
 				8BAB4A201E725F5A00B64D6D /* GameScene.sks */,
 				8BAB4A221E725F5A00B64D6D /* Actions.sks */,
@@ -164,7 +166,7 @@
 				8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */,
 				8B3742741FAD4F2900889FB6 /* Game.swift */,
 				8B3742761FAD50A900889FB6 /* Player.swift */,
-				8B460FC81FB017C400002FF6 /* CurrentGames.swift */,
+				8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */,
 			);
 			path = titanictictactoe;
 			sourceTree = "<group>";
@@ -206,6 +208,14 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 66RVF7F458;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -315,7 +325,7 @@
 				8BEDB76E1FA2BF1B002C42F6 /* BasicBoard.swift in Sources */,
 				8B3742771FAD50A900889FB6 /* Player.swift in Sources */,
 				8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */,
-				8B460FC91FB017C500002FF6 /* CurrentGames.swift in Sources */,
+				8B460FC91FB017C500002FF6 /* Current&SavedGames.swift in Sources */,
 				8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */,
 				8B3742751FAD4F2900889FB6 /* Game.swift in Sources */,
 				8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */,
@@ -445,6 +455,7 @@
 			baseConfigurationReference = FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = titanictictactoe/titanictictactoe.entitlements;
 				DEVELOPMENT_TEAM = 66RVF7F458;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +475,7 @@
 			baseConfigurationReference = 72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = titanictictactoe/titanictictactoe.entitlements;
 				DEVELOPMENT_TEAM = 66RVF7F458;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -13,6 +13,7 @@ import FacebookShare
 import FacebookCore
 import FBSDKShareKit
 import FBSDKCoreKit
+import GameKit
 
 class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInviteDialogDelegate {
     static var multiplayer = false
@@ -266,6 +267,11 @@ class LevelMenu: UIViewController, FBSDKGameRequestDialogDelegate, FBSDKAppInvit
             }))
             
             self.present(warning, animated: true, completion: nil)
+            break
+        case 307:
+            if (!LevelMenu.multiplayer) {
+                self.performSegue(withIdentifier: "toSavedGames", sender: nil)
+            }
         case 308:
             self.dismiss(animated: true, completion: nil)
             break

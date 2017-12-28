@@ -493,6 +493,7 @@
                         <outlet property="titleLabel" destination="gbk-Uk-q95" id="hSp-qL-KpX"/>
                         <segue destination="85Z-43-oKX" kind="show" identifier="ToGame" id="nsR-wa-C6u"/>
                         <segue destination="xQL-Z6-AhB" kind="show" identifier="toCurrentGames" id="77y-6e-F3K"/>
+                        <segue destination="xQL-Z6-AhB" kind="show" identifier="toSavedGames" id="aw7-pK-Bg2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KNT-0Y-LRp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,6 +643,7 @@
                     <connections>
                         <outlet property="background" destination="K3U-tP-JQe" id="jXp-Yl-XOs"/>
                         <outlet property="pleaseSelectGameLabel" destination="dYu-Bu-8Zp" id="L4O-QK-nSN"/>
+                        <outlet property="titleLabel" destination="Ntb-pI-Weh" id="IJG-A0-1eG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="927-0y-K01" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -736,6 +738,7 @@
                         <outlet property="playerWinsLabel" destination="tLj-Gz-B2C" id="ej6-gg-1WQ"/>
                         <outlet property="rematchButton" destination="xaf-5N-uUu" id="ReY-Ms-Nez"/>
                         <outlet property="viewGameButton" destination="CiO-9D-Tld" id="Kh2-Xl-oXT"/>
+                        <segue destination="85Z-43-oKX" kind="show" identifier="rematch" id="2pP-lP-oOH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAW-ee-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,4 +749,8 @@
     <resources>
         <image name="Logo" width="127" height="46"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aw7-pK-Bg2"/>
+        <segue reference="2pP-lP-oOH"/>
+    </inferredMetricsTieBreakers>
 </document>

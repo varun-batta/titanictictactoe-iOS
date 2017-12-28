@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicBoard" customModule="titanictictactoe" customModuleProvider="target">
             <connections>
                 <outlet property="boardBackground" destination="Kj0-cW-Rzh" id="HwW-oS-mTU"/>
+                <outlet property="boardBackgroundRed" destination="EJ0-Yz-dS4" id="ewh-ow-izn"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="za6-V5-cDg"/>
                 <outlet property="horizontalStackView" destination="Al7-N4-NxE" id="AVk-yf-0Y5"/>
                 <outlet property="horizontalStackViewBottomConstraint" destination="Btc-vK-K31" id="0fP-CU-5kJ"/>
@@ -36,6 +37,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Kj0-cW-Rzh" secondAttribute="height" multiplier="1:1" id="8ln-Ay-iPE"/>
                     </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoardBackground-Red" translatesAutoresizingMaskIntoConstraints="NO" id="EJ0-Yz-dS4">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Al7-N4-NxE">
                     <rect key="frame" x="25" y="30" width="350" height="340"/>
@@ -63,10 +67,14 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bnU-tx-TZg" secondAttribute="trailing" id="5mx-rh-4AT"/>
                 <constraint firstItem="Kj0-cW-Rzh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6KL-z8-bwb"/>
                 <constraint firstItem="Al7-N4-NxE" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-5" id="Btc-vK-K31"/>
+                <constraint firstItem="EJ0-Yz-dS4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="I4o-8x-0I9"/>
                 <constraint firstItem="bnU-tx-TZg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="JMP-2B-GdL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="EJ0-Yz-dS4" secondAttribute="bottom" id="NWa-LL-WfH"/>
                 <constraint firstItem="Kj0-cW-Rzh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NnC-PP-mk3"/>
+                <constraint firstItem="EJ0-Yz-dS4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="TRt-iU-JWP"/>
                 <constraint firstItem="bnU-tx-TZg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="U5t-dg-kav"/>
                 <constraint firstItem="Al7-N4-NxE" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="Wc4-8a-ap3" userLabel="Horizontal Stack View Top Constraint"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EJ0-Yz-dS4" secondAttribute="trailing" id="YLU-ZL-MsN"/>
                 <constraint firstAttribute="bottom" secondItem="Kj0-cW-Rzh" secondAttribute="bottom" id="bj0-87-iJV"/>
                 <constraint firstItem="Kj0-cW-Rzh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gUK-OF-NKS"/>
                 <constraint firstItem="Kj0-cW-Rzh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qtX-4v-tXY"/>
@@ -81,5 +89,6 @@
     </objects>
     <resources>
         <image name="BoardBackground" width="239" height="219"/>
+        <image name="BoardBackground-Red" width="232" height="216"/>
     </resources>
 </document>
