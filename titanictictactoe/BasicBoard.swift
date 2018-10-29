@@ -32,7 +32,6 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     var dimension : CGFloat!
     var metaRow : Int = -1
     var metaColumn : Int = -1
-    var zeroCount : Int = -1
     static var currentTurn : String = "X"
     var turn : String!
     var board : Board!

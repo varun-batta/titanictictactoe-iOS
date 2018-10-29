@@ -9,5 +9,7 @@ target 'titanictictactoe' do
   pod ‘FacebookCore’
   pod ‘FacebookLogin’
   pod ‘FacebookShare’
+  
+  pod 'XLPagerTabStrip', '~> 8.0'
 
 end

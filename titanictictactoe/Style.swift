@@ -16,4 +16,5 @@ struct Style {
     static var mainColorBlack = UIColor(red: 30.0/255.0, green: 26.0/255.0, blue: 17.0/255.0, alpha: 1)
     static var mainColorRed = UIColor(red: 237.0/255.0, green: 106.0/255.0, blue: 94.0/255.0, alpha: 1)
     static var mainColorBlue = UIColor(red: 29.0/255.0, green: 78.0/255.0, blue: 137.0/255.0, alpha: 1)
+    static var mainColorDarkGreen = UIColor(red: 117.0/255.0, green: 180.0/255.0, blue: 172.0/255.0, alpha: 1)
 }

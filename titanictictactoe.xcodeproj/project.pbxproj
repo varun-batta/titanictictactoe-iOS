@@ -11,6 +11,11 @@
 		8B3742751FAD4F2900889FB6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742741FAD4F2900889FB6 /* Game.swift */; };
 		8B3742771FAD50A900889FB6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742761FAD50A900889FB6 /* Player.swift */; };
 		8B460FC91FB017C500002FF6 /* Current&SavedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */; };
+		8B90777B20CC456A00EFBFAB /* PlayerSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90777A20CC456A00EFBFAB /* PlayerSelector.swift */; };
+		8B90777D20CC460200EFBFAB /* FacebookGameSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90777C20CC460200EFBFAB /* FacebookGameSelected.swift */; };
+		8B90777F20CC463E00EFBFAB /* LocalGameSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90777E20CC463E00EFBFAB /* LocalGameSelected.swift */; };
+		8B90778120CCD07300EFBFAB /* FacebookFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B90778020CCD07300EFBFAB /* FacebookFriend.xib */; };
+		8B90778320CCD0A400EFBFAB /* FacebookFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90778220CCD0A400EFBFAB /* FacebookFriend.swift */; };
 		8B9B66C31F9D794F0070B58F /* TitanicTicTacToeLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */; };
 		8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B66C41F9D8FE40070B58F /* Style.swift */; };
 		8B9B66D31F9DAFFD0070B58F /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */; };
@@ -48,6 +53,11 @@
 		8B3742741FAD4F2900889FB6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8B3742761FAD50A900889FB6 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Current&SavedGames.swift"; sourceTree = "<group>"; };
+		8B90777A20CC456A00EFBFAB /* PlayerSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelector.swift; sourceTree = "<group>"; };
+		8B90777C20CC460200EFBFAB /* FacebookGameSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookGameSelected.swift; sourceTree = "<group>"; };
+		8B90777E20CC463E00EFBFAB /* LocalGameSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGameSelected.swift; sourceTree = "<group>"; };
+		8B90778020CCD07300EFBFAB /* FacebookFriend.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookFriend.xib; sourceTree = "<group>"; };
+		8B90778220CCD0A400EFBFAB /* FacebookFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookFriend.swift; sourceTree = "<group>"; };
 		8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitanicTicTacToeLogo.png; sourceTree = "<group>"; };
 		8B9B66C41F9D8FE40070B58F /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		8B9B66C71F9DAFFB0070B58F /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BlackItalic.ttf"; path = "titanictictactoe/Roboto/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -167,6 +177,11 @@
 				8B3742741FAD4F2900889FB6 /* Game.swift */,
 				8B3742761FAD50A900889FB6 /* Player.swift */,
 				8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */,
+				8B90777A20CC456A00EFBFAB /* PlayerSelector.swift */,
+				8B90777C20CC460200EFBFAB /* FacebookGameSelected.swift */,
+				8B90777E20CC463E00EFBFAB /* LocalGameSelected.swift */,
+				8B90778020CCD07300EFBFAB /* FacebookFriend.xib */,
+				8B90778220CCD0A400EFBFAB /* FacebookFriend.swift */,
 			);
 			path = titanictictactoe;
 			sourceTree = "<group>";
@@ -183,7 +198,6 @@
 				8BAB4A181E725F5900B64D6D /* Frameworks */,
 				8BAB4A191E725F5900B64D6D /* Resources */,
 				B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */,
-				3D8D8363E105F66F39E3C1BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,6 +265,7 @@
 				8B9B66D91F9DAFFD0070B58F /* Roboto-BoldItalic.ttf in Resources */,
 				8B9B66DA1F9DAFFD0070B58F /* Roboto-Medium.ttf in Resources */,
 				8B9B66DB1F9DAFFD0070B58F /* Roboto-MediumItalic.ttf in Resources */,
+				8B90778120CCD07300EFBFAB /* FacebookFriend.xib in Resources */,
 				8B9B66DC1F9DAFFD0070B58F /* Roboto-Bold.ttf in Resources */,
 				8B9B66DD1F9DAFFD0070B58F /* Roboto-ThinItalic.ttf in Resources */,
 				8BEDB76C1FA2BD45002C42F6 /* BasicBoard.xib in Resources */,
@@ -267,34 +282,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3D8D8363E105F66F39E3C1BF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		535652F29DFBC932018FA8BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-titanictictactoe-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */ = {
@@ -303,9 +306,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -319,7 +339,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B90777F20CC463E00EFBFAB /* LocalGameSelected.swift in Sources */,
 				8BAB4A391E78E87900B64D6D /* LevelMenu.swift in Sources */,
+				8B90777D20CC460200EFBFAB /* FacebookGameSelected.swift in Sources */,
+				8B90778320CCD0A400EFBFAB /* FacebookFriend.swift in Sources */,
 				8BAB4A251E725F5A00B64D6D /* GameScene.swift in Sources */,
 				8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */,
 				8BEDB76E1FA2BF1B002C42F6 /* BasicBoard.swift in Sources */,
@@ -330,6 +353,7 @@
 				8B3742751FAD4F2900889FB6 /* Game.swift in Sources */,
 				8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */,
 				8BAB4A1F1E725F5A00B64D6D /* AppDelegate.swift in Sources */,
+				8B90777B20CC456A00EFBFAB /* PlayerSelector.swift in Sources */,
 				8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */,
 				8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */,
 			);

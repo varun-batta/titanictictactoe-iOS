@@ -18,6 +18,7 @@ class Game: NSObject {
     var lastMoveColumn : Int
     var level : Int
     var requestID : Int64
+    var opponentWon : Bool
     
     override init() {
         self.player1 = Player()
@@ -28,6 +29,7 @@ class Game: NSObject {
         self.lastMoveColumn = -1
         self.level = 0
         self.requestID = 0
+        self.opponentWon = false
     }
     
     func initWithGameRequest(request: GraphResponse) {
@@ -56,6 +58,7 @@ class Game: NSObject {
             self.player1.initWithPlayerData(playerData: to, turn: "X")
             self.player2.initWithPlayerData(playerData: from, turn: "O")
         }
+        self.opponentWon = (request.dictionaryValue!["message"] as! String).lowercased().contains("won")
     }
     
     func initWithSavedGame(savedGameData: String, savedGameName: String) {

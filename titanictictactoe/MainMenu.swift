@@ -26,10 +26,10 @@ class MainMenu: UIViewController {
         mainMenuLabel.textColor = Style.mainColorBlack;
         instructionsButton.backgroundColor = Style.mainColorBlack;
         instructionsButton.setTitleColor(Style.mainColorWhite, for: .normal);
-        passByPassGameButton.backgroundColor = Style.mainColorBlack;
-        passByPassGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
-        wifiGameButton.backgroundColor = Style.mainColorBlack;
-        wifiGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+//        passByPassGameButton.backgroundColor = Style.mainColorBlack;
+//        passByPassGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
+//        wifiGameButton.backgroundColor = Style.mainColorBlack;
+//        wifiGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
         welcomeLabel.textColor = Style.mainColorBlack;
     }
 

@@ -52,10 +52,10 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             // Fallback on earlier versions
         }
         
-        background.backgroundColor = Style.mainColorBlue;
-        collectionView.backgroundColor = Style.mainColorBlue;
-        playButton.backgroundColor = Style.mainColorWhite;
-        playButton.setTitleColor(Style.mainColorBlack, for: .normal);
+//        background.backgroundColor = Style.mainColorBlue;
+//        collectionView.backgroundColor = Style.mainColorBlue;
+//        playButton.backgroundColor = Style.mainColorWhite;
+//        playButton.setTitleColor(Style.mainColorBlack, for: .normal);
         
         self.authenticateLocalPlayer()
         
@@ -107,17 +107,17 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCellDescription", for: indexPath)
             let titleCellTextView : UITextView = titleCell .viewWithTag(102) as! UITextView;
             titleCellTextView.text = titleLabels[indexPath.item];
-            titleCellTextView.backgroundColor = Style.mainColorGreen;
-            titleCellTextView.textColor = Style.mainColorBlack;
+//            titleCellTextView.backgroundColor = Style.mainColorGreen;
+//            titleCellTextView.textColor = Style.mainColorBlack;
             titleCellTextView.isEditable = false
-            titleCell.backgroundColor = Style.mainColorGreen;
+//            titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         } else {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath);
             let titleCellLabel : UILabel = titleCell .viewWithTag(101) as! UILabel;
             titleCellLabel.text = titleLabels[indexPath.item];
-            titleCellLabel.textColor = Style.mainColorBlack;
-            titleCell.backgroundColor = Style.mainColorGreen;
+//            titleCellLabel.textColor = Style.mainColorBlack;
+//            titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         }
     }
@@ -183,9 +183,20 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         Board.gameID  = game.requestID
         LevelMenu.multiplayer = true
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
-        board.level = game.level
-        self.present(board, animated: true, completion: nil)
+        if (game.opponentWon) {
+            let winner : Winner = mainStoryboard.instantiateViewController(withIdentifier: "Winner") as! Winner
+            if (game.lastMove == "X") {
+                winner.winnerName = game.player1.playerName
+            } else {
+                winner.winnerName = game.player2.playerName
+            }
+            self.deleteGameRequest(request_id: "\(game.requestID)")
+            self.present(winner, animated: true, completion: nil)
+        } else {
+            let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
+            board.level = game.level
+            self.present(board, animated: true, completion: nil)
+        }
     }
     
     func authenticateLocalPlayer() {
@@ -195,5 +206,18 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
                 self.present(viewController!, animated: true, completion: nil)
             }
         }
+    }
+    
+    func deleteGameRequest(request_id: String) {
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
+            switch(result) {
+            case .success(let response):
+                print("\(response)")
+            case .failed(let error):
+                print("\(error)")
+            }
+        }
+        connection.start()
     }
 }

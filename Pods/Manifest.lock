@@ -24,11 +24,24 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.20.2):
     - FBSDKCoreKit
+  - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - FacebookShare
+  - XLPagerTabStrip (~> 8.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Bolts
+    - FacebookCore
+    - FacebookLogin
+    - FacebookShare
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -38,7 +51,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
   FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
   FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
+  XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: b1756780450e7ded8a46e3a277f28a01fab60a50
+PODFILE CHECKSUM: 39db8e577041fc48d1b4763d3ff9ce5abaf67ea7
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3
