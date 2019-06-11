@@ -17,14 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         let currentiCloudToken = FileManager.default.ubiquityIdentityToken
         
         if (currentiCloudToken != nil) {
-            let newTokenData = NSKeyedArchiver.archivedData(withRootObject: currentiCloudToken)
+            let newTokenData = NSKeyedArchiver.archivedData(withRootObject: currentiCloudToken!)
             UserDefaults.standard.set(newTokenData, forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
         } else {
             UserDefaults.standard.removeObject(forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled = ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
 
         let urlString = url.absoluteString.removingPercentEncoding!
         let targetURL = urlString.components(separatedBy: "#")[1]
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        AppEventsLogger.activate(application)
+        AppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -99,11 +99,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             concurrentQueue.async(group: myGroup) {
                 myGroup.enter()
                 let connection = GraphRequestConnection()
-                connection.add(GraphRequest(graphPath: "/\(request_ids_list[i])", parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { httpResponse, result in
-                    switch(result) {
-                    case .success(let response):
+                connection.add(GraphRequest(graphPath: "/\(request_ids_list[i])", parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { connection, result, error in
+                    if (result != nil) {
+                        let response = result as! [String: Any]
                         print("GetListOfOpponentsResponse: \(response)")
-                        if (response.dictionaryValue!["data"] != nil) {
+                        if (response["data"] != nil) {
                             let game : Game = Game()
                             game.initWithGameRequest(request: response)
                             games[i] = game
@@ -113,12 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         } else {
                             self.deleteGameRequest(request_id: request_ids_list[i])
                         }
-                        if ((response.dictionaryValue!["message"] as! String).lowercased().contains("forfeit")) {
+                        if ((response["message"] as! String).lowercased().contains("forfeit")) {
                             self.deleteGameRequest(request_id: request_ids_list[i])
                         }
 //                        print("\(name)")
-                    case .failed(let error):
-                        print("Error! \(error)")
+                    } else {
+                        print("Error! \(String(describing: error))")
                     }
                     myGroup.leave()
                 }
@@ -133,12 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
+            if (result != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()

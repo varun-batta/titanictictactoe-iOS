@@ -12,7 +12,7 @@ import FacebookShare
 import FBSDKCoreKit
 import FBSDKShareKit
 
-class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
+class BasicBoard: UIView, GameRequestDialogDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var boardBackground: UIImageView!
@@ -136,15 +136,15 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
                     }
                 }
                 button.setTitleColor(Style.mainColorBlack, for: .disabled)
-                button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-                button.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+                button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
+                button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
                 button.backgroundColor = .clear
                 if metaLevel == 1 {
                     button.titleLabel!.font = Style.globalFont?.withSize(100)
                 } else {
                     button.titleLabel!.font = Style.globalFont?.withSize(15)
                 }
-                button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+                button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 if metaLevel == 2 {
                     button.tag = metaRow*27 + row*9 + metaColumn*3 + column
                 } else if metaLevel == 1 {
@@ -246,7 +246,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         return dimension
     }
     
-    func buttonClicked(sender: UIButton) {
+    @objc func buttonClicked(sender: UIButton) {
         
         var turn : String!
         
@@ -268,7 +268,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         sender.isEnabled = false
         sender.backgroundColor = .clear
         
-        let size : Int = Int(NSDecimalNumber(decimal: pow(3, metaLevel)))
+        let size : Int = Int(truncating: NSDecimalNumber(decimal: pow(3, metaLevel)))
         
         var found : Bool = false
         var row : Int = -1
@@ -502,7 +502,7 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         }
         
         var winningPlayer : String = ""
-        var winningLetter : UILabel = UILabel()
+        let winningLetter : UILabel = UILabel()
         if x == "X" {
             winningPlayer = Board.player1.playerName
             winningLetter.text = "X"
@@ -553,10 +553,10 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
     //MARK: Multiplayer Functions
     
     func makeTurn(to : Int64, params : [String : Any]) {
-        let gameRequestContent = FBSDKGameRequestContent()
+        let gameRequestContent = GameRequestContent()
         gameRequestContent.recipients = [String(to)]
         gameRequestContent.message = params["message"] as! String
-        gameRequestContent.data = params["data"] as! String
+        gameRequestContent.data = params["data"] as? String
         gameRequestContent.title = params["title"] as! String
         gameRequestContent.actionType = .turn
 //        if self.winOrTie {
@@ -565,20 +565,20 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
 //            gameRequestContent.actionType = FBSDKGameRequestActionType.turn
 //        }
         
-        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
+        GameRequestDialog.init(content: gameRequestContent, delegate: self).show()
     }
     
-    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+    func gameRequestDialogDidCancel(_ gameRequestDialog: GameRequestDialog) {
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didFailWithError error: Error) {
         print("Error!")
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
-        let size : Int = Int(NSDecimalNumber(decimal: pow(3, metaLevel)))
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didCompleteWithResults results: [String : Any]) {
+        let size : Int = Int(truncating: NSDecimalNumber(decimal: pow(3, metaLevel)))
         for i in 0..<size {
             for j in 0..<size {
                 let key = i*size + j
@@ -597,17 +597,16 @@ class BasicBoard: UIView, FBSDKGameRequestDialogDelegate {
         }
         board.finish(won: winOrTie, winnerName: winningPlayerName)
         
-        print("Success! \(results)")
+        print("Success! \(String(describing: results))")
     }
     
     func deleteGameRequest() {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(Board.gameID)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(Board.gameID)", httpMethod: .delete)) { connection, result, error in
+            if (result != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()

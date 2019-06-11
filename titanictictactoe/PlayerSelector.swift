@@ -26,10 +26,10 @@ class PlayerSelector: ButtonBarPagerTabStripViewController {
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Style.mainColorWhite
-            oldCell?.imageView.image = oldCell?.imageView.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            oldCell?.imageView.image = oldCell?.imageView.image!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
             oldCell?.imageView.tintColor = Style.mainColorWhite
             newCell?.label.textColor = Style.mainColorBlack
-            newCell?.imageView.image = newCell?.imageView.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            newCell?.imageView.image = newCell?.imageView.image!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
             newCell?.imageView.tintColor = Style.mainColorBlack
         }
         super.viewDidLoad()

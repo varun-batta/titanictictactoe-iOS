@@ -34,7 +34,7 @@ class Winner: UIViewController {
                 playerWinsLabel.text = "It's a Tie!"
             } else {
                 if (LevelMenu.multiplayer && (AccessToken.current) != nil) {
-                    if ((Board.player1.playerName == winnerName && AccessToken.current?.userId == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userId == String(Board.player2.playerFBID))) {
+                    if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
                         playerWinsLabel.text = "You WIN!!!"
                     } else {
                         playerWinsLabel.text = winnerName + "has won"
@@ -71,12 +71,12 @@ class Winner: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func rematchButtonTapped(sender: UIButton) {
+    @objc func rematchButtonTapped(sender: UIButton) {
         if (LevelMenu.multiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
         
-        if (LevelMenu.multiplayer && (AccessToken.current?.userId == String(Board.player2.playerFBID))) {
+        if (LevelMenu.multiplayer && (AccessToken.current?.userID == String(Board.player2.playerFBID))) {
             let temp : Player = Board.player1
             Board.player1 = Board.player2
             Board.player2 = temp
@@ -97,7 +97,7 @@ class Winner: UIViewController {
         }
     }
     
-    func mainMenuButtonTapped(sender: UIButton) {
+    @objc func mainMenuButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         if (LevelMenu.multiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
@@ -110,11 +110,11 @@ class Winner: UIViewController {
         }
     }
     
-    func viewGameButtonTapped(sender: UIButton) {
+    @objc func viewGameButtonTapped(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func newGameButtonTapped(sender: UIButton) {
+    @objc func newGameButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         if (LevelMenu.multiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
@@ -129,12 +129,11 @@ class Winner: UIViewController {
     
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error  in
+            if ((result) != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()

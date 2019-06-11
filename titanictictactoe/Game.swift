@@ -8,6 +8,7 @@
 
 import UIKit
 import FacebookCore
+import FBSDKCoreKit
 
 class Game: NSObject {
     var player1 : Player
@@ -32,8 +33,8 @@ class Game: NSObject {
         self.opponentWon = false
     }
     
-    func initWithGameRequest(request: GraphResponse) {
-        let data = request.dictionaryValue?["data"] as! String
+    func initWithGameRequest(request: [String: Any]) {
+        let data = request["data"] as! String
         initData(data: data)
         if (self.data[9][0] != "") {
             self.lastMoveRow = Int(self.data[9][0])!
@@ -47,10 +48,10 @@ class Game: NSObject {
         if (self.data[9][3] != "") {
             self.level = Int(self.data[9][3])!
         }
-        self.requestID = Int64(request.dictionaryValue?["id"] as! String)!
+        self.requestID = Int64(request["id"] as! String)!
         
-        let from = request.dictionaryValue?["from"] as! [String:String]
-        let to = request.dictionaryValue?["to"] as! [String:String]
+        let from = request["from"] as! [String:String]
+        let to = request["to"] as! [String:String]
         if (self.lastMove == "X") {
             self.player1.initWithPlayerData(playerData: from, turn: "X")
             self.player2.initWithPlayerData(playerData: to, turn: "O")
@@ -58,7 +59,7 @@ class Game: NSObject {
             self.player1.initWithPlayerData(playerData: to, turn: "X")
             self.player2.initWithPlayerData(playerData: from, turn: "O")
         }
-        self.opponentWon = (request.dictionaryValue!["message"] as! String).lowercased().contains("won")
+        self.opponentWon = (request["message"] as! String).lowercased().contains("won")
     }
     
     func initWithSavedGame(savedGameData: String, savedGameName: String) {
@@ -83,7 +84,7 @@ class Game: NSObject {
     func initData(data: String) {
         var row = 0
         var column = 0
-        for i in data.characters.indices {
+        for i in data.indices {
             let char = data[i]
             if (char == ";") {
                 row += 1

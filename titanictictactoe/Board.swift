@@ -53,9 +53,9 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
 
         // Do any additional setup after loading the view.
         if !self.doneOnce {
-            Board.titleLabel = self.view.viewWithTag(402) as! UILabel
+            Board.titleLabel = self.view.viewWithTag(402) as? UILabel
             Board.background = self.view.viewWithTag(401)
-            Board.playerTurnLabel = self.view.viewWithTag(407) as! UILabel
+            Board.playerTurnLabel = self.view.viewWithTag(407) as? UILabel
 //            Board.boardCollectionView = self.view.viewWithTag(403) as! UICollectionView
             self.doneOnce = true
         }
@@ -294,14 +294,14 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     @IBAction func bottomPanelListener(_ sender: UIButton) {
         switch sender.tag {
         case 408:
-            let localPlayer = GKLocalPlayer.localPlayer()
+            let localPlayer = GKLocalPlayer.local
             let gameData = createGameString().data(using: .utf8)
             let gameName = Board.player1.playerName + " vs. " + Board.player2.playerName + " - Level \(level)"
             localPlayer.saveGameData(gameData!, withName: gameName) {(savedGame, error) -> Void in
                 if (error == nil) {
                     print("Successfully saved!")
                 } else {
-                    print("\(error)")
+                    print("\(String(describing: error))")
                 }
             }
             break
@@ -367,7 +367,7 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
             let extras = sender as! [Any]
             winner.board = self
             winner.levelMenu = self.levelMenu
-            winner.winnerName = extras[0] as! String
+            winner.winnerName = extras[0] as? String
             winner.mainMenu = self.mainMenu
         }
     }
@@ -383,12 +383,11 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
     
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
+            if (result != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()

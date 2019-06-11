@@ -14,7 +14,7 @@ import FBSDKShareKit
 
 private let reuseIdentifier = "Cell"
 
-class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, FBSDKGameRequestDialogDelegate {
+class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayout, GameRequestDialogDelegate {
 
     var level : Int!
     var dimension : CGFloat!
@@ -152,15 +152,15 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         button.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
         button.setTitle("", for: .normal)
         button.setTitleColor(Style.mainColorBlack, for: .disabled)
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        button.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
+        button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         button.backgroundColor = Style.mainColorGreen
         if level == 1 {
             button.titleLabel!.font = Style.globalFont?.withSize(100)
         } else {
             button.titleLabel!.font = Style.globalFont?.withSize(15)
         }
-        button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         button.tag = tag
         button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         
@@ -206,7 +206,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     // MARK: ButtonPressedActions
     
-    func buttonClicked(sender: UIButton) {
+    @objc func buttonClicked(sender: UIButton) {
         
         if self.currentTurn == "X" {
             turn = "X"
@@ -226,7 +226,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
         sender.isEnabled = false
         sender.backgroundColor = .clear
         
-        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
+        let size : Int = Int(truncating: NSDecimalNumber(decimal: pow(3, level)))
         
         var found : Bool = false
         var row : Int = -1
@@ -278,7 +278,7 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     func createGameString() -> String {
         var game = ""
-        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
+        let size : Int = Int(truncating: NSDecimalNumber(decimal: pow(3, level)))
         for i in 0...(size - 1) {
             for j in 0...(size - 1) {
                 game += BoardAdapter.wincheck[i][j] + ","
@@ -463,25 +463,25 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
     //MARK: Multiplayer Functions
     
     func makeTurn(to : Int64, params : [String : Any]) {
-        let gameRequestContent = FBSDKGameRequestContent()
+        let gameRequestContent = GameRequestContent()
         gameRequestContent.recipients = [String(to)]
         gameRequestContent.message = params["message"] as! String
-        gameRequestContent.data = params["data"] as! String
-        gameRequestContent.actionType = FBSDKGameRequestActionType.turn
+        gameRequestContent.data = params["data"] as? String
+        gameRequestContent.actionType = GameRequestActionType.turn
     
-        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
+        GameRequestDialog.init(content: gameRequestContent, delegate: self).show()
     }
     
-    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+    func gameRequestDialogDidCancel(_ gameRequestDialog: GameRequestDialog) {
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didFailWithError error: Error) {
         print("Error!")
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didCompleteWithResults results: [String : Any]) {
         for i in 0...2 {
             for j in 0...2 {
                 let key : Int = i*3 + j
@@ -490,6 +490,6 @@ class BoardAdapter: UICollectionViewController, UICollectionViewDelegateFlowLayo
                 button.isEnabled = false
             }
         }
-        print("Success! \(results)")
+        print("Success! \(String(describing: results))")
     }
 }

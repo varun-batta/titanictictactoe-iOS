@@ -41,7 +41,7 @@ class MainMenu: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 201:
-            let alert = UIAlertController(title: "Sorry!", message: "Instructions not available", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Sorry!", message: "Instructions not available", preferredStyle: UIAlertController.Style.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)

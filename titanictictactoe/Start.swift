@@ -11,6 +11,8 @@ import SpriteKit
 import GameplayKit
 import FacebookCore
 import GameKit
+import FacebookShare
+import FBSDKShareKit
 
 class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -123,7 +125,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     // MARK : Facebook Tools
-    func promptGameToOpen(notification: Notification) {
+    @objc func promptGameToOpen(notification: Notification) {
 //        let opponentNames = notification.object as! [String]
         let games = notification.object as! [Game]
         let gameCount = countGames(games: games)
@@ -200,7 +202,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func authenticateLocalPlayer() {
-        let localPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if (viewController != nil) {
                 self.present(viewController!, animated: true, completion: nil)
@@ -210,12 +212,11 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
+            if (result != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()

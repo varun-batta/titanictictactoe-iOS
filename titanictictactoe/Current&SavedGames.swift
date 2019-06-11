@@ -13,8 +13,8 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import GameKit
 
-class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
-
+class CurrentGames: UIViewController, GameRequestDialogDelegate {
+    
     @IBOutlet var background: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var pleaseSelectGameLabel: UILabel!
@@ -55,10 +55,10 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
     }
     
     func prepareSavedGamesButtons() {
-        let localPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer = GKLocalPlayer.local
         localPlayer.fetchSavedGames() {(savedGames, error) -> Void in
             if (error != nil) {
-                print("\(error)")
+                print("\(String(describing: error))")
             } else {
                 let count = savedGames!.count
                 for i in 0..<count {
@@ -70,7 +70,7 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
                     button.setTitleColor(Style.mainColorWhite, for: .normal)
                     button.backgroundColor = Style.mainColorBlack
                     button.tag = i
-                    button.addTarget(self, action: #selector(self.promptForSavedGames), for: UIControlEvents.touchUpInside)
+                    button.addTarget(self, action: #selector(self.promptForSavedGames), for: UIControl.Event.touchUpInside)
                     self.background.addSubview(button)
                 }
             }
@@ -80,14 +80,14 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
         button.setTitle(buttonText, for: .normal)
         button.setTitleColor(Style.mainColorWhite, for: .normal)
         button.backgroundColor = Style.mainColorBlack
-        button.addTarget(self, action: #selector(dismissView), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(dismissView), for: UIControl.Event.touchUpInside)
         self.background.addSubview(button)
     }
     
     func createGameFromData(savedGame : GKSavedGame) {
         savedGame.loadData() { (data, error) -> Void in
             if (error != nil) {
-                print("\(error)")
+                print("\(String(describing: error))")
             } else {
                 let gameString = String.init(data: data!, encoding: .utf8)
                 let game = Game()
@@ -97,7 +97,7 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
         }
     }
     
-    func promptForSavedGames(sender: UIButton) {
+    @objc func promptForSavedGames(sender: UIButton) {
 //        let prompt = UIAlertController(title: "What would you like to do?", message: "Please choose an action for the chosen game", preferredStyle: .alert)
 //
 //        let playAction = UIAlertAction(title: "Play", style: .default) { (action) in
@@ -128,7 +128,7 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
                 button.setTitleColor(Style.mainColorWhite, for: .normal)
                 button.backgroundColor = Style.mainColorBlack
                 button.tag = i
-                button.addTarget(self, action: #selector(promptForCurrentGame), for: UIControlEvents.touchUpInside)
+                button.addTarget(self, action: #selector(promptForCurrentGame), for: UIControl.Event.touchUpInside)
                 self.background.addSubview(button)
             }
         }
@@ -137,11 +137,11 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
         button.setTitle(buttonText, for: .normal)
         button.setTitleColor(Style.mainColorWhite, for: .normal)
         button.backgroundColor = Style.mainColorBlack
-        button.addTarget(self, action: #selector(dismissView), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(dismissView), for: UIControl.Event.touchUpInside)
         self.background.addSubview(button)
     }
     
-    func promptForCurrentGame(sender: UIButton) {
+    @objc func promptForCurrentGame(sender: UIButton) {
         let prompt = UIAlertController(title: "What would you like to do?", message: "Please choose an action for the chosen game", preferredStyle: .alert)
         
         let playAction = UIAlertAction(title: "Play", style: .default) { (action) in
@@ -189,38 +189,37 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
         let messageText = "\(fromPlayer.playerName) has forfeit the game. You win!"
         let gameString = self.createGameString()
         
-        let gameRequestContent = FBSDKGameRequestContent()
+        let gameRequestContent = GameRequestContent()
         gameRequestContent.recipients = [String(toPlayer.playerFBID)]
         gameRequestContent.message = messageText
         gameRequestContent.data = gameString
         gameRequestContent.title = "Forfeit"
-        gameRequestContent.actionType = FBSDKGameRequestActionType.none
+        gameRequestContent.actionType = GameRequestActionType.none
         
-        FBSDKGameRequestDialog.show(with: gameRequestContent, delegate: self)
+        GameRequestDialog.init(content: gameRequestContent, delegate: self).show()
     }
     
-    func gameRequestDialogDidCancel(_ gameRequestDialog: FBSDKGameRequestDialog!) {
+    func gameRequestDialogDidCancel(_ gameRequestDialog: GameRequestDialog) {
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: Error!) {
-        print("Error! \(error)")
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didFailWithError error: Error) {
+        print("Error! \(String(describing: error))")
         //Fall back as if no move was made
     }
     
-    func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+    func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didCompleteWithResults results: [String : Any]) {
         self.deleteGameRequest()
-        print("Success! \(results)")
+        print("Success! \(String(describing: results))")
     }
     
     func deleteGameRequest() {
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(self.chosenGameRequestID)", httpMethod: .DELETE)) {httpResponse, result in
-            switch(result) {
-            case .success(let response):
-                print("\(response)")
-            case .failed(let error):
-                print("\(error)")
+        connection.add(GraphRequest(graphPath: "/\(self.chosenGameRequestID)", httpMethod: .delete)) {connection, result, error in
+            if (result != nil) {
+                print("\(String(describing: result))")
+            } else {
+                print("\(String(describing: error))")
             }
         }
         connection.start()
@@ -237,7 +236,7 @@ class CurrentGames: UIViewController, FBSDKGameRequestDialogDelegate {
         return game
     }
     
-    func dismissView(sender: UIButton) {
+    @objc func dismissView(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
