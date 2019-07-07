@@ -19,6 +19,11 @@ class Player: NSObject {
         self.turn = ""
     }
     
+    func initForLocalGame(playerName: String, turn: String) {
+        self.playerName = playerName
+        self.turn = turn
+    }
+    
     func initForSavedGameName(playerName: String, turn: String) {
         self.playerName = playerName
         self.turn = turn

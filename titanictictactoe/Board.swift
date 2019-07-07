@@ -96,6 +96,11 @@ class Board: UIViewController { //}, UICollectionViewDelegate, UICollectionViewD
         // Dispose of any resources that can be recreated.
     }
     
+    func setPlayers(player1 : Player, player2: Player) {
+        Board.player1 = player1
+        Board.player2 = player2
+    }
+    
     func configureBoard() {
         self.willLayoutSubviewsCount += 1
         if (self.willLayoutSubviewsCount == 2) {
