@@ -1,6 +1,0 @@
-framework module Pods_titanictictactoe {
-  umbrella header "Pods-titanictictactoe-umbrella.h"
-
-  export *
-  module * { export * }
-}
