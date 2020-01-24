@@ -48,8 +48,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_titanictictactoe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
+		6C745EA2978A64A426007A80 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
 		8B3742741FAD4F2900889FB6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8B3742761FAD50A900889FB6 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Current&SavedGames.swift"; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		8BAB4A411E80CA2100B64D6D /* Winner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
 		8BEDB76B1FA2BD45002C42F6 /* BasicBoard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicBoard.xib; sourceTree = "<group>"; };
 		8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBoard.swift; sourceTree = "<group>"; };
-		FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +116,8 @@
 		84C3456FA68AD96678B3D9BF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */,
-				72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */,
+				6C745EA2978A64A426007A80 /* Pods-titanictictactoe.debug.xcconfig */,
+				171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 				8BAB4A171E725F5900B64D6D /* Sources */,
 				8BAB4A181E725F5900B64D6D /* Frameworks */,
 				8BAB4A191E725F5900B64D6D /* Resources */,
-				B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */,
+				F4C6E6C45CC6551976427489 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,7 +301,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B971F876B280A2B7C14D50F9 /* [CP] Embed Pods Frameworks */ = {
+		F4C6E6C45CC6551976427489 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,7 +475,7 @@
 		};
 		8BAB4A341E725F5A00B64D6D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC1A366C9F2A88CD37A71470 /* Pods-titanictictactoe.debug.xcconfig */;
+			baseConfigurationReference = 6C745EA2978A64A426007A80 /* Pods-titanictictactoe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = titanictictactoe/titanictictactoe.entitlements;
@@ -485,7 +485,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -495,7 +495,7 @@
 		};
 		8BAB4A351E725F5A00B64D6D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72DD3934FBF8598085731B70 /* Pods-titanictictactoe.release.xcconfig */;
+			baseConfigurationReference = 171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = titanictictactoe/titanictictactoe.entitlements;
@@ -505,7 +505,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
