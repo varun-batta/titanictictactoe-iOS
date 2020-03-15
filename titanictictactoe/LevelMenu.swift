@@ -16,14 +16,12 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import GameKit
 
+// DEPRECATED!!!
+
 class LevelMenu: UIViewController, GameRequestDialogDelegate {
     static var multiplayer = false
     var caller = ""
     var instructions = false
-//    static var player1 : String = "Player 1"
-//    static var player2 : String = "Player 2"
-//    static var player1ID : Int = 0
-//    static var player2ID : Int = 0
     static var player1 : Player = Player()
     static var player2 : Player = Player()
     var level : Int = 1

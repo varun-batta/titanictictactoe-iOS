@@ -7,15 +7,26 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
-class FacebookFriend: UIView {
+class FacebookFriend: UITableViewCell {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet var profilePictureView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
+    
+    class func instanceFromNib() -> FacebookFriend {
+        return UINib(nibName: "FacebookFriend", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! FacebookFriend
     }
-    */
+    
+    func setProfile(pictureID: Int64, name: String) {
+//        profilePictureView = FBProfilePictureView()
+//        profilePictureView.profileID = String(pictureID)
+//        profilePictureView.setNeedsImageUpdate()
+        let url = NSURL(string: "https://graph.facebook.com/\(pictureID)/picture?width=48&height=48");
+        let data = NSData(contentsOf: url! as URL) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        profilePictureView.image = UIImage(data: data! as Data)
+        
+        nameLabel.text = name
+    }
 
 }

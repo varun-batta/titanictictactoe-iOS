@@ -120,7 +120,7 @@ class Winner: UIViewController {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
         if (self.levelMenu == nil) {
-            let levelMenu = main.instantiateViewController(withIdentifier: "LevelMenu")
+            let levelMenu = main.instantiateViewController(withIdentifier: "MainMenu")
             self.present(levelMenu, animated: true, completion: nil)
         } else {
             self.levelMenu.dismiss(animated: true, completion: nil)

@@ -13,6 +13,7 @@ import FacebookCore
 import GameKit
 import FacebookShare
 import FBSDKShareKit
+import FBSDKLoginKit
 
 class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -24,42 +25,10 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if #available(iOS 10.0, *) {
-            if let scene = GKScene(fileNamed: "GameScene") {
-                
-                // Get the SKScene from the loaded GKScene
-                if let sceneNode = scene.rootNode as! GameScene? {
-                    
-                    // Copy gameplay related content over to the scene
-                    sceneNode.entities = scene.entities
-                    sceneNode.graphs = scene.graphs
-                    
-                    // Set the scale mode to scale to fit the window
-                    sceneNode.scaleMode = .aspectFill
-                    
-                    // Present the scene
-                    if let view = self.view as! SKView? {
-                        view.presentScene(sceneNode)
-                        
-                        view.ignoresSiblingOrder = true
-                        
-                        view.showsFPS = true
-                        view.showsNodeCount = true
-                    }
-                }
-            }
-        } else {
-            // Fallback on earlier versions
+        // Sign in to Facebook if not already signed in
+        if (AccessToken.current == nil) {
+            LoginManager().logIn(permissions: ["public_profile", "email", "user_friends"])
         }
-        
-//        background.backgroundColor = Style.mainColorBlue;
-//        collectionView.backgroundColor = Style.mainColorBlue;
-//        playButton.backgroundColor = Style.mainColorWhite;
-//        playButton.setTitleColor(Style.mainColorBlack, for: .normal);
-        
-        self.authenticateLocalPlayer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(promptGameToOpen(notification:)), name: NSNotification.Name(rawValue: "gamesReady"), object: nil)
     }
@@ -99,6 +68,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width : Double = Double(self.view.frame.size.width);
+        // Make the width and height of each cell roughly 90% - 20 pixels of the grid itself (for buffering effect)
         let dimension : Int = Int(0.9 * width - 20)/3;
         return CGSize(width: dimension, height: dimension);
     }
@@ -109,34 +79,23 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCellDescription", for: indexPath)
             let titleCellTextView : UITextView = titleCell .viewWithTag(102) as! UITextView;
             titleCellTextView.text = titleLabels[indexPath.item];
-//            titleCellTextView.backgroundColor = Style.mainColorGreen;
-//            titleCellTextView.textColor = Style.mainColorBlack;
             titleCellTextView.isEditable = false
-//            titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         } else {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath);
             let titleCellLabel : UILabel = titleCell .viewWithTag(101) as! UILabel;
             titleCellLabel.text = titleLabels[indexPath.item];
-//            titleCellLabel.textColor = Style.mainColorBlack;
-//            titleCell.backgroundColor = Style.mainColorGreen;
             return titleCell;
         }
     }
     
     // MARK : Facebook Tools
     @objc func promptGameToOpen(notification: Notification) {
-//        let opponentNames = notification.object as! [String]
         let games = notification.object as! [Game]
         let gameCount = countGames(games: games)
         if (gameCount > 1) {
             let prompt = UIAlertController(title: "Choose Game to Play", message: "Please choose an opponent whose game you wish to return to", preferredStyle: .alert)
-            //        prompt.modalPresentationStyle = .popover
-            //        for i in 0...opponentNames.count - 1 {
             for i in 0..<games.count {
-                //            let action = UIAlertAction(title: opponentNames[i], style: .default) { (action) in
-                //                self.beginGame(index: i)
-                //            }
                 var opponent : Player = Player()
                 if (games[i].lastMove == "X") {
                     opponent = games[i].player1
@@ -150,8 +109,6 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
                     prompt.addAction(action)
                 }
             }
-            //        prompt.popoverPresentationController?.sourceRect = self.view.bounds
-            //        prompt.popoverPresentationController?.sourceView = self.view
             self.present(prompt, animated: true, completion: nil)
         } else if (gameCount == 1){
             beginGame(game: games[0]);
@@ -176,10 +133,6 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             BasicBoard.currentTurn = "X"
         }
         BasicBoard.firstTurn = false
-//        Board.player1 = game.player1.playerName
-//        Board.player2 = game.player2.playerName
-//        Board.player1ID = game.player1.playerFBID
-//        Board.player2ID = game.player2.playerFBID
         Board.player1 = game.player1
         Board.player2 = game.player2
         Board.gameID  = game.requestID
@@ -198,15 +151,6 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
             board.level = game.level
             self.present(board, animated: true, completion: nil)
-        }
-    }
-    
-    func authenticateLocalPlayer() {
-        let localPlayer = GKLocalPlayer.local
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            if (viewController != nil) {
-                self.present(viewController!, animated: true, completion: nil)
-            }
         }
     }
     

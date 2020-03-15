@@ -14,23 +14,14 @@ class MainMenu: UIViewController {
     @IBOutlet var background: UIView!
     @IBOutlet var mainMenuLabel: UILabel!
     @IBOutlet var instructionsButton: UIButton!
-    @IBOutlet var passByPassGameButton: UIButton!
-    @IBOutlet var wifiGameButton: UIButton!
+    @IBOutlet var level1Button: UIButton!
+    @IBOutlet var level2Button: UIButton!
+    @IBOutlet var level3Button: UIButton!
+    @IBOutlet var level4Button: UIButton!
     @IBOutlet var welcomeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // UI Setup
-        background.backgroundColor = Style.mainColorGreen;
-        mainMenuLabel.textColor = Style.mainColorBlack;
-        instructionsButton.backgroundColor = Style.mainColorBlack;
-        instructionsButton.setTitleColor(Style.mainColorWhite, for: .normal);
-//        passByPassGameButton.backgroundColor = Style.mainColorBlack;
-//        passByPassGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
-//        wifiGameButton.backgroundColor = Style.mainColorBlack;
-//        wifiGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
-        welcomeLabel.textColor = Style.mainColorBlack;
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,42 +37,30 @@ class MainMenu: UIViewController {
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
             break
-        case 202:
-            let multiplayer = false
-            let instructions = false
-            let extras = [multiplayer, caller, instructions] as [Any]
-            self.performSegue(withIdentifier: "GameTypeSelection", sender: extras)
+        case 303:
+            let level = 1
+            let extras = [level] as [Any]
+            self.performSegue(withIdentifier: "SelectPlayers", sender: extras)
             break
-        case 203:
-            let multiplayer = true
-            let instructions = false
-            let extras = [multiplayer, caller, instructions] as [Any]
-            self.performSegue(withIdentifier: "GameTypeSelection", sender: extras)
+        case 304:
+            let level = 2
+            let extras = [level] as [Any]
+            self.performSegue(withIdentifier: "SelectPlayers", sender: extras)
             break
         default:
-            return
-            
+            let alert = UIAlertController(title: "Sorry!", message: sender.titleLabel!.text! + " not available", preferredStyle: UIAlertController.Style.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+            break
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "GameTypeSelection") {
-            let levelMenu = segue.destination as! LevelMenu
+        if (segue.identifier == "SelectPlayers") {
+            let playerSelector = segue.destination as! PlayerSelector
             let extras = sender as! [Any]
-            LevelMenu.multiplayer = extras[0] as! Bool
-            levelMenu.caller = extras[1] as! String
-            levelMenu.instructions = extras[2] as! Bool
-            levelMenu.mainMenu = self
+            playerSelector.level = extras[0] as! Int
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

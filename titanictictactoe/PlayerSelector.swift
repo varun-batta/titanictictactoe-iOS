@@ -9,8 +9,9 @@
 import UIKit
 import XLPagerTabStrip
 
-class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDelegate {
+class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDelegate, FacebookGameSelectedDelegate {
     
+    var level : Int = 1
     var localGameSelected : LocalGameSelected!
     var facebookGameSelected : FacebookGameSelected!
     
@@ -59,6 +60,7 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
         facebookGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "facebookGameSelected") as! FacebookGameSelected)
         localGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "localGameSelected") as! LocalGameSelected)
         localGameSelected.delegate = self
+        facebookGameSelected.delegate = self
         return [localGameSelected, facebookGameSelected]
     }
 
@@ -67,14 +69,16 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
         // Dispose of any resources that can be recreated.
     }
     
-    func beginGame() {
-        performSegue(withIdentifier: "BeginGame", sender: self)
+    func beginGame(player1: Player, player2: Player) {
+        performSegue(withIdentifier: "BeginGame", sender: [level, player1, player2])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BeginGame" {
             let board : Board = segue.destination as! Board
-            board.setPlayers(player1: localGameSelected.player1, player2: localGameSelected.player2)
+            let extras = sender as! [Any]
+            board.level = extras[0] as! Int
+            board.setPlayers(player1: extras[1] as! Player, player2: extras[2] as! Player)
         }
     }
 }
