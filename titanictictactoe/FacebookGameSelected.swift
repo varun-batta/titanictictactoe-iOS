@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import FBSDKLoginKit
 
 protocol FacebookGameSelectedDelegate: AnyObject {
-    func beginGame(player1: Player, player2: Player)
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool)
 }
 
 class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
@@ -22,7 +22,7 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
     
     var player1 : Player = Player()
     var player2 : Player = Player()
-    var friendsFBIDs : [Int64] = []
+    var friends : [Player] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +45,8 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
                 
-                if let response = response as? [String:Any] {
-                    self.player1.playerName = response["name"] as! String
-                    self.player1.playerFBID = Int64(response["id"] as! String)!
+                if let response = response as? [String:String] {
+                    self.player1.initWithPlayerData(playerData: response, turn: "X")
                 }
                 dispatchGroup.leave()
             })
@@ -65,8 +64,10 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 if let response = response as? [String:Any] {
-                    for friend in response["data"] as! [[String:Any]] {
-                        self.friendsFBIDs.append(Int64(friend["id"] as! String)!)
+                    for friendData in response["data"] as! [[String:String]] {
+                        let friend = Player()
+                        friend.initWithPlayerData(playerData: friendData, turn: "O")
+                        self.friends.append(friend)
                     }
                 }
                 dispatchGroup.leave()
@@ -94,7 +95,7 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: FriendListTableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.friendsFBIDs.count
+        return self.friends.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,26 +104,11 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get friend information
-        let friendFBID = self.friendsFBIDs[indexPath.row]
-        let player2Request = GraphRequest.init(graphPath: "/?id=" + String(friendFBID), parameters: ["fields": "id,name"])
+        let facebookFriend = self.friends[indexPath.row]
         
         // Create an empty cell to hold the friend information
         let cell = FacebookFriend.instanceFromNib()
-        
-        // Populate cell with data from player2Request
-        let connection = GraphRequestConnection()
-        connection.add(player2Request, completionHandler: {_, response, error in
-            if error != nil {
-                NSLog(error.debugDescription)
-                return
-            }
-            
-            if let response = response as? [String:Any] {
-                cell.setProfile(pictureID: Int64(response["id"] as! String)!, name: response["name"] as! String)
-            }
-            return
-        })
-        connection.start()
+        cell.setFacebookFriendProfile(facebookFriend: facebookFriend)
            
         return cell
     }
@@ -130,13 +116,9 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get player2 information from selected row
         let selectedPlayerCell = tableView.cellForRow(at: indexPath) as! FacebookFriend
-        let player2Name = selectedPlayerCell.nameLabel.text!
+        let player2 = selectedPlayerCell.facebookFriend!
         
-        // Start game based on selection
-        player1.initForLocalGame(playerName: player1.playerName, turn: "X")
-        player2.initForLocalGame(playerName: player2Name, turn: "O")
-        
-        self.delegate!.beginGame(player1: player1, player2: player2)
+        self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: true)
     }
 
 }

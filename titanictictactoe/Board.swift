@@ -14,6 +14,7 @@ import GameKit
 
 class Board: UIViewController {
 
+    // TODO: See about all these variables and which are actually necessary
     var boardAdapter : BoardAdapter? = nil
     
     var gaps : CGFloat = 20
@@ -23,6 +24,7 @@ class Board: UIViewController {
     static var player1 : Player = Player()
     static var player2 : Player = Player()
     static var currentPlayer : Player = Player()
+    static var isMultiplayer : Bool!
     var playerTurn : String!
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
     static var playerTurnLabel: UILabel!
@@ -46,6 +48,7 @@ class Board: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // TODO: Is this "doneOnce" necessary?
         if !self.doneOnce {
             Board.titleLabel = self.view.viewWithTag(402) as? UILabel
             Board.background = self.view.viewWithTag(401)
@@ -64,9 +67,11 @@ class Board: UIViewController {
         
         // UI Setup
         background.backgroundColor = Style.mainColorGreen;
+        // TODO: Why is there Board.playerTurnLabel and playersTurnLabel?
         playersTurnLabel.textColor = Style.mainColorBlack;
         
-        if (LevelMenu.multiplayer) {
+        // TODO: Does "isMultiplayer" need to be static? & Clean up this UI anyway
+        if (Board.isMultiplayer) {
             saveButton.isEnabled = false
             saveButton.isHidden = true
         }
@@ -87,12 +92,14 @@ class Board: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: Clean up this data being all over the place
     func setPlayers(player1 : Player, player2: Player) {
         Board.player1 = player1
         Board.player2 = player2
     }
     
     func configureBoard() {
+        // TODO: What is the willLayoutSubviewCount all about??
         self.willLayoutSubviewsCount += 1
         if (self.willLayoutSubviewsCount == 2) {
             if boardAdapter == nil {
@@ -108,6 +115,8 @@ class Board: UIViewController {
             
             board.addSubview(metaBoard)
             
+            // The logic to recreate an existing game
+            // TODO: Perhaps this logic should be moved elsewhere to clarify the code
             if (BasicBoard.wincheck[9][2] != "" && level >= 2) {
                 let row : Int = Int(BasicBoard.wincheck[9][0])!
                 let column : Int = Int(BasicBoard.wincheck[9][1])!
@@ -116,10 +125,12 @@ class Board: UIViewController {
         }
     }
     
+    // TODO: What is this function for? Looks like it's a way to get the size for an item at a particular index according to collectionview (might need to clean this up)
     func sizeForItemAt(index : Int, width: CGFloat) {
         dimension = (width - gaps)/3.0
     }
     
+    // TODO: Get rid of this once the UI is cleaned up
     @IBAction func bottomPanelListener(_ sender: UIButton) {
         switch sender.tag {
         case 408:

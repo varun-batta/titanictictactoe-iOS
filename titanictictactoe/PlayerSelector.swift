@@ -69,8 +69,8 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
         // Dispose of any resources that can be recreated.
     }
     
-    func beginGame(player1: Player, player2: Player) {
-        performSegue(withIdentifier: "BeginGame", sender: [level, player1, player2])
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool) {
+        performSegue(withIdentifier: "BeginGame", sender: [level, player1, player2, isMultiplayer])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,6 +79,7 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
             let extras = sender as! [Any]
             board.level = extras[0] as! Int
             board.setPlayers(player1: extras[1] as! Player, player2: extras[2] as! Player)
+            Board.isMultiplayer = extras[3] as? Bool
         }
     }
 }

@@ -27,6 +27,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     @IBOutlet var verticalRightStackView: UIStackView!
     @IBOutlet var overlayingWinnerLabel: UILabel!
     
+    // TODO: Might need to clarify what of all this is necessary and what is not
     var level : Int!
     var metaLevel : Int!
     var dimension : CGFloat!
@@ -62,6 +63,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     }
     
     func configureBoard(width: CGFloat, level: Int, metaLevel: Int, board: Board) {
+        // TODO: Clean up this logic!!
         self.level = level
         self.metaLevel = metaLevel
         let gaps : CGFloat = 20.0
@@ -72,69 +74,68 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         
         if (level == 1) {
             for index in 0...8 {
-                var row : Int = -1
-                var column : Int = -1
-                switch(index) {
-                case 0:
-                    row = 0
-                    column = 0
-                    break
-                case 1:
-                    row = 0
-                    column = 1
-                    break
-                case 2:
-                    row = 0
-                    column = 2
-                    break
-                case 3:
-                    row = 1
-                    column = 0
-                    break
-                case 4:
-                    row = 1
-                    column = 1
-                    break
-                case 5:
-                    row = 1
-                    column = 2
-                    break
-                case 6:
-                    row = 2
-                    column = 0
-                    break
-                case 7:
-                    row = 2
-                    column = 1
-                    break
-                case 8:
-                    row = 2
-                    column = 2
-                    break
-                default:
-                    row = -1
-                    column = -1
-                    break
-                }
+                let row : Int = index/3
+                let column : Int = index%3
+//                switch(index) {
+//                case 0:
+//                    row = 0
+//                    column = 0
+//                    break
+//                case 1:
+//                    row = 0
+//                    column = 1
+//                    break
+//                case 2:
+//                    row = 0
+//                    column = 2
+//                    break
+//                case 3:
+//                    row = 1
+//                    column = 0
+//                    break
+//                case 4:
+//                    row = 1
+//                    column = 1
+//                    break
+//                case 5:
+//                    row = 1
+//                    column = 2
+//                    break
+//                case 6:
+//                    row = 2
+//                    column = 0
+//                    break
+//                case 7:
+//                    row = 2
+//                    column = 1
+//                    break
+//                case 8:
+//                    row = 2
+//                    column = 2
+//                    break
+//                default:
+//                    row = -1
+//                    column = -1
+//                    break
+//                }
                 let button = UIButton()
                 button.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
-//                button.setTitle("", for: .normal)
                 button.setTitle(BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], for: .normal)
+                // TODO: Clean up this logic
                 if (BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] != "") {
                     button.isEnabled = false
                 }
-                if (BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "X" || BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "O") {
-                    if (metaLevel >= 2 && self.winChecker(row: metaRow*3 + row, column: metaColumn*3 + column, level: metaLevel, actual: metaLevel, winchecker: BasicBoard.wincheck, turnValue: BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], recreatingGame: true)) {
-                        let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
-                        label?.text = BasicBoard.metawincheck[metaRow][metaColumn]
-                        label?.textColor = Style.mainColorBlack
-                        label?.textAlignment = .center
-                        label?.font = Style.globalFont?.withSize(100)
-                        
-                        BasicBoard.metaBoard[metaRow][metaColumn].boardBackground.alpha = 0
-                        BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
-                    }
+                if ((BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "X" || BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "O") && metaLevel >= 2 && self.winChecker(row: metaRow*3 + row, column: metaColumn*3 + column, level: metaLevel, actual: metaLevel, winchecker: BasicBoard.wincheck, turnValue: BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], recreatingGame: true)) {
+                    let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
+                    label?.text = BasicBoard.metawincheck[metaRow][metaColumn]
+                    label?.textColor = Style.mainColorBlack
+                    label?.textAlignment = .center
+                    label?.font = Style.globalFont?.withSize(100)
+                    
+                    BasicBoard.metaBoard[metaRow][metaColumn].boardBackground.alpha = 0
+                    BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
                 }
+                // TODO: See if there's anyway to avoid all this UI logic
                 button.setTitleColor(Style.mainColorBlack, for: .disabled)
                 button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
                 button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -147,7 +148,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 if metaLevel == 2 {
                     button.tag = metaRow*27 + row*9 + metaColumn*3 + column
-                } else if metaLevel == 1 {
+                } else {
                     button.tag = row*3 + column
                 }
                 
@@ -155,9 +156,10 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 
                 Board.keys.setObject(button, forKey: NSNumber.init(value: button.tag))
                 
-                if index%3 == 0 {
+                // TODO: Find a way to arrange the views better!
+                if column == 0 {
                     verticalLeftStackView.addArrangedSubview(button)
-                } else if index%3 == 1 {
+                } else if column == 1 {
                     verticalMiddleStackView.addArrangedSubview(button)
                 } else {
                     verticalRightStackView.addArrangedSubview(button)
@@ -167,60 +169,63 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             for index in 0...8 {
                 let miniBoard : BasicBoard = BasicBoard();
                 miniBoard.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
-                switch(index) {
-                case 0:
-                    miniBoard.metaRow = 0
-                    miniBoard.metaColumn = 0
-                    break
-                case 1:
-                    miniBoard.metaRow = 0
-                    miniBoard.metaColumn = 1
-                    break
-                case 2:
-                    miniBoard.metaRow = 0
-                    miniBoard.metaColumn = 2
-                    break
-                case 3:
-                    miniBoard.metaRow = 1
-                    miniBoard.metaColumn = 0
-                    break
-                case 4:
-                    miniBoard.metaRow = 1
-                    miniBoard.metaColumn = 1
-                    break
-                case 5:
-                    miniBoard.metaRow = 1
-                    miniBoard.metaColumn = 2
-                    break
-                case 6:
-                    miniBoard.metaRow = 2
-                    miniBoard.metaColumn = 0
-                    break
-                case 7:
-                    miniBoard.metaRow = 2
-                    miniBoard.metaColumn = 1
-                    break
-                case 8:
-                    miniBoard.metaRow = 2
-                    miniBoard.metaColumn = 2
-                    break
-                default:
-                    miniBoard.metaRow = -1
-                    miniBoard.metaColumn = -1
-                    break
-                }
+                miniBoard.metaRow = index/3
+                miniBoard.metaColumn = index%3
+//                switch(index) {
+//                case 0:
+//                    miniBoard.metaRow = 0
+//                    miniBoard.metaColumn = 0
+//                    break
+//                case 1:
+//                    miniBoard.metaRow = 0
+//                    miniBoard.metaColumn = 1
+//                    break
+//                case 2:
+//                    miniBoard.metaRow = 0
+//                    miniBoard.metaColumn = 2
+//                    break
+//                case 3:
+//                    miniBoard.metaRow = 1
+//                    miniBoard.metaColumn = 0
+//                    break
+//                case 4:
+//                    miniBoard.metaRow = 1
+//                    miniBoard.metaColumn = 1
+//                    break
+//                case 5:
+//                    miniBoard.metaRow = 1
+//                    miniBoard.metaColumn = 2
+//                    break
+//                case 6:
+//                    miniBoard.metaRow = 2
+//                    miniBoard.metaColumn = 0
+//                    break
+//                case 7:
+//                    miniBoard.metaRow = 2
+//                    miniBoard.metaColumn = 1
+//                    break
+//                case 8:
+//                    miniBoard.metaRow = 2
+//                    miniBoard.metaColumn = 2
+//                    break
+//                default:
+//                    miniBoard.metaRow = -1
+//                    miniBoard.metaColumn = -1
+//                    break
+//                }
                 
                 BasicBoard.metaBoard[miniBoard.metaRow][miniBoard.metaColumn] = miniBoard
                 
                 miniBoard.configureBoard(width: dimension, level: 1, metaLevel: 2, board: board)
                 
+                // Clean up all this UI logic, it shouldn't be necessary
                 miniBoard.horizontalStackViewTopConstraint.constant = miniBoard.horizontalStackViewTopConstraint.constant/3;
                 miniBoard.horizontalStackViewBottomConstraint.constant = miniBoard.horizontalStackViewBottomConstraint.constant/3;
                 miniBoard.horizontalStackViewLeadingConstraint.constant = miniBoard.horizontalStackViewLeadingConstraint.constant/3;
                 miniBoard.horizontalStackViewTrailingConstraint.constant = miniBoard.horizontalStackViewTrailingConstraint.constant/3;
                 
-                if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "X" || BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "O") {
-                    if (self.winChecker(row: miniBoard.metaRow, column: miniBoard.metaColumn, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn], recreatingGame: true)) {
+                // TODO: Clean up this logic!!
+                if ((BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "X" || BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "O") && self.winChecker(row: miniBoard.metaRow, column: miniBoard.metaColumn, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn], recreatingGame: true)) {
                         if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "X") {
                             board.finish(won: true, winnerName: Board.player1.playerName)
                         } else if (BasicBoard.metawincheck[miniBoard.metaRow][miniBoard.metaColumn] == "O") {
@@ -228,8 +233,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                         }
                     }
 
-                }
-                
+                // TODO: Find a way to arrange these views better (this really shouldn't be necessary)
                 if index%3 == 0 {
                     verticalLeftStackView.addArrangedSubview(miniBoard)
                 } else if index%3 == 1 {
@@ -301,19 +305,13 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
 
         self.winOrTie = winChecker(row: row, column: column, level: metaLevel, actual: level, winchecker: BasicBoard.wincheck, turnValue: turn, recreatingGame: false)
 
-        if LevelMenu.multiplayer {
-//            var toID : Int64 = 0
-//            var fromID : Int64 = 0
+        if Board.isMultiplayer {
             var toPlayer : Player = Player()
             var fromPlayer : Player = Player()
             if turn == "X" {
-//                toID = Board.player2ID
-//                fromID = Board.player1ID
                 toPlayer = Board.player2
                 fromPlayer = Board.player1
             } else {
-//                toID = Board.player1ID
-//                fromID = Board.player2ID
                 toPlayer = Board.player1
                 fromPlayer = Board.player2
             }
@@ -339,9 +337,6 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     
     func createGameString() -> String {
         var game = ""
-//        let size : Int = Int(NSDecimalNumber(decimal: pow(3, level)))
-//        for i in 0...(size - 1) {
-//            for j in 0...(size - 1) {
         for i in 0..<10 {
             for j in 0..<9 {
                 game += BasicBoard.wincheck[i][j] + ","
@@ -352,6 +347,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     }
     
     func boardChanger( row : Int, column : Int, level : Int, clickable : Bool) {
+        // TODO: Clean up this logic as much as possible
         if level == 2 {
             for i in 0...8 {
                 for j in 0...8 {
@@ -365,8 +361,8 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                     }
                 }
             }
-            let metaRow = row%3 //abs(row - 8)%3;
-            let metaColumn = column%3 //abs(column - 8)%3;
+            let metaRow = row%3
+            let metaColumn = column%3
             if BasicBoard.metawincheck[metaRow][metaColumn] == "" {
                 for k in 0...2 {
                     for l in 0...2 {
@@ -392,7 +388,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                         }
                         
                         if BasicBoard.metawincheck[i%3][j%3] == "" {
-                            BasicBoard.metaBoard[i%3][j%3].boardBackgroundRed.alpha = 0;
+                            BasicBoard.metaBoard[i%3][j%3].boardBackgroundRed.alpha = 0
                         }
                     }
                 }
@@ -401,106 +397,107 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     }
     
     func winChecker(row: Int, column: Int, level: Int, actual: Int, winchecker: [[String]], turnValue: String, recreatingGame: Bool) -> Bool {
+        // TODO: Refactor this function
         var winOrTie : Bool = false
         var value : String = ""
         var value1 : String = ""
         var value2 : String = ""
         var x : String = ""
-        var q : Int = -1
-        var r : Int = -1
-        var f : Int = row
-        var g : Int = column
-        var length : Int = winchecker.count
-        var width : Int = winchecker[0].count
+        var rowIndex : Int = row
+        var columnIndex : Int = column
         
         
         if level == 1 && actual >= 2 {
-            q = row
-            r = column
-            f = row/3
-            g = column/3
+            rowIndex /= 3
+            columnIndex /= 3
         }
         
-        if f%3 == 0 {
-            value = winchecker[f][g]
-            value1 = winchecker[f+1][g]
-            value2 = winchecker[f+2][g]
-        } else if f%3 == 1 {
-            value = winchecker[f-1][g]
-            value1 = winchecker[f][g]
-            value2 = winchecker[f+1][g]
-        } else if f%3 == 2 {
-            value = winchecker[f-2][g]
-            value1 = winchecker[f-1][g]
-            value2 = winchecker[f][g]
+        // Check the column
+        // TODO: Clean up this approach
+        if rowIndex%3 == 0 {
+            value = winchecker[rowIndex][columnIndex]
+            value1 = winchecker[rowIndex+1][columnIndex]
+            value2 = winchecker[rowIndex+2][columnIndex]
+        } else if rowIndex%3 == 1 {
+            value = winchecker[rowIndex-1][columnIndex]
+            value1 = winchecker[rowIndex][columnIndex]
+            value2 = winchecker[rowIndex+1][columnIndex]
+        } else if rowIndex%3 == 2 {
+            value = winchecker[rowIndex-2][columnIndex]
+            value1 = winchecker[rowIndex-1][columnIndex]
+            value2 = winchecker[rowIndex][columnIndex]
         }
         
-        if value != "" && value1 != "" && value2 != "" {
-            if value == value1 && value1 == value2 {
-                x = turnValue
-            }
+        // Seeing if all the cells in the column have the same value
+        if value != "" && value1 != "" && value2 != "" && value == value1 && value1 == value2 {
+            x = turnValue
         }
         
-        if g%3 == 0 {
-            value = winchecker[f][g]
-            value1 = winchecker[f][g+1]
-            value2 = winchecker[f][g+2]
-        } else if g%3 == 1 {
-            value = winchecker[f][g-1]
-            value1 = winchecker[f][g]
-            value2 = winchecker[f][g+1]
-        } else if g%3 == 2 {
-            value = winchecker[f][g-2]
-            value1 = winchecker[f][g-1]
-            value2 = winchecker[f][g]
+        // Check the row
+        // TODO: Clean up this approach
+        if columnIndex%3 == 0 {
+            value = winchecker[rowIndex][columnIndex]
+            value1 = winchecker[rowIndex][columnIndex+1]
+            value2 = winchecker[rowIndex][columnIndex+2]
+        } else if columnIndex%3 == 1 {
+            value = winchecker[rowIndex][columnIndex-1]
+            value1 = winchecker[rowIndex][columnIndex]
+            value2 = winchecker[rowIndex][columnIndex+1]
+        } else if columnIndex%3 == 2 {
+            value = winchecker[rowIndex][columnIndex-2]
+            value1 = winchecker[rowIndex][columnIndex-1]
+            value2 = winchecker[rowIndex][columnIndex]
         }
         
-        if value != "" && value1 != "" && value2 != "" {
-            if value == value1 && value1 == value2 {
-                x = turnValue
-            }
+        // Seeing if all the cells in the row have the same value
+        if value != "" && value1 != "" && value2 != "" && value == value1 && value1 == value2 {
+            x = turnValue
         }
         
-        if f%3 == 0 && g%3 == 0 {
-            value = winchecker[f][g]
-            value1 = winchecker[f+1][g+1]
-            value2 = winchecker[f+2][g+2]
-        } else if f%3 == 1 && g%3 == 1 {
-            value = winchecker[f-1][g-1]
-            value1 = winchecker[f][g]
-            value2 = winchecker[f+1][g+1]
-        } else if f%3 == 2 && g%3 == 2 {
-            value = winchecker[f-2][g-2]
-            value1 = winchecker[f-1][g-1]
-            value2 = winchecker[f][g]
+        // Check the top left to bottom right diagonal
+        // TODO: Clean up this approach
+        if rowIndex%3 == 0 && columnIndex%3 == 0 {
+            value = winchecker[rowIndex][columnIndex]
+            value1 = winchecker[rowIndex+1][columnIndex+1]
+            value2 = winchecker[rowIndex+2][columnIndex+2]
+        } else if rowIndex%3 == 1 && columnIndex%3 == 1 {
+            value = winchecker[rowIndex-1][columnIndex-1]
+            value1 = winchecker[rowIndex][columnIndex]
+            value2 = winchecker[rowIndex+1][columnIndex+1]
+        } else if rowIndex%3 == 2 && columnIndex%3 == 2 {
+            value = winchecker[rowIndex-2][columnIndex-2]
+            value1 = winchecker[rowIndex-1][columnIndex-1]
+            value2 = winchecker[rowIndex][columnIndex]
         }
         
-        if value != "" && value1 != "" && value2 != "" {
-            if value == value1 && value1 == value2 {
-                x = turnValue
-            }
+        // Seeing if all the cells in the diagonal have the same value
+        if value != "" && value1 != "" && value2 != "" && value == value1 && value1 == value2 {
+            x = turnValue
         }
         
-        if f%3 == 2 && g%3 == 0 {
-            value = winchecker[f][g]
-            value1 = winchecker[f-1][g+1]
-            value2 = winchecker[f-2][g+2]
-        } else if f%3 == 1 && g%3 == 1 {
-            value = winchecker[f+1][g-1]
-            value1 = winchecker[f][g]
-            value2 = winchecker[f-1][g+1]
-        } else if f%3 == 0 && g%3 == 2 {
-            value = winchecker[f+2][g-2]
-            value1 = winchecker[f+1][g-1]
-            value2 = winchecker[f][g]
+        // Check the top right to bottom-left diagonal
+        // TODO: Clean up this approach
+        if rowIndex%3 == 2 && columnIndex%3 == 0 {
+            value = winchecker[rowIndex][columnIndex]
+            value1 = winchecker[rowIndex-1][columnIndex+1]
+            value2 = winchecker[rowIndex-2][columnIndex+2]
+        } else if rowIndex%3 == 1 && columnIndex%3 == 1 {
+            value = winchecker[rowIndex+1][columnIndex-1]
+            value1 = winchecker[rowIndex][columnIndex]
+            value2 = winchecker[rowIndex-1][columnIndex+1]
+        } else if rowIndex%3 == 0 && columnIndex%3 == 2 {
+            value = winchecker[rowIndex+2][columnIndex-2]
+            value1 = winchecker[rowIndex+1][columnIndex-1]
+            value2 = winchecker[rowIndex][columnIndex]
         }
         
-        if value != "" && value1 != "" && value2 != "" {
-            if value == value1 && value1 == value2 {
-                x = turnValue
-            }
+        // Seeing if all the cells in the diagonal have the same value
+        if value != "" && value1 != "" && value2 != "" && value == value1 && value1 == value2 {
+            x = turnValue
         }
         
+        // Setting the winning player name and winning letter
+        // TODO: Make this not based on the letter being played (if possible)
         var winningPlayer : String = ""
         let winningLetter : UILabel = UILabel()
         if x == "X" {
@@ -518,7 +515,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 case 1:
                     return true;
                 case 2:
-                    BasicBoard.metawincheck[f/3][g/3] = x
+                    BasicBoard.metawincheck[rowIndex/3][columnIndex/3] = x
                     return true;
                 default:
                     return false;
@@ -527,20 +524,21 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             }
             switch(level) {
             case 1:
-                if (!LevelMenu.multiplayer) {
+                if (!Board.isMultiplayer) {
                     board.finish(won: true, winnerName: winningPlayer)
                 }
                 winOrTie = true
                 break
             case 2:
-                BasicBoard.metawincheck[f/3][g/3] = x
-                winOrTie = board.winningBoardChanger(boardAdapter: self, row: f, column: g, level: level, clickable: true, x: x)
+                BasicBoard.metawincheck[rowIndex/3][columnIndex/3] = x
+                winOrTie = board.winningBoardChanger(boardAdapter: self, row: rowIndex, column: columnIndex, level: level, clickable: true, x: x)
                 break
             default:
                 return false
             }
         }
         
+        // TODO: Check for ties as well
         
         return winOrTie
     }
@@ -550,7 +548,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         
     }
     
-    //MARK: Multiplayer Functions
+    // MARK: Multiplayer Functions
     
     func makeTurn(to : Int64, params : [String : Any]) {
         let gameRequestContent = GameRequestContent()
@@ -559,24 +557,20 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         gameRequestContent.data = params["data"] as? String
         gameRequestContent.title = params["title"] as! String
         gameRequestContent.actionType = .turn
-//        if self.winOrTie {
-//            gameRequestContent.actionType = FBSDKGameRequestActionType.none
-//        } else {
-//            gameRequestContent.actionType = FBSDKGameRequestActionType.turn
-//        }
         
         GameRequestDialog.init(content: gameRequestContent, delegate: self).show()
     }
     
     func gameRequestDialogDidCancel(_ gameRequestDialog: GameRequestDialog) {
-        //Fall back as if no move was made
+        // TODO: Fall back as if no move was made
     }
     
     func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didFailWithError error: Error) {
         print("Error!")
-        //Fall back as if no move was made
+        // TODO: Fall back as if no move was made
     }
     
+    // TODO: Document this function
     func gameRequestDialog(_ gameRequestDialog: GameRequestDialog, didCompleteWithResults results: [String : Any]) {
         let size : Int = Int(truncating: NSDecimalNumber(decimal: pow(3, metaLevel)))
         for i in 0..<size {
@@ -600,6 +594,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         print("Success! \(String(describing: results))")
     }
     
+    // TODO: Document this function
     func deleteGameRequest() {
         let connection = GraphRequestConnection()
         connection.add(GraphRequest(graphPath: "/\(Board.gameID)", httpMethod: .delete)) { connection, result, error in
