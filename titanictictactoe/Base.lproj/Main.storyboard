@@ -605,32 +605,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to play with friends over Facebook? Invite them to install the app too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-HK-ltM">
-                                <rect key="frame" x="40" y="100" width="334" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Kds-9o-EJw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shH-EC-tWq">
-                                <rect key="frame" x="36" y="176" width="342" height="544"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YUh-bc-0m9">
+                                <rect key="frame" x="16" y="16" width="382" height="688"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to play with friends over Facebook? Invite them to install the app too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-HK-ltM">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Kds-9o-EJw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shH-EC-tWq">
+                                        <rect key="frame" x="0.0" y="60" width="382" height="580"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wi-xB-8BO">
+                                        <rect key="frame" x="0.0" y="640" width="382" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Ypf-jv-V94"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="shH-EC-tWq" firstAttribute="leading" secondItem="CMy-7e-X2L" secondAttribute="leadingMargin" constant="16" id="3G5-nv-j9l"/>
-                            <constraint firstItem="vJU-HK-ltM" firstAttribute="top" secondItem="J1F-Tn-3eg" secondAttribute="bottom" constant="100" id="66F-2S-GR8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vJU-HK-ltM" secondAttribute="trailing" constant="20" id="Ez8-lC-OSH"/>
-                            <constraint firstItem="shH-EC-tWq" firstAttribute="top" secondItem="vJU-HK-ltM" secondAttribute="bottom" constant="16" id="Kpn-WI-UNO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="shH-EC-tWq" secondAttribute="trailing" constant="16" id="P5r-UW-EXw"/>
-                            <constraint firstItem="vJU-HK-ltM" firstAttribute="leading" secondItem="CMy-7e-X2L" secondAttribute="leadingMargin" constant="20" id="bAe-Ra-dk5"/>
-                            <constraint firstItem="q4u-ff-Ln7" firstAttribute="top" secondItem="shH-EC-tWq" secondAttribute="bottom" constant="16" id="xCj-BN-oeX"/>
+                            <constraint firstAttribute="bottom" secondItem="YUh-bc-0m9" secondAttribute="bottom" constant="32" id="0HP-Co-lub"/>
+                            <constraint firstItem="YUh-bc-0m9" firstAttribute="leading" secondItem="CMy-7e-X2L" secondAttribute="leading" constant="16" id="DCG-ee-cBC"/>
+                            <constraint firstAttribute="trailing" secondItem="YUh-bc-0m9" secondAttribute="trailing" constant="16" id="HW8-qC-oCe"/>
+                            <constraint firstItem="YUh-bc-0m9" firstAttribute="top" secondItem="J1F-Tn-3eg" secondAttribute="bottom" constant="16" id="lNZ-13-aRu"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fbLoginButtonView" destination="0wi-xB-8BO" id="gak-1S-Kro"/>
                         <outlet property="friendsTableView" destination="shH-EC-tWq" id="ghZ-St-hee"/>
                         <outlet property="inviteFriendsLabel" destination="vJU-HK-ltM" id="RH6-Ff-vpd"/>
                     </connections>

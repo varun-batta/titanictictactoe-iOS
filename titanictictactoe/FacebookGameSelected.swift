@@ -14,11 +14,13 @@ protocol FacebookGameSelectedDelegate: AnyObject {
     func beginGame(player1: Player, player2: Player, isMultiplayer: Bool)
 }
 
-class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
+class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider, LoginButtonDelegate {
+    
     weak var delegate: FacebookGameSelectedDelegate?
     
     @IBOutlet var inviteFriendsLabel: UILabel!
     @IBOutlet var friendsTableView: UITableView!
+    @IBOutlet var fbLoginButtonView: UIView!
     
     var player1 : Player = Player()
     var player2 : Player = Player()
@@ -80,6 +82,12 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
                 self.friendsTableView.dataSource = self
                 self.friendsTableView.delegate = self
                 self.friendsTableView.reloadData()
+                
+                // Assign LoginButton Delegate
+                let loginButton = FBLoginButton(type: UIButton.ButtonType.custom)
+                loginButton.center = self.fbLoginButtonView.center
+                self.fbLoginButtonView.addSubview(loginButton)
+                loginButton.delegate = self
             }
         }
     }
@@ -120,5 +128,22 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: true)
     }
-
+    
+    // MARK: FBLoginButtonDelegate
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if error != nil {
+            NSLog(error.debugDescription)
+            return
+        }
+        else if result!.isCancelled {
+            // TODO: Report Error if Login Issues
+        }
+        else {
+            // TODO: Add friends to the tableview
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        //  TODO: Handle Logout
+    }
 }
