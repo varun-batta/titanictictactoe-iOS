@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -606,7 +606,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YUh-bc-0m9">
-                                <rect key="frame" x="16" y="16" width="382" height="688"/>
+                                <rect key="frame" x="16" y="16" width="382" height="656"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to play with friends over Facebook? Invite them to install the app too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-HK-ltM">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
@@ -618,11 +618,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shH-EC-tWq">
-                                        <rect key="frame" x="0.0" y="60" width="382" height="580"/>
+                                        <rect key="frame" x="0.0" y="60" width="382" height="548"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wi-xB-8BO">
-                                        <rect key="frame" x="0.0" y="640" width="382" height="48"/>
+                                        <rect key="frame" x="0.0" y="608" width="382" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Ypf-jv-V94"/>
@@ -633,7 +633,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="YUh-bc-0m9" secondAttribute="bottom" constant="32" id="0HP-Co-lub"/>
+                            <constraint firstAttribute="bottom" secondItem="YUh-bc-0m9" secondAttribute="bottom" constant="64" id="0HP-Co-lub"/>
                             <constraint firstItem="YUh-bc-0m9" firstAttribute="leading" secondItem="CMy-7e-X2L" secondAttribute="leading" constant="16" id="DCG-ee-cBC"/>
                             <constraint firstAttribute="trailing" secondItem="YUh-bc-0m9" secondAttribute="trailing" constant="16" id="HW8-qC-oCe"/>
                             <constraint firstItem="YUh-bc-0m9" firstAttribute="top" secondItem="J1F-Tn-3eg" secondAttribute="bottom" constant="16" id="lNZ-13-aRu"/>

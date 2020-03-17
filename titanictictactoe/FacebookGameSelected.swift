@@ -84,9 +84,11 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
                 self.friendsTableView.reloadData()
                 
                 // Assign LoginButton Delegate
-                let loginButton = FBLoginButton(type: UIButton.ButtonType.custom)
-                loginButton.center = self.fbLoginButtonView.center
+                let loginButton = FBLoginButton()
                 self.fbLoginButtonView.addSubview(loginButton)
+                loginButton.translatesAutoresizingMaskIntoConstraints = false
+                loginButton.centerXAnchor.constraint(equalTo: self.fbLoginButtonView.centerXAnchor).isActive = true
+                loginButton.centerYAnchor.constraint(equalTo: self.fbLoginButtonView.centerYAnchor).isActive = true
                 loginButton.delegate = self
             }
         }
