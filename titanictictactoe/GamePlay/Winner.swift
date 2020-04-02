@@ -27,7 +27,8 @@ class Winner: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Set the winning player label
+        // TODO: Might want to clean up this logic if possible
         if winnerName != nil {
             if winnerName == "Tie" {
                 playerWinsLabel.text = "It's a Tie!"
@@ -45,6 +46,7 @@ class Winner: UIViewController {
         }
         
         // UI Setup
+        // TODO: See if there's a better way to take care of all this
         background.backgroundColor = Style.mainColorGreen;
         playerWinsLabel.textColor = Style.mainColorBlack;
         
@@ -67,20 +69,24 @@ class Winner: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // TODO: Handle button clicks better if possible
     @objc func rematchButtonTapped(sender: UIButton) {
+        // TODO: What is this for?
         if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
         
+        // Switch players since we are player 2 and we will become player 1
+        // TODO: Is this the right logic?
         if (Board.isMultiplayer && (AccessToken.current?.userID == String(Board.player2.playerFBID))) {
             let temp : Player = Board.player1
             Board.player1 = Board.player2
             Board.player2 = temp
         }
         
+        // TODO: Player 1 shouldn't have to be X
         BasicBoard.currentTurn = "X"
         BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
         BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
@@ -95,11 +101,15 @@ class Winner: UIViewController {
         }
     }
     
+    // TODO: Do we need both main menu and new game if main menu is where you create a new game from? Clean up!
     @objc func mainMenuButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
+        
         if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
+        
+        // TODO: Handle the view dismissing process better
         if (self.mainMenu == nil) {
             let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
             self.present(mainMenu, animated: true, completion: nil)
@@ -108,15 +118,19 @@ class Winner: UIViewController {
         }
     }
     
+    // TODO: Make sure when viewing the game it is not clickable
     @objc func viewGameButtonTapped(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc func newGameButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
+        
         if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
+        
+        // TODO: Handle the view dismissing process better
         if (self.mainMenu == nil) {
             let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
             self.present(mainMenu, animated: true, completion: nil)
@@ -125,6 +139,7 @@ class Winner: UIViewController {
         }
     }
     
+    // TODO: Is this necessary? If yes, perhaps group all deleteGameRequest functions together? And all game request functions altogether, if possible
     func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
         connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error  in

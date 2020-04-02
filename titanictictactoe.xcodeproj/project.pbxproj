@@ -169,19 +169,19 @@
 		8BAB4A1D1E725F5A00B64D6D /* titanictictactoe */ = {
 			isa = PBXGroup;
 			children = (
-				8BE72865242DACF900BFD873 /* GamePlay */,
-				8BE72863242DAC8F00BFD873 /* Models */,
-				8B1F80AA242FDACE00904DEB /* OngoingGames */,
-				8BE72862242DAC6600BFD873 /* PlayerSelection */,
-				8BA93F7E1FD65C0E00043A74 /* titanictictactoe.entitlements */,
+				8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */,
+				8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */,
 				8BAB4A1E1E725F5A00B64D6D /* AppDelegate.swift */,
 				8B9B66C41F9D8FE40070B58F /* Style.swift */,
 				8BAB4A261E725F5A00B64D6D /* Start.swift */,
 				8BAB4A361E78AECB00B64D6D /* MainMenu.swift */,
-				8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */,
-				8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */,
-				8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */,
+				8BE72865242DACF900BFD873 /* GamePlay */,
+				8BE72863242DAC8F00BFD873 /* Models */,
+				8B1F80AA242FDACE00904DEB /* OngoingGames */,
+				8BE72862242DAC6600BFD873 /* PlayerSelection */,
 				8BAB4A301E725F5A00B64D6D /* Info.plist */,
+				8BA93F7E1FD65C0E00043A74 /* titanictictactoe.entitlements */,
+				8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */,
 			);
 			path = titanictictactoe;
 			sourceTree = "<group>";

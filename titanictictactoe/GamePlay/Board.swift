@@ -44,7 +44,6 @@ class Board: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         // TODO: Is this "doneOnce" necessary?
         if !self.doneOnce {
             Board.titleLabel = self.view.viewWithTag(402) as? UILabel
