@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */; };
+		8B1F80A2242EC84100904DEB /* FacebookGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F80A0242EC84100904DEB /* FacebookGame.swift */; };
+		8B1F80A3242EC84100904DEB /* FacebookGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1F80A1242EC84100904DEB /* FacebookGame.xib */; };
+		8B1F80A5242EE98900904DEB /* SavedLocalGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F80A4242EE98900904DEB /* SavedLocalGames.swift */; };
+		8B1F80A8242EF7E300904DEB /* LocalGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F80A6242EF7E300904DEB /* LocalGame.swift */; };
+		8B1F80A9242EF7E300904DEB /* LocalGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1F80A7242EF7E300904DEB /* LocalGame.xib */; };
 		8B3742751FAD4F2900889FB6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742741FAD4F2900889FB6 /* Game.swift */; };
 		8B3742771FAD50A900889FB6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3742761FAD50A900889FB6 /* Player.swift */; };
 		8B460FC91FB017C500002FF6 /* Current&SavedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */; };
@@ -42,6 +47,7 @@
 		8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3A1E7A08EA00B64D6D /* Board.swift */; };
 		8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */; };
 		8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB4A411E80CA2100B64D6D /* Winner.swift */; };
+		8BE72867242DAE6100BFD873 /* CurrentFacebookGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE72866242DAE6100BFD873 /* CurrentFacebookGames.swift */; };
 		8BEDB7621FA0345F002C42F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */; };
 		8BEDB76C1FA2BD45002C42F6 /* BasicBoard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEDB76B1FA2BD45002C42F6 /* BasicBoard.xib */; };
 		8BEDB76E1FA2BF1B002C42F6 /* BasicBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */; };
@@ -51,6 +57,11 @@
 		171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_titanictictactoe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C745EA2978A64A426007A80 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
+		8B1F80A0242EC84100904DEB /* FacebookGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookGame.swift; sourceTree = "<group>"; };
+		8B1F80A1242EC84100904DEB /* FacebookGame.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookGame.xib; sourceTree = "<group>"; };
+		8B1F80A4242EE98900904DEB /* SavedLocalGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocalGames.swift; sourceTree = "<group>"; };
+		8B1F80A6242EF7E300904DEB /* LocalGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGame.swift; sourceTree = "<group>"; };
+		8B1F80A7242EF7E300904DEB /* LocalGame.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalGame.xib; sourceTree = "<group>"; };
 		8B3742741FAD4F2900889FB6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8B3742761FAD50A900889FB6 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Current&SavedGames.swift"; sourceTree = "<group>"; };
@@ -89,6 +100,7 @@
 		8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardAdapter.swift; sourceTree = "<group>"; };
 		8BAB4A3F1E7B7B1200B64D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8BAB4A411E80CA2100B64D6D /* Winner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
+		8BE72866242DAE6100BFD873 /* CurrentFacebookGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentFacebookGames.swift; sourceTree = "<group>"; };
 		8BEDB76B1FA2BD45002C42F6 /* BasicBoard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicBoard.xib; sourceTree = "<group>"; };
 		8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +132,20 @@
 				171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8B1F80AA242FDACE00904DEB /* OngoingGames */ = {
+			isa = PBXGroup;
+			children = (
+				8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */,
+				8BE72866242DAE6100BFD873 /* CurrentFacebookGames.swift */,
+				8B1F80A0242EC84100904DEB /* FacebookGame.swift */,
+				8B1F80A1242EC84100904DEB /* FacebookGame.xib */,
+				8B1F80A4242EE98900904DEB /* SavedLocalGames.swift */,
+				8B1F80A6242EF7E300904DEB /* LocalGame.swift */,
+				8B1F80A7242EF7E300904DEB /* LocalGame.xib */,
+			);
+			path = OngoingGames;
 			sourceTree = "<group>";
 		};
 		8BAB4A121E725F5900B64D6D = {
@@ -163,27 +189,51 @@
 				8BAB4A261E725F5A00B64D6D /* Start.swift */,
 				8BAB4A361E78AECB00B64D6D /* MainMenu.swift */,
 				8BAB4A3E1E7B7B1200B64D6D /* Main.storyboard */,
-				8BAB4A411E80CA2100B64D6D /* Winner.swift */,
-				8BAB4A3A1E7A08EA00B64D6D /* Board.swift */,
-				8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */,
+				8BE72865242DACF900BFD873 /* GamePlay */,
 				8BAB4A381E78E87900B64D6D /* LevelMenu.swift */,
 				8BAB4A2B1E725F5A00B64D6D /* Assets.xcassets */,
 				8BAB4A2D1E725F5A00B64D6D /* LaunchScreen.storyboard */,
 				8BAB4A301E725F5A00B64D6D /* Info.plist */,
 				8B9B66C21F9D794E0070B58F /* TitanicTicTacToeLogo.png */,
 				8B9B66C41F9D8FE40070B58F /* Style.swift */,
-				8BEDB76B1FA2BD45002C42F6 /* BasicBoard.xib */,
-				8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */,
-				8B3742741FAD4F2900889FB6 /* Game.swift */,
-				8B3742761FAD50A900889FB6 /* Player.swift */,
-				8B460FC81FB017C400002FF6 /* Current&SavedGames.swift */,
+				8BE72863242DAC8F00BFD873 /* Models */,
+				8B1F80AA242FDACE00904DEB /* OngoingGames */,
+				8BE72862242DAC6600BFD873 /* PlayerSelection */,
+			);
+			path = titanictictactoe;
+			sourceTree = "<group>";
+		};
+		8BE72862242DAC6600BFD873 /* PlayerSelection */ = {
+			isa = PBXGroup;
+			children = (
 				8B90777A20CC456A00EFBFAB /* PlayerSelector.swift */,
 				8B90777C20CC460200EFBFAB /* FacebookGameSelected.swift */,
 				8B90777E20CC463E00EFBFAB /* LocalGameSelected.swift */,
 				8B90778020CCD07300EFBFAB /* FacebookFriend.xib */,
 				8B90778220CCD0A400EFBFAB /* FacebookFriend.swift */,
 			);
-			path = titanictictactoe;
+			path = PlayerSelection;
+			sourceTree = "<group>";
+		};
+		8BE72863242DAC8F00BFD873 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B3742741FAD4F2900889FB6 /* Game.swift */,
+				8B3742761FAD50A900889FB6 /* Player.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8BE72865242DACF900BFD873 /* GamePlay */ = {
+			isa = PBXGroup;
+			children = (
+				8BAB4A411E80CA2100B64D6D /* Winner.swift */,
+				8BAB4A3A1E7A08EA00B64D6D /* Board.swift */,
+				8BAB4A3C1E7A339D00B64D6D /* BoardAdapter.swift */,
+				8BEDB76B1FA2BD45002C42F6 /* BasicBoard.xib */,
+				8BEDB76D1FA2BF1B002C42F6 /* BasicBoard.swift */,
+			);
+			path = GamePlay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +310,9 @@
 				8B9B66D31F9DAFFD0070B58F /* Roboto-BlackItalic.ttf in Resources */,
 				8B9B66D41F9DAFFD0070B58F /* Roboto-Italic.ttf in Resources */,
 				8B9B66D51F9DAFFD0070B58F /* Roboto-Light.ttf in Resources */,
+				8B1F80A9242EF7E300904DEB /* LocalGame.xib in Resources */,
 				8B9B66D61F9DAFFD0070B58F /* Roboto-LightItalic.ttf in Resources */,
+				8B1F80A3242EC84100904DEB /* FacebookGame.xib in Resources */,
 				8B9B66D71F9DAFFD0070B58F /* Roboto-Regular.ttf in Resources */,
 				8B9B66D81F9DAFFD0070B58F /* Roboto-Thin.ttf in Resources */,
 				8B9B66D91F9DAFFD0070B58F /* Roboto-BoldItalic.ttf in Resources */,
@@ -343,18 +395,22 @@
 				8B90777D20CC460200EFBFAB /* FacebookGameSelected.swift in Sources */,
 				8B90778320CCD0A400EFBFAB /* FacebookFriend.swift in Sources */,
 				8BAB4A251E725F5A00B64D6D /* GameScene.swift in Sources */,
+				8BE72867242DAE6100BFD873 /* CurrentFacebookGames.swift in Sources */,
 				8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */,
+				8B1F80A5242EE98900904DEB /* SavedLocalGames.swift in Sources */,
 				8BEDB76E1FA2BF1B002C42F6 /* BasicBoard.swift in Sources */,
 				8B3742771FAD50A900889FB6 /* Player.swift in Sources */,
 				8BAB4A3B1E7A08EA00B64D6D /* Board.swift in Sources */,
 				8B460FC91FB017C500002FF6 /* Current&SavedGames.swift in Sources */,
 				8BAB4A3D1E7A339D00B64D6D /* BoardAdapter.swift in Sources */,
+				8B1F80A2242EC84100904DEB /* FacebookGame.swift in Sources */,
 				8B3742751FAD4F2900889FB6 /* Game.swift in Sources */,
 				8BAB4A271E725F5A00B64D6D /* Start.swift in Sources */,
 				8BAB4A1F1E725F5A00B64D6D /* AppDelegate.swift in Sources */,
 				8B90777B20CC456A00EFBFAB /* PlayerSelector.swift in Sources */,
 				8B9B66C51F9D8FE40070B58F /* Style.swift in Sources */,
 				8BAB4A371E78AECB00B64D6D /* MainMenu.swift in Sources */,
+				8B1F80A8242EF7E300904DEB /* LocalGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

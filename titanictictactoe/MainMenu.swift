@@ -19,6 +19,7 @@ class MainMenu: UIViewController {
     @IBOutlet var level3Button: UIButton!
     @IBOutlet var level4Button: UIButton!
     @IBOutlet var welcomeLabel: UILabel!
+    @IBOutlet var currentGamesButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,8 @@ class MainMenu: UIViewController {
             let extras = [level] as [Any]
             self.performSegue(withIdentifier: "SelectPlayers", sender: extras)
             break
+        case 307:
+            self.performSegue(withIdentifier: "ViewCurrentGames", sender: [])
         default:
             let alert = UIAlertController(title: "Sorry!", message: sender.titleLabel!.text! + " not available", preferredStyle: UIAlertController.Style.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)

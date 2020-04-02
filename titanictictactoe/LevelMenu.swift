@@ -262,30 +262,30 @@ class LevelMenu: UIViewController, GameRequestDialogDelegate {
         }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToGame" {
-            let board = segue.destination as! Board
-//            let levelSelect = sender as! Int
-//            board.level = levelSelect
-            let extras = sender as! [Any]
-            board.level = extras[0] as! Int
-//            Board.player1 = extras[1] as! String
-//            Board.player2 = extras[2] as! String
-//            if (LevelMenu.multiplayer) {
-//                Board.player1ID = Int64(extras[3] as! String)!
-//                Board.player2ID = Int64(extras[4] as! String)!
-//            }
-            Board.player1 = extras[1] as! Player
-            Board.player2 = extras[2] as! Player
-            board.levelMenu = self
-            board.mainMenu = self.mainMenu
-        } else if segue.identifier == "toCurrentGames" {
-            let currentGames = segue.destination as! CurrentGames
-            let extras = sender as! [Any]
-            currentGames.currentGames = extras[0] as! [Game]
-        }
-        // Pass the selected object to the new view controller.
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ToGame" {
+//            let board = segue.destination as! Board
+////            let levelSelect = sender as! Int
+////            board.level = levelSelect
+//            let extras = sender as! [Any]
+//            board.level = extras[0] as! Int
+////            Board.player1 = extras[1] as! String
+////            Board.player2 = extras[2] as! String
+////            if (LevelMenu.multiplayer) {
+////                Board.player1ID = Int64(extras[3] as! String)!
+////                Board.player2ID = Int64(extras[4] as! String)!
+////            }
+//            Board.player1 = extras[1] as! Player
+//            Board.player2 = extras[2] as! Player
+//            board.levelMenu = self
+//            board.mainMenu = self.mainMenu
+//        } else if segue.identifier == "toCurrentGames" {
+//            let currentGames = segue.destination as! CurrentGames
+//            let extras = sender as! [Any]
+//            currentGames.currentGames = extras[0] as! [Game]
+//        }
+//        // Pass the selected object to the new view controller.
+//    }
     
     //MARK: FBSDKGameRequestDialogDelegate
     
