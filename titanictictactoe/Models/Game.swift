@@ -96,4 +96,16 @@ class Game: NSObject {
             }
         }
     }
+    
+    static func createGameString() -> String {
+        var gameString = ""
+        for i in 0..<10 {
+            for j in 0..<9 {
+                // TODO: See if this needs to remain where it is
+                gameString += BasicBoard.wincheck[i][j] + ","
+            }
+            gameString += ";"
+        }
+        return gameString
+    }
 }

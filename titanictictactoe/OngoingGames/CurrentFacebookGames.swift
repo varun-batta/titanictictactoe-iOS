@@ -32,7 +32,7 @@ class CurrentFacebookGames: UIViewController, UITableViewDelegate, UITableViewDa
             
             // Sign in to Facebook if not already signed in
             if (AccessToken.current == nil) {
-                LoginManager().logIn(permissions: ["public_profile", "email", "user_friends"])
+                LoginManager().logIn(permissions: ["public_profile", "email", "user_friends"], from: self)
             }
             
             // Get all current game IDs to request game data

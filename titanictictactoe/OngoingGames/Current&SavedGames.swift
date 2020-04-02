@@ -153,7 +153,7 @@ class CurrentGames: ButtonBarPagerTabStripViewController, SavedLocalGamesDelegat
             
             // Set forfeit message and game accordingly
             let messageText = "\(fromPlayer.playerName) has forfeit the game. You win!"
-            let gameString = self.createGameString()
+            let gameString = Game.createGameString()
             
             // Create game request content for the forfeit call
             let gameRequestContent = GameRequestContent()
@@ -166,17 +166,6 @@ class CurrentGames: ButtonBarPagerTabStripViewController, SavedLocalGamesDelegat
             GameRequestDialog.init(content: gameRequestContent, delegate: self).show()
         }
         // TODO: Handle deleting local game
-    }
-    
-    func createGameString() -> String {
-        var game = ""
-        for i in 0..<10 {
-            for j in 0..<9 {
-                game += BasicBoard.wincheck[i][j] + ","
-            }
-            game += ";"
-        }
-        return game
     }
     
     // MARK: Game Request Dialog Delegate

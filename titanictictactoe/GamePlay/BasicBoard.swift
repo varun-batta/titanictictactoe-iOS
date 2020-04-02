@@ -248,21 +248,10 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                     titleText = "Your turn"
                 }
             }
-            let game = createGameString()
+            let game = Game.createGameString()
             let params : [String : Any] = ["data" : game, "message" : messageText, "title" : titleText]
             makeTurn(to: toPlayer.playerFBID, params: params)
         }
-    }
-    
-    func createGameString() -> String {
-        var game = ""
-        for i in 0..<10 {
-            for j in 0..<9 {
-                game += BasicBoard.wincheck[i][j] + ","
-            }
-            game += ";"
-        }
-        return game
     }
     
     func boardChanger( row : Int, column : Int, level : Int, clickable : Bool) {
@@ -450,7 +439,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 break
             case 2:
                 BasicBoard.metawincheck[rowIndex/3][columnIndex/3] = x
-                winOrTie = board.winningBoardChanger(boardAdapter: self, row: rowIndex, column: columnIndex, level: level, clickable: true, x: x)
+                winOrTie = board.winningBoardChanger(basicBoard: self, row: rowIndex, column: columnIndex, level: level, clickable: true, x: x)
                 break
             default:
                 return false
@@ -462,6 +451,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         return winOrTie
     }
     
+    // TODO : What is this for?
     func winningBoardChanger(row: Int, column: Int, level: Int, clickable: Bool, x : String)
     {
         

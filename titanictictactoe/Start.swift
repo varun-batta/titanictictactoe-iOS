@@ -27,7 +27,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         
         // Sign in to Facebook if not already signed in
         if (AccessToken.current == nil) {
-            LoginManager().logIn(permissions: ["public_profile", "email", "user_friends"])
+            LoginManager().logIn(permissions: ["public_profile", "email", "user_friends"], from: self)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(promptGameToOpen(notification:)), name: NSNotification.Name(rawValue: "gamesReady"), object: nil)
@@ -136,7 +136,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         Board.player1 = game.player1
         Board.player2 = game.player2
         Board.gameID  = game.requestID
-        LevelMenu.multiplayer = true
+        Board.isMultiplayer = true
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         if (game.opponentWon) {
             let winner : Winner = mainStoryboard.instantiateViewController(withIdentifier: "Winner") as! Winner

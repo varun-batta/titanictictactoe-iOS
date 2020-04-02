@@ -15,7 +15,6 @@ class Winner: UIViewController {
 
     var winnerName : String!
     var mainMenu : MainMenu!
-    var levelMenu : LevelMenu!
     var board : Board!
     
     @IBOutlet var background: UIView!
@@ -33,7 +32,7 @@ class Winner: UIViewController {
             if winnerName == "Tie" {
                 playerWinsLabel.text = "It's a Tie!"
             } else {
-                if (LevelMenu.multiplayer && (AccessToken.current) != nil) {
+                if (Board.isMultiplayer && (AccessToken.current) != nil) {
                     if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
                         playerWinsLabel.text = "You WIN!!!"
                     } else {
@@ -72,11 +71,11 @@ class Winner: UIViewController {
     }
     
     @objc func rematchButtonTapped(sender: UIButton) {
-        if (LevelMenu.multiplayer) {
+        if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
         
-        if (LevelMenu.multiplayer && (AccessToken.current?.userID == String(Board.player2.playerFBID))) {
+        if (Board.isMultiplayer && (AccessToken.current?.userID == String(Board.player2.playerFBID))) {
             let temp : Player = Board.player1
             Board.player1 = Board.player2
             Board.player2 = temp
@@ -92,14 +91,13 @@ class Winner: UIViewController {
         if segue.identifier == "rematch" {
             let board = segue.destination as! Board
             board.level = self.board.level
-            board.levelMenu = self.levelMenu
             board.mainMenu = self.mainMenu
         }
     }
     
     @objc func mainMenuButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
-        if (LevelMenu.multiplayer) {
+        if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
         if (self.mainMenu == nil) {
@@ -116,14 +114,14 @@ class Winner: UIViewController {
     
     @objc func newGameButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
-        if (LevelMenu.multiplayer) {
+        if (Board.isMultiplayer) {
             self.deleteGameRequest(request_id: String(Board.gameID))
         }
-        if (self.levelMenu == nil) {
-            let levelMenu = main.instantiateViewController(withIdentifier: "MainMenu")
-            self.present(levelMenu, animated: true, completion: nil)
+        if (self.mainMenu == nil) {
+            let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
+            self.present(mainMenu, animated: true, completion: nil)
         } else {
-            self.levelMenu.dismiss(animated: true, completion: nil)
+            self.mainMenu.dismiss(animated: true, completion: nil)
         }
     }
     

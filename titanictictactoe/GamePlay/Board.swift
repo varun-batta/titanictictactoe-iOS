@@ -15,8 +15,6 @@ import GameKit
 class Board: UIViewController {
 
     // TODO: See about all these variables and which are actually necessary
-    var boardAdapter : BoardAdapter? = nil
-    
     var gaps : CGFloat = 20
     var level : Int = 1
     var dimension : CGFloat!
@@ -33,7 +31,6 @@ class Board: UIViewController {
     static var reload = false
     static var titleLabel : UILabel!
     static var background : UIView!
-    var levelMenu : LevelMenu!
     var mainMenu : MainMenu!
     static var gameID : Int64 = 0
     
@@ -102,10 +99,6 @@ class Board: UIViewController {
         // TODO: What is the willLayoutSubviewCount all about??
         self.willLayoutSubviewsCount += 1
         if (self.willLayoutSubviewsCount == 2) {
-            if boardAdapter == nil {
-                boardAdapter = BoardAdapter.init(collectionViewLayout: UICollectionViewFlowLayout.init())
-            }
-            
             let metaBoard : BasicBoard = BasicBoard();
             metaBoard.frame = CGRect(x: 0, y: 0, width: self.board.frame.size.width, height: self.board.frame.size.height)
             metaBoard.metaRow = 0
@@ -135,7 +128,7 @@ class Board: UIViewController {
         switch sender.tag {
         case 408:
             let localPlayer = GKLocalPlayer.local
-            let gameData = createGameString().data(using: .utf8)
+            let gameData = Game.createGameString().data(using: .utf8)
             let gameName = Board.player1.playerName + " vs. " + Board.player2.playerName + " - Level \(level)"
             localPlayer.saveGameData(gameData!, withName: gameName) {(savedGame, error) -> Void in
                 if (error == nil) {
@@ -159,18 +152,7 @@ class Board: UIViewController {
         }
     }
     
-    func createGameString() -> String {
-        var game = ""
-        for i in 0..<10 {
-            for j in 0..<9 {
-                game += BasicBoard.wincheck[i][j] + ","
-            }
-            game += ";"
-        }
-        return game
-    }
-    
-    func winningBoardChanger(boardAdapter : BasicBoard, row : Int, column : Int, level : Int, clickable : Bool, x : String) -> Bool {
+    func winningBoardChanger(basicBoard : BasicBoard, row : Int, column : Int, level : Int, clickable : Bool, x : String) -> Bool {
         let metaRow = row/3
         let metaColumn = column/3
         let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
@@ -183,8 +165,8 @@ class Board: UIViewController {
         BasicBoard.metaBoard[metaRow][metaColumn].boardBackgroundRed.alpha = 0
         BasicBoard.metaBoard[metaRow][metaColumn].horizontalStackView.alpha = 0
         
-        boardAdapter.boardChanger(row: row, column: column, level: level, clickable: clickable)
-        return boardAdapter.winChecker(row: row, column: column, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: x, recreatingGame: false)
+        basicBoard.boardChanger(row: row, column: column, level: level, clickable: clickable)
+        return basicBoard.winChecker(row: row, column: column, level: 1, actual: level, winchecker: BasicBoard.metawincheck, turnValue: x, recreatingGame: false)
     }
     
     func finish(won : Bool, winnerName : String) {
@@ -199,21 +181,8 @@ class Board: UIViewController {
             let winner = segue.destination as! Winner
             let extras = sender as! [Any]
             winner.board = self
-            winner.levelMenu = self.levelMenu
             winner.winnerName = extras[0] as? String
             winner.mainMenu = self.mainMenu
         }
-    }
-    
-    func deleteGameRequest(request_id: String) {
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
-            if (result != nil) {
-                print("\(String(describing: result))")
-            } else {
-                print("\(String(describing: error))")
-            }
-        }
-        connection.start()
     }
 }
