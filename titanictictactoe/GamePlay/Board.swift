@@ -14,43 +14,22 @@ import GameKit
 
 class Board: UIViewController {
 
-    // TODO: See about all these variables and which are actually necessary
-    var gaps : CGFloat = 20
-    var level : Int = 1
-    var dimension : CGFloat!
-    var currentPlayer : String!
-    static var player1 : Player = Player()
-    static var player2 : Player = Player()
-    static var currentPlayer : Player = Player()
-    static var isMultiplayer : Bool!
-    var playerTurn : String!
-    static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>()
-    static var playerTurnLabel: UILabel!
-    var doneOnce : Bool = false
-    var willLayoutSubviewsCount : Int = 0
-    static var reload = false
-    static var titleLabel : UILabel!
-    static var background : UIView!
-    var mainMenu : MainMenu!
-    static var gameID : Int64 = 0
+    var level : Int = 1 // Will come from game
+    static var player1 : Player = Player() // Will come from game
+    static var player2 : Player = Player() // Will come from game
+    static var isMultiplayer : Bool! // Will come from game
+    static var gameID : Int64 = 0 // Will come from game
+    static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>() // TODO: Required for the buttons - does it need to be here or could it move to the BasicBoard?
+    var mainMenu : MainMenu! // TODO: Does this need to be passed around?
     
-    @IBOutlet var background: UIView!
-    @IBOutlet var board: UIView!
-    @IBOutlet var playersTurnLabel: UILabel!
+    @IBOutlet var board: BasicBoard!
+    @IBOutlet var currentPlayerLabel: UILabel!
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var menuButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // TODO: Is this "doneOnce" necessary?
-        if !self.doneOnce {
-            Board.titleLabel = self.view.viewWithTag(402) as? UILabel
-            Board.background = self.view.viewWithTag(401)
-            Board.playerTurnLabel = self.view.viewWithTag(407) as? UILabel
-            self.doneOnce = true
-        }
         
         if level == 1 {
             titleLabel.text = "Tic"
@@ -58,68 +37,51 @@ class Board: UIViewController {
             titleLabel.text = "Tic Tac"
         }
         
-        Board.playerTurnLabel.text = Board.player1.playerName + "'s Turn"
-        Board.playerTurnLabel.textColor = Style.mainColorBlack
-        
         // UI Setup
-        background.backgroundColor = Style.mainColorGreen;
-        // TODO: Why is there Board.playerTurnLabel and playersTurnLabel?
-        playersTurnLabel.textColor = Style.mainColorBlack;
+        currentPlayerLabel.text = Board.player1.playerName + "'s Turn"
         
-        // TODO: Does "isMultiplayer" need to be static? & Clean up this UI anyway
+        // TODO: Does "isMultiplayer" need to be static?
         if (Board.isMultiplayer) {
             saveButton.isEnabled = false
             saveButton.isHidden = true
         }
-        saveButton.backgroundColor = Style.mainColorBlack;
-        saveButton.setTitleColor(Style.mainColorWhite, for: .normal);
-        
-        menuButton.backgroundColor = Style.mainColorBlack;
-        menuButton.setTitleColor(Style.mainColorWhite, for: .normal);
-        titleLabel.textColor = Style.mainColorBlack;
     }
     
     override func viewWillLayoutSubviews() {
-        configureBoard()
+        super.viewWillLayoutSubviews()
+        
+        self.board.metaRow = 0
+        self.board.metaColumn = 0
+        self.board.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
+        
+        // The logic to recreate an existing game
+        // TODO: Perhaps this logic should be moved elsewhere to clarify the code
+        if (BasicBoard.wincheck[9][2] != "" && level >= 2) {
+            let row : Int = Int(BasicBoard.wincheck[9][0])!
+            let column : Int = Int(BasicBoard.wincheck[9][1])!
+            board.boardChanger(row: row, column: column, level: level, clickable: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func setCurrentPlayerLabel() {
+        // TODO: Fix all this unnecessary static logic
+        if BasicBoard.currentTurn == "X" {
+            currentPlayerLabel.text = Board.player2.playerName + "'s Turn"
+            BasicBoard.currentTurn = "O"
+        } else {
+            currentPlayerLabel.text = Board.player1.playerName + "'s Turn"
+            BasicBoard.currentTurn = "X"
+        }
     }
     
     // TODO: Clean up this data being all over the place
     func setPlayers(player1 : Player, player2: Player) {
         Board.player1 = player1
         Board.player2 = player2
-    }
-    
-    func configureBoard() {
-        // TODO: What is the willLayoutSubviewCount all about??
-        self.willLayoutSubviewsCount += 1
-        if (self.willLayoutSubviewsCount == 2) {
-            let metaBoard : BasicBoard = BasicBoard();
-            metaBoard.frame = CGRect(x: 0, y: 0, width: self.board.frame.size.width, height: self.board.frame.size.height)
-            metaBoard.metaRow = 0
-            metaBoard.metaColumn = 0
-            
-            metaBoard.configureBoard(width: self.board.frame.size.width, level: level, metaLevel: level, board: self)
-            
-            board.addSubview(metaBoard)
-            
-            // The logic to recreate an existing game
-            // TODO: Perhaps this logic should be moved elsewhere to clarify the code
-            if (BasicBoard.wincheck[9][2] != "" && level >= 2) {
-                let row : Int = Int(BasicBoard.wincheck[9][0])!
-                let column : Int = Int(BasicBoard.wincheck[9][1])!
-                metaBoard.boardChanger(row: row, column: column, level: level, clickable: true)
-            }
-        }
-    }
-    
-    // TODO: What is this function for? Looks like it's a way to get the size for an item at a particular index according to collectionview (might need to clean this up)
-    func sizeForItemAt(index : Int, width: CGFloat) {
-        dimension = (width - gaps)/3.0
     }
     
     // TODO: Get rid of this once the UI is cleaned up

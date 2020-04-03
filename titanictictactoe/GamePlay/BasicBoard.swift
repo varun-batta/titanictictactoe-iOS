@@ -63,6 +63,11 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     }
     
     func configureBoard(width: CGFloat, level: Int, metaLevel: Int, board: Board) {
+        // Reset the 3 stack views
+        verticalLeftStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
+        verticalMiddleStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
+        verticalRightStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
+        
         // TODO: Clean up this logic!!
         self.level = level
         self.metaLevel = metaLevel
@@ -171,21 +176,9 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     
     @objc func buttonClicked(sender: UIButton) {
         
-        var turn : String!
+        let turn : String! = BasicBoard.currentTurn
         
-        if BasicBoard.currentTurn == "X" {
-            turn = "X"
-            
-            Board.playerTurnLabel.text = Board.player2.playerName + "'s Turn"
-            
-            BasicBoard.currentTurn = "O"
-        } else {
-            turn = "O"
-            
-            Board.playerTurnLabel.text = Board.player1.playerName + "'s Turn"
-            
-            BasicBoard.currentTurn = "X"
-        }
+        board.setCurrentPlayerLabel()
         
         sender.setTitle(turn, for: .disabled)
         sender.isEnabled = false
