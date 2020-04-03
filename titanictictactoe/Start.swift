@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SpriteKit
 import GameplayKit
 import FacebookCore
 import GameKit
@@ -18,7 +17,6 @@ import FBSDKLoginKit
 class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //MARK: Properties
-    @IBOutlet var background: UIView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var playButton: UIButton!
     
@@ -56,7 +54,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - UICollectionViewDataSource
     
-    var titleLabels = ["Tic", "Tac", "Toe", "", "This is the\nenhanced version\nof Tic-Tac-Toe\nEnjoy!", "", "", "", ""];
+    var titleLabels = ["Tic", "Tac", "Toe", "", "This is the enhanced version of Tic-Tac-Toe Enjoy!", "", "", "", ""];
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1;
@@ -77,13 +75,12 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         
         if (indexPath.item == 4) {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCellDescription", for: indexPath)
-            let titleCellTextView : UITextView = titleCell .viewWithTag(102) as! UITextView;
-            titleCellTextView.text = titleLabels[indexPath.item];
-            titleCellTextView.isEditable = false
+            let titleCellDescriptionLabel : UILabel = titleCell.viewWithTag(102) as! UILabel;
+            titleCellDescriptionLabel.text = titleLabels[indexPath.item];
             return titleCell;
         } else {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath);
-            let titleCellLabel : UILabel = titleCell .viewWithTag(101) as! UILabel;
+            let titleCellLabel : UILabel = titleCell.viewWithTag(101) as! UILabel;
             titleCellLabel.text = titleLabels[indexPath.item];
             return titleCell;
         }

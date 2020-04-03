@@ -11,7 +11,6 @@ import UIKit
 class MainMenu: UIViewController {
     var caller = "MainMenu"
     
-    @IBOutlet var background: UIView!
     @IBOutlet var mainMenuLabel: UILabel!
     @IBOutlet var instructionsButton: UIButton!
     @IBOutlet var level1Button: UIButton!
@@ -27,7 +26,6 @@ class MainMenu: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
