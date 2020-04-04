@@ -822,79 +822,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view tag="501" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwK-ZJ-kFI" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player WINS!!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLj-Gz-B2C">
-                                        <rect key="frame" x="0.0" y="293" width="414" height="58.666666666666686"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="50"/>
-                                        <color key="textColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-5N-uUu">
-                                        <rect key="frame" x="20.666666666666657" y="361.66666666666669" width="372.66666666666674" height="48"/>
-                                        <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
-                                        <state key="normal" title="Rematch?">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" tag="504" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qt-93-cPT">
-                                        <rect key="frame" x="20.666666666666671" y="419.66666666666669" width="165.66666666666663" height="34"/>
-                                        <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Main Menu">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" tag="505" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-9D-Tld">
-                                        <rect key="frame" x="227.66666666666669" y="419.66666666666669" width="165.66666666666669" height="34"/>
-                                        <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="View Game">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" tag="506" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfV-cd-Bhs">
-                                        <rect key="frame" x="20.666666666666657" y="463.66666666666669" width="372.66666666666674" height="34"/>
-                                        <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="New Game">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.57647058819999997" green="0.88235294119999996" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="6Qt-93-cPT" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" multiplier="0.4" id="79a-FZ-62l"/>
-                                    <constraint firstItem="CiO-9D-Tld" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" multiplier="1.5" id="88U-q2-dv0"/>
-                                    <constraint firstItem="xaf-5N-uUu" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" multiplier="0.9" id="9EA-QY-iFo"/>
-                                    <constraint firstItem="tLj-Gz-B2C" firstAttribute="centerY" secondItem="kwK-ZJ-kFI" secondAttribute="centerY" multiplier="0.9" id="Ua4-aY-7m8"/>
-                                    <constraint firstItem="tfV-cd-Bhs" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" id="WKK-DE-Okc"/>
-                                    <constraint firstItem="tLj-Gz-B2C" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" id="Xfp-rH-SPI"/>
-                                    <constraint firstItem="6Qt-93-cPT" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" multiplier="0.5" id="Xxk-KM-Q1W"/>
-                                    <constraint firstItem="tfV-cd-Bhs" firstAttribute="top" secondItem="6Qt-93-cPT" secondAttribute="bottom" constant="10" id="cwy-4q-ljr"/>
-                                    <constraint firstItem="tfV-cd-Bhs" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" multiplier="0.9" id="d3n-eg-PVw"/>
-                                    <constraint firstItem="6Qt-93-cPT" firstAttribute="top" secondItem="xaf-5N-uUu" secondAttribute="bottom" constant="10" id="eME-Wo-sUt"/>
-                                    <constraint firstItem="xaf-5N-uUu" firstAttribute="top" secondItem="tLj-Gz-B2C" secondAttribute="bottom" constant="10" id="jI8-Uw-Ei8"/>
-                                    <constraint firstItem="tLj-Gz-B2C" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" id="jJ0-9z-HBF"/>
-                                    <constraint firstItem="xaf-5N-uUu" firstAttribute="centerX" secondItem="kwK-ZJ-kFI" secondAttribute="centerX" id="pqk-Yj-XGk"/>
-                                    <constraint firstItem="CiO-9D-Tld" firstAttribute="width" secondItem="kwK-ZJ-kFI" secondAttribute="width" multiplier="0.4" id="v8K-Vb-9Ee"/>
-                                    <constraint firstItem="CiO-9D-Tld" firstAttribute="top" secondItem="xaf-5N-uUu" secondAttribute="bottom" constant="10" id="yBM-hg-xT4"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player WINS!!!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLj-Gz-B2C">
+                                <rect key="frame" x="36" y="293" width="342" height="58.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="50"/>
+                                <color key="textColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-5N-uUu">
+                                <rect key="frame" x="36" y="361.33333333333331" width="342" height="47"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                <state key="normal" title="Rematch?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="504" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qt-93-cPT">
+                                <rect key="frame" x="36" y="418.33333333333331" width="152" height="33"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="Main Menu">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="505" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-9D-Tld">
+                                <rect key="frame" x="226" y="418.33333333333331" width="152" height="33"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="View Game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="506" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfV-cd-Bhs">
+                                <rect key="frame" x="36" y="461.33333333333331" width="342" height="33"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1019607843" blue="0.066666666669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="mainColorGreen"/>
                         <constraints>
-                            <constraint firstItem="kwK-ZJ-kFI" firstAttribute="height" secondItem="a4I-E7-U37" secondAttribute="height" id="FPt-cy-9s0"/>
-                            <constraint firstItem="kwK-ZJ-kFI" firstAttribute="centerX" secondItem="a4I-E7-U37" secondAttribute="centerX" id="dnw-ep-F3e"/>
-                            <constraint firstItem="kwK-ZJ-kFI" firstAttribute="width" secondItem="a4I-E7-U37" secondAttribute="width" id="rIy-gl-pCS"/>
-                            <constraint firstItem="kwK-ZJ-kFI" firstAttribute="centerY" secondItem="a4I-E7-U37" secondAttribute="centerY" id="yj5-rU-OSb"/>
+                            <constraint firstItem="tLj-Gz-B2C" firstAttribute="leading" secondItem="a4I-E7-U37" secondAttribute="leadingMargin" constant="16" id="7Oy-Xe-XLT"/>
+                            <constraint firstItem="xaf-5N-uUu" firstAttribute="leading" secondItem="a4I-E7-U37" secondAttribute="leadingMargin" constant="16" id="AKy-Ci-knC"/>
+                            <constraint firstItem="xaf-5N-uUu" firstAttribute="top" secondItem="tLj-Gz-B2C" secondAttribute="bottom" constant="10" id="Ax1-gD-ttM"/>
+                            <constraint firstItem="tfV-cd-Bhs" firstAttribute="top" secondItem="6Qt-93-cPT" secondAttribute="bottom" constant="10" id="HAA-yN-Li8"/>
+                            <constraint firstItem="tfV-cd-Bhs" firstAttribute="leading" secondItem="a4I-E7-U37" secondAttribute="leadingMargin" constant="16" id="KSI-0K-mns"/>
+                            <constraint firstItem="tLj-Gz-B2C" firstAttribute="centerY" secondItem="a4I-E7-U37" secondAttribute="centerY" multiplier="0.9" id="P50-QI-MTy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tfV-cd-Bhs" secondAttribute="trailing" constant="16" id="SDW-sQ-4pR"/>
+                            <constraint firstItem="6Qt-93-cPT" firstAttribute="width" secondItem="xaf-5N-uUu" secondAttribute="width" multiplier="4/9" id="Sam-Iv-upK"/>
+                            <constraint firstItem="tLj-Gz-B2C" firstAttribute="centerX" secondItem="a4I-E7-U37" secondAttribute="centerX" id="T5l-yY-Tzt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xaf-5N-uUu" secondAttribute="trailing" constant="16" id="WgB-KX-vsN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tLj-Gz-B2C" secondAttribute="trailing" constant="16" id="WkU-Lm-8qO"/>
+                            <constraint firstItem="CiO-9D-Tld" firstAttribute="top" secondItem="xaf-5N-uUu" secondAttribute="bottom" constant="10" id="cdL-A6-rLP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CiO-9D-Tld" secondAttribute="trailing" constant="16" id="ek0-bd-vGj"/>
+                            <constraint firstItem="6Qt-93-cPT" firstAttribute="leading" secondItem="a4I-E7-U37" secondAttribute="leadingMargin" constant="16" id="noJ-tF-483"/>
+                            <constraint firstItem="CiO-9D-Tld" firstAttribute="width" secondItem="xaf-5N-uUu" secondAttribute="width" multiplier="4/9" id="ybu-XY-BDC"/>
+                            <constraint firstItem="6Qt-93-cPT" firstAttribute="top" secondItem="xaf-5N-uUu" secondAttribute="bottom" constant="10" id="ytc-6u-e7P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cqI-Xe-nfG"/>
                     <connections>
-                        <outlet property="background" destination="kwK-ZJ-kFI" id="e9l-ti-5i5"/>
                         <outlet property="mainMenuButton" destination="6Qt-93-cPT" id="9g9-42-OZi"/>
                         <outlet property="newGameButton" destination="tfV-cd-Bhs" id="y2L-xt-WSk"/>
                         <outlet property="playerWinsLabel" destination="tLj-Gz-B2C" id="ej6-gg-1WQ"/>

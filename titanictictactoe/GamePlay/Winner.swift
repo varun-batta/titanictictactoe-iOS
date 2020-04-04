@@ -14,10 +14,9 @@ import FBSDKShareKit
 class Winner: UIViewController {
 
     var winnerName : String!
-    var mainMenu : MainMenu!
-    var board : Board!
+    var mainMenu : MainMenu! // TODO: Does this really need to be passed around?
+    var board : Board! // TODO: Does this really need to be passed around?
     
-    @IBOutlet var background: UIView!
     @IBOutlet var playerWinsLabel: UILabel!
     @IBOutlet var mainMenuButton: UIButton!
     @IBOutlet var viewGameButton: UIButton!
@@ -28,12 +27,12 @@ class Winner: UIViewController {
         super.viewDidLoad()
 
         // Set the winning player label
-        // TODO: Might want to clean up this logic if possible
         if winnerName != nil {
             if winnerName == "Tie" {
                 playerWinsLabel.text = "It's a Tie!"
             } else {
-                if (Board.isMultiplayer && (AccessToken.current) != nil) {
+                if (Board.isMultiplayer && AccessToken.current != nil) {
+                    // For facebook, we need to verify that you are the winning player
                     if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
                         playerWinsLabel.text = "You WIN!!!"
                     } else {
@@ -46,24 +45,9 @@ class Winner: UIViewController {
         }
         
         // UI Setup
-        // TODO: See if there's a better way to take care of all this
-        background.backgroundColor = Style.mainColorGreen;
-        playerWinsLabel.textColor = Style.mainColorBlack;
-        
-        rematchButton.backgroundColor = Style.mainColorBlack;
-        rematchButton.setTitleColor(Style.mainColorWhite, for: .normal);
         rematchButton.addTarget(self, action: #selector(rematchButtonTapped), for: .touchUpInside)
-        
-        mainMenuButton.backgroundColor = Style.mainColorBlack;
-        mainMenuButton.setTitleColor(Style.mainColorWhite, for: .normal);
         mainMenuButton.addTarget(self, action: #selector(mainMenuButtonTapped), for: .touchUpInside)
-        
-        viewGameButton.backgroundColor = Style.mainColorBlack;
-        viewGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
         viewGameButton.addTarget(self, action: #selector(viewGameButtonTapped), for: .touchUpInside)
-        
-        newGameButton.backgroundColor = Style.mainColorBlack;
-        newGameButton.setTitleColor(Style.mainColorWhite, for: .normal);
         newGameButton.addTarget(self, action: #selector(newGameButtonTapped), for: .touchUpInside)
     }
 
@@ -79,8 +63,7 @@ class Winner: UIViewController {
         }
         
         // Switch players since we are player 2 and we will become player 1
-        // TODO: Is this the right logic?
-        if (Board.isMultiplayer && (AccessToken.current?.userID == String(Board.player2.playerFBID))) {
+        if (Board.isMultiplayer && AccessToken.current?.userID == String(Board.player2.playerFBID)) {
             let temp : Player = Board.player1
             Board.player1 = Board.player2
             Board.player2 = temp
