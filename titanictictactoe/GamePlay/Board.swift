@@ -20,7 +20,6 @@ class Board: UIViewController {
     static var isMultiplayer : Bool! // Will come from game
     static var gameID : Int64 = 0 // Will come from game
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>() // TODO: Required for the buttons - does it need to be here or could it move to the BasicBoard?
-    var mainMenu : MainMenu! // TODO: Does this need to be passed around?
     
     @IBOutlet var board: BasicBoard!
     @IBOutlet var currentPlayerLabel: UILabel!
@@ -118,7 +117,7 @@ class Board: UIViewController {
         let metaColumn = column/3
         let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
         label?.text = BasicBoard.metawincheck[metaRow][metaColumn]
-        label?.textColor = Style.mainColorBlack
+        label?.textColor = UIColor(named: "mainColorBlack")
         label?.textAlignment = .center
         label?.font = Style.globalFont?.withSize(100)
         
@@ -132,6 +131,7 @@ class Board: UIViewController {
     
     func finish(won : Bool, winnerName : String) {
         if won {
+            board.disableBoard(level: level)
             let extras = [winnerName]
             self.performSegue(withIdentifier: "ToWinner", sender: extras)
         }
@@ -141,9 +141,8 @@ class Board: UIViewController {
         if segue.identifier == "ToWinner" {
             let winner = segue.destination as! Winner
             let extras = sender as! [Any]
-            winner.board = self
             winner.winnerName = extras[0] as? String
-            winner.mainMenu = self.mainMenu
+            winner.level = self.level
         }
     }
 }

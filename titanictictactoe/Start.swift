@@ -16,7 +16,6 @@ import FBSDKLoginKit
 
 class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    //MARK: Properties
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var playButton: UIButton!
     
@@ -45,14 +44,13 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: UICollectionViewDataSource
     
     var titleLabels = ["Tic", "Tac", "Toe", "", "This is the enhanced version of Tic-Tac-Toe Enjoy!", "", "", "", ""];
     
@@ -66,6 +64,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width : Double = Double(self.view.frame.size.width);
+        
         // Make the width and height of each cell roughly 90% - 20 pixels of the grid itself (for buffering effect)
         let dimension : Int = Int(0.9 * width - 20)/3;
         return CGSize(width: dimension, height: dimension);
@@ -73,6 +72,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        // Need to handle center description view differently than the other title views because the label text size and constraints are different
         if (indexPath.item == 4) {
             let titleCell : UICollectionViewCell = collectionView .dequeueReusableCell(withReuseIdentifier: "titleCellDescription", for: indexPath)
             let titleCellDescriptionLabel : UILabel = titleCell.viewWithTag(102) as! UILabel;
@@ -86,7 +86,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    // MARK : Facebook Tools
+    // MARK: Facebook Tools
     @objc func promptGameToOpen(notification: Notification) {
         let games = notification.object as! [Game]
         let gameCount = countGames(games: games)
@@ -122,6 +122,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         return count+1;
     }
     
+    // TODO: See if one universal beginGame function can be created
     func beginGame(game: Game) {
         BasicBoard.wincheck = game.data
         if (game.lastMove == "X") {
@@ -142,24 +143,12 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
             } else {
                 winner.winnerName = game.player2.playerName
             }
-            self.deleteGameRequest(request_id: "\(game.requestID)")
+            AppDelegate.deleteGameRequest(request_id: "\(game.requestID)")
             self.present(winner, animated: true, completion: nil)
         } else {
             let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
             board.level = game.level
             self.present(board, animated: true, completion: nil)
         }
-    }
-    
-    func deleteGameRequest(request_id: String) {
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
-            if (result != nil) {
-                print("\(String(describing: result))")
-            } else {
-                print("\(String(describing: error))")
-            }
-        }
-        connection.start()
     }
 }

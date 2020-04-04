@@ -344,7 +344,7 @@
         <!--Player Selector-->
         <scene sceneID="4pf-Ky-jxE">
             <objects>
-                <viewController id="x40-NS-Qtp" customClass="PlayerSelector" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerSelector" id="x40-NS-Qtp" customClass="PlayerSelector" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Cg-TL-gCT"/>
                         <viewControllerLayoutGuide type="bottom" id="xkP-qw-9zO"/>
@@ -417,7 +417,7 @@
                         <viewControllerLayoutGuide type="bottom" id="knR-sv-K1P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FV9-Md-sbK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="402" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyP-9u-ILQ">
@@ -430,7 +430,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pHX-as-az1">
-                                <rect key="frame" x="44" y="539" width="326" height="33"/>
+                                <rect key="frame" x="44" y="559" width="326" height="33"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="407" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Player's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-rm-Q6o">
                                         <rect key="frame" x="0.0" y="0.0" width="166" height="33"/>
@@ -469,7 +469,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-hz-ClG" customClass="BasicBoard" customModule="titanictictactoe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="414" height="414"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="434"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" name="mainColorGreen"/>
@@ -888,7 +888,7 @@
                         <outlet property="playerWinsLabel" destination="tLj-Gz-B2C" id="ej6-gg-1WQ"/>
                         <outlet property="rematchButton" destination="xaf-5N-uUu" id="ReY-Ms-Nez"/>
                         <outlet property="viewGameButton" destination="CiO-9D-Tld" id="Kh2-Xl-oXT"/>
-                        <segue destination="85Z-43-oKX" kind="show" identifier="rematch" id="2pP-lP-oOH"/>
+                        <segue destination="85Z-43-oKX" kind="presentation" identifier="rematch" modalPresentationStyle="fullScreen" id="2pP-lP-oOH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAW-ee-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>

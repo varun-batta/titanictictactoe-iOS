@@ -14,8 +14,7 @@ import FBSDKShareKit
 class Winner: UIViewController {
 
     var winnerName : String!
-    var mainMenu : MainMenu! // TODO: Does this really need to be passed around?
-    var board : Board! // TODO: Does this really need to be passed around?
+    var level : Int!
     
     @IBOutlet var playerWinsLabel: UILabel!
     @IBOutlet var mainMenuButton: UIButton!
@@ -33,6 +32,7 @@ class Winner: UIViewController {
             } else {
                 if (Board.isMultiplayer && AccessToken.current != nil) {
                     // For facebook, we need to verify that you are the winning player
+                    // TODO: Once game is available, just use game.opponentWon
                     if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
                         playerWinsLabel.text = "You WIN!!!"
                     } else {
@@ -59,7 +59,7 @@ class Winner: UIViewController {
     @objc func rematchButtonTapped(sender: UIButton) {
         // TODO: What is this for?
         if (Board.isMultiplayer) {
-            self.deleteGameRequest(request_id: String(Board.gameID))
+            AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         
         // Switch players since we are player 2 and we will become player 1
@@ -69,39 +69,41 @@ class Winner: UIViewController {
             Board.player2 = temp
         }
         
+        // Resetting board
         // TODO: Player 1 shouldn't have to be X
         BasicBoard.currentTurn = "X"
         BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
         BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+        
+        // Initiating Rematch
         self.performSegue(withIdentifier: "rematch", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "rematch" {
             let board = segue.destination as! Board
-            board.level = self.board.level
-            board.mainMenu = self.mainMenu
+            board.level = self.level
         }
     }
     
-    // TODO: Do we need both main menu and new game if main menu is where you create a new game from? Clean up!
     @objc func mainMenuButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         
         if (Board.isMultiplayer) {
-            self.deleteGameRequest(request_id: String(Board.gameID))
+            AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         
-        // TODO: Handle the view dismissing process better
-        if (self.mainMenu == nil) {
-            let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
-            self.present(mainMenu, animated: true, completion: nil)
-        } else {
-            self.mainMenu.dismiss(animated: true, completion: nil)
-        }
+        // Resetting board
+        BasicBoard.currentTurn = "X"
+        BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+        BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+        
+        // Moving to Main Menu
+        let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
+        mainMenu.modalPresentationStyle = .fullScreen // Necessary for iOS 13 onwards to make sure you can't come back
+        self.present(mainMenu, animated: true, completion: nil)
     }
     
-    // TODO: Make sure when viewing the game it is not clickable
     @objc func viewGameButtonTapped(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -110,28 +112,17 @@ class Winner: UIViewController {
         let main = UIStoryboard(name: "Main", bundle: nil)
         
         if (Board.isMultiplayer) {
-            self.deleteGameRequest(request_id: String(Board.gameID))
+            AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         
-        // TODO: Handle the view dismissing process better
-        if (self.mainMenu == nil) {
-            let mainMenu = main.instantiateViewController(withIdentifier: "MainMenu")
-            self.present(mainMenu, animated: true, completion: nil)
-        } else {
-            self.mainMenu.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    // TODO: Is this necessary? If yes, perhaps group all deleteGameRequest functions together? And all game request functions altogether, if possible
-    func deleteGameRequest(request_id: String) {
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error  in
-            if ((result) != nil) {
-                print("\(String(describing: result))")
-            } else {
-                print("\(String(describing: error))")
-            }
-        }
-        connection.start()
+        // Resetting board
+        BasicBoard.currentTurn = "X"
+        BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+        BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+        
+        // Moving to Player Selector to start new game
+        let playerSelector = main.instantiateViewController(withIdentifier: "PlayerSelector")
+        playerSelector.modalPresentationStyle = .fullScreen // Necessary for iOS 13 onwards to make sure you can't come back
+        self.present(playerSelector, animated: true, completion: nil)
     }
 }

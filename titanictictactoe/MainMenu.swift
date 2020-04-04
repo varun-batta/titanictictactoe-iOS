@@ -28,6 +28,7 @@ class MainMenu: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // TODO: Figure out one universal way to handle buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 201:

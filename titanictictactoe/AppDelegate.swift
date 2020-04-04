@@ -19,39 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-//
-//        let currentiCloudToken = FileManager.default.ubiquityIdentityToken
-//
-//        if (currentiCloudToken != nil) {
-//            let newTokenData = NSKeyedArchiver.archivedData(withRootObject: currentiCloudToken!)
-//            UserDefaults.standard.set(newTokenData, forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
-//        } else {
-//            UserDefaults.standard.removeObject(forKey: "com.varunbatta.titanictictactoe.UbiquityIdentityToken")
-//        }
         FBSDKCoreKit.ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        let handled = ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
-//
-//        let urlString = url.absoluteString.removingPercentEncoding!
-//        let targetURL = urlString.components(separatedBy: "#")[1]
-//        let request_ids_with_key = targetURL.components(separatedBy: "&")[1]
-//        let request_ids = request_ids_with_key.components(separatedBy: "=")[1]
-//        let request_ids_list = (request_ids.replacingOccurrences(of: "%2C", with: ",")).components(separatedBy: ",")
-//
-//        if (request_ids_list.count > 0) {
-//            self.getListOfOpponents(request_ids_list: request_ids_list)
-//        }
-//
-//        let main = UIStoryboard(name: "Main", bundle: nil)
-//        let start = main.instantiateInitialViewController()
-//
-//        self.window = UIWindow.init(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = start
-//        self.window?.makeKeyAndVisible()
         let handled = FBSDKCoreKit.ApplicationDelegate.shared.application(app, open: url, options: options)
         return handled
     }
@@ -79,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // TODO: Move this to a separate set of Facebook API Call functions
     func getListOfOpponents(request_ids_list : [String]) {
         var gamesCount = request_ids_list.count
         var start = 0
@@ -100,16 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 connection.add(GraphRequest(graphPath: "/\(request_ids_list[i])", parameters: ["fields" : "id, action_type, application, created_time, data, from, message, object, to"])) { connection, result, error in
                     if (result != nil) {
                         let response = result as! [String: Any]
-                        print("GetListOfOpponentsResponse: \(response)")
                         if (response["data"] != nil) {
                             let game : Game = Game()
                             game.initWithGameRequest(request: response)
                             games[i] = game
                         } else {
-                            self.deleteGameRequest(request_id: request_ids_list[i])
+                            AppDelegate.deleteGameRequest(request_id: request_ids_list[i])
                         }
                         if ((response["message"] as! String).lowercased().contains("forfeit")) {
-                            self.deleteGameRequest(request_id: request_ids_list[i])
+                            AppDelegate.deleteGameRequest(request_id: request_ids_list[i])
                         }
                     } else {
                         print("Error! \(String(describing: error))")
@@ -125,7 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func deleteGameRequest(request_id: String) {
+    // TODO: Move this to one global file for all API calls & better document what it is for!!
+    static func deleteGameRequest(request_id: String) {
         let connection = GraphRequestConnection()
         connection.add(GraphRequest(graphPath: "/\(request_id)", httpMethod: .delete)) {connection, result, error in
             if (result != nil) {

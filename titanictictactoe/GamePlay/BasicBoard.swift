@@ -93,7 +93,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 if ((BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "X" || BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column] == "O") && metaLevel >= 2 && self.winChecker(row: metaRow*3 + row, column: metaColumn*3 + column, level: metaLevel, actual: metaLevel, winchecker: BasicBoard.wincheck, turnValue: BasicBoard.wincheck[metaRow*3 + row][metaColumn*3 + column], recreatingGame: true)) {
                     let label = BasicBoard.metaBoard[metaRow][metaColumn].overlayingWinnerLabel
                     label?.text = BasicBoard.metawincheck[metaRow][metaColumn]
-                    label?.textColor = Style.mainColorBlack
+                    label?.textColor = UIColor(named: "mainColorBlack")
                     label?.textAlignment = .center
                     label?.font = Style.globalFont?.withSize(100)
                     
@@ -102,7 +102,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 }
                 
                 // TODO: See if there's anyway to avoid all this UI logic
-                button.setTitleColor(Style.mainColorBlack, for: .disabled)
+                button.setTitleColor(UIColor(named: "mainColorBlack"), for: .disabled)
                 button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
                 button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
                 button.backgroundColor = .clear
@@ -250,8 +250,8 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     func boardChanger( row : Int, column : Int, level : Int, clickable : Bool) {
         // TODO: Clean up this logic as much as possible
         if level == 2 {
-            for i in 0...8 {
-                for j in 0...8 {
+            for i in 0..<9 {
+                for j in 0..<9 {
                     let key : Int = i*9 + j
                     let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
                     
@@ -265,8 +265,8 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             let metaRow = row%3
             let metaColumn = column%3
             if BasicBoard.metawincheck[metaRow][metaColumn] == "" {
-                for k in 0...2 {
-                    for l in 0...2 {
+                for k in 0..<3 {
+                    for l in 0..<3 {
                         let key : Int = ((row % 3)*27 + k*9 + (column % 3)*3 + l)
                         let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
                         
@@ -278,8 +278,8 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 }
                 BasicBoard.metaBoard[metaRow][metaColumn].boardBackgroundRed.alpha = 0
             } else {
-                for i in 0...8 {
-                    for j in 0...8 {
+                for i in 0..<9 {
+                    for j in 0..<9 {
                         let key : Int = i*9 + j
                         let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
                         
@@ -293,6 +293,18 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    // TODO: See if there is a way to integrate this into boardChanger above
+    func disableBoard(level: Int) {
+        let boardSize = 3^level
+        for rowIndex in 0..<boardSize {
+            for columnIndex in 0..<boardSize {
+                let key : Int = rowIndex*boardSize + columnIndex
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                button.isEnabled = false
             }
         }
     }
@@ -483,7 +495,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 button.isEnabled = false
             }
         }
-        self.deleteGameRequest()
+        AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         
         var winningPlayerName : String = ""
         if turn == "X" {
@@ -494,18 +506,5 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         board.finish(won: winOrTie, winnerName: winningPlayerName)
         
         print("Success! \(String(describing: results))")
-    }
-    
-    // TODO: Document this function
-    func deleteGameRequest() {
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "/\(Board.gameID)", httpMethod: .delete)) { connection, result, error in
-            if (result != nil) {
-                print("\(String(describing: result))")
-            } else {
-                print("\(String(describing: error))")
-            }
-        }
-        connection.start()
     }
 }
