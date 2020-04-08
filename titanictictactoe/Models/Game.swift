@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FacebookCore
 import FBSDKCoreKit
 
 class Game: NSObject {

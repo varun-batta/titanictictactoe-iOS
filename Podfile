@@ -6,9 +6,9 @@ target 'titanictictactoe' do
   use_frameworks!
 
   # Pods for titanictictactoe
-  pod 'FacebookCore'
-  pod 'FacebookLogin'
-  pod 'FacebookShare'
+  pod 'FBSDKCoreKit/Swift'
+  pod 'FBSDKLoginKit/Swift'
+  pod 'FBSDKShareKit/Swift'
   
   pod 'XLPagerTabStrip'
 

@@ -7,10 +7,6 @@
 //
 
 import UIKit
-import GameplayKit
-import FacebookCore
-import GameKit
-import FacebookShare
 import FBSDKShareKit
 import FBSDKLoginKit
 

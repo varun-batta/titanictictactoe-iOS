@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FacebookCore
-import FacebookShare
+import FBSDKCoreKit
 import FBSDKShareKit
 
 class Winner: UIViewController {

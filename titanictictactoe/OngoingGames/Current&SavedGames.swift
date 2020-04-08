@@ -8,8 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import FacebookCore
-import FacebookShare
 import FBSDKCoreKit
 import FBSDKShareKit
 
@@ -114,6 +112,7 @@ class CurrentGames: ButtonBarPagerTabStripViewController, SavedLocalGamesDelegat
         let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
         board.level = game.level
         self.present(board, animated: true, completion: nil)
+        // TODO: Delete the game so that it doesn't show up twice
     }
     
     func viewGame(game: Game) {
