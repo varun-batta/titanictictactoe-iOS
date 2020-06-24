@@ -76,8 +76,8 @@ class Game: NSObject {
             self.level = Int(self.data[9][3])!
         }
         
-        self.player1.initForSavedGameName(playerName: String(savedGameName.split(separator: " ")[0]), turn: "X")
-        self.player2.initForSavedGameName(playerName: String(savedGameName.split(separator: " ")[2]), turn: "O")
+        self.player1.initPlayer(playerName: String(savedGameName.split(separator: " ")[0]), turn: "X")
+        self.player2.initPlayer(playerName: String(savedGameName.split(separator: " ")[2]), turn: "O")
     }
     
     func initData(data: String) {

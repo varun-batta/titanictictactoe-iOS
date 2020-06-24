@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -417,7 +417,7 @@
                         <viewControllerLayoutGuide type="bottom" id="knR-sv-K1P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FV9-Md-sbK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="402" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyP-9u-ILQ">
@@ -430,7 +430,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pHX-as-az1">
-                                <rect key="frame" x="44" y="559" width="326" height="33"/>
+                                <rect key="frame" x="44" y="539" width="326" height="33"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="407" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Player's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-rm-Q6o">
                                         <rect key="frame" x="0.0" y="0.0" width="166" height="33"/>
@@ -469,7 +469,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-hz-ClG" customClass="BasicBoard" customModule="titanictictactoe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="414" height="434"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="414"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" name="mainColorGreen"/>
@@ -710,16 +710,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fiS-Qc-vV4">
-                                <rect key="frame" x="30" y="30" width="354" height="140.33333333333334"/>
+                                <rect key="frame" x="30" y="30" width="354" height="160.66666666666666"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the player names below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrD-KY-NQK">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the player names and associated player moves below:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrD-KY-NQK">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="40.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" name="mainColorBlack"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Slc-PL-cVa">
-                                        <rect key="frame" x="0.0" y="30.333333333333336" width="354" height="50.000000000000007"/>
+                                        <rect key="frame" x="0.0" y="50.666666666666671" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RM2-GX-ayV">
                                                 <rect key="frame" x="0.0" y="0.0" width="234" height="50"/>
@@ -743,7 +743,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VHR-2x-sna">
-                                        <rect key="frame" x="0.0" y="90.333333333333329" width="354" height="49.999999999999986"/>
+                                        <rect key="frame" x="0.0" y="110.66666666666666" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c5O-Ts-Rjw">
                                                 <rect key="frame" x="0.0" y="0.0" width="234" height="50"/>
@@ -809,6 +809,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xvk-bT-V5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1743" y="1588"/>
+        </scene>
+        <!--Game Selected-->
+        <scene sceneID="DRA-Xz-u2e">
+            <objects>
+                <viewController storyboardIdentifier="aiGameSelected" id="y9C-f0-iOv" customClass="AIGameSelected" customModule="titanictictactoe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="91T-kB-SFv"/>
+                        <viewControllerLayoutGuide type="bottom" id="w3F-sn-D1Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fVz-C3-2kY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VT-K0-ggL">
+                                <rect key="frame" x="50" y="636" width="314" height="50"/>
+                                <color key="backgroundColor" name="mainColorBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sSl-8k-Rjd"/>
+                                </constraints>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" name="mainColorWhite"/>
+                                </state>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BtY-Rl-XbA">
+                                <rect key="frame" x="50" y="30" width="314" height="237"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select which move you wish to be below:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xee-cl-AAs">
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="40.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" name="mainColorBlack"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="(X means you will play first)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBK-Ja-0Nq">
+                                        <rect key="frame" x="0.0" y="40.666666666666671" width="314" height="39.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                                        <color key="textColor" name="mainColorBlack"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CHg-Lp-0bK">
+                                        <rect key="frame" x="0.0" y="80" width="314" height="158"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="157" id="LqU-ef-AVt"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="X"/>
+                                            <segment title="O"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="CHg-Lp-0bK" firstAttribute="top" secondItem="BtY-Rl-XbA" secondAttribute="top" constant="80" id="iou-67-xUW"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="1VT-K0-ggL" secondAttribute="trailing" constant="30" id="ATh-u1-tvL"/>
+                            <constraint firstItem="1VT-K0-ggL" firstAttribute="leading" secondItem="fVz-C3-2kY" secondAttribute="leadingMargin" constant="30" id="Fw9-gh-n6s"/>
+                            <constraint firstItem="BtY-Rl-XbA" firstAttribute="leading" secondItem="fVz-C3-2kY" secondAttribute="leadingMargin" constant="30" id="J1C-Ca-XCh"/>
+                            <constraint firstItem="BtY-Rl-XbA" firstAttribute="top" secondItem="91T-kB-SFv" secondAttribute="bottom" constant="30" id="MHf-zK-g8U"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BtY-Rl-XbA" secondAttribute="trailing" constant="30" id="YB5-k4-H7i"/>
+                            <constraint firstItem="w3F-sn-D1Z" firstAttribute="top" secondItem="1VT-K0-ggL" secondAttribute="bottom" constant="50" id="yL3-zH-19B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playButton" destination="1VT-K0-ggL" id="F9H-Ii-ebm"/>
+                        <outlet property="symbolSelector" destination="CHg-Lp-0bK" id="QOX-fu-AUB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orL-cs-2ae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1743" y="2357"/>
         </scene>
         <!--Winner-->
         <scene sceneID="C0E-vb-n8O">
@@ -897,7 +969,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2pP-lP-oOH"/>
+        <segue reference="d02-Nr-0SJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="127.33333587646484" height="46.666667938232422"/>

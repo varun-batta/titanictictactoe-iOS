@@ -119,6 +119,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
                 
                 Board.keys.setObject(button, forKey: NSNumber.init(value: button.tag))
+                Board.enabledKeys.append(NSNumber.init(value: button.tag))
                 
                 // TODO: Find a way to arrange the views better!
                 if column == 0 {
@@ -242,6 +243,10 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             let game = Game.createGameString()
             let params : [String : Any] = ["data" : game, "message" : messageText, "title" : titleText]
             makeTurn(to: toPlayer.playerFBID, params: params)
+        } else if board.currentPlayerLabel.text == "AI's Turn" {
+            // Determine which of the enabledKeys will be chosen
+            let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
+            buttonClicked(sender: Board.keys.object(forKey: chosenKey)!)
         }
     }
     
@@ -260,6 +265,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                     }
                 }
             }
+            Board.enabledKeys = []
             let metaRow = row%3
             let metaColumn = column%3
             if BasicBoard.metawincheck[metaRow][metaColumn] == "" {
@@ -271,6 +277,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
                             button.backgroundColor = .clear
+                            Board.enabledKeys.append(NSNumber.init(value: key))
                         }
                     }
                 }
@@ -284,6 +291,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                         if button.title(for: .disabled) == "" {
                             button.isEnabled = true
                             button.backgroundColor = .clear
+                            Board.enabledKeys.append(NSNumber.init(value: key))
                         }
                         
                         if BasicBoard.metawincheck[i%3][j%3] == "" {

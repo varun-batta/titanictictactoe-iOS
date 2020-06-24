@@ -11,22 +11,25 @@ import UIKit
 class Player: NSObject {
     var playerName : String
     var playerFBID : Int64
+    var isPlayerAI : Bool
     var turn : String
     
     override init() {
         self.playerName = ""
         self.playerFBID = -1
+        self.isPlayerAI = false
         self.turn = ""
     }
     
-    func initForLocalGame(playerName: String, turn: String) {
+    func initPlayer(playerName: String, turn: String) {
         self.playerName = playerName
         self.turn = turn
     }
     
-    func initForSavedGameName(playerName: String, turn: String) {
-        self.playerName = playerName
+    func initAI(turn: String) {
+        self.playerName = "AI"
         self.turn = turn
+        self.isPlayerAI = true
     }
     
     func initWithPlayerData(playerData: [String:String], turn: String) {

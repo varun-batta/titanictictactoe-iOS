@@ -47,7 +47,7 @@ class LocalGameSelected: UIViewController, IndicatorInfoProvider {
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Play Locally", image: UIImage(named: "Local Players-logo"))
+        return IndicatorInfo(title: "Play with Friend", image: UIImage(named: "Local Players-logo"))
     }
     
     @objc func selectSymbolForPlayer(sender: UISegmentedControl) {
@@ -68,8 +68,8 @@ class LocalGameSelected: UIViewController, IndicatorInfoProvider {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            player1.initForLocalGame(playerName: player1Name, turn: player1SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
-            player2.initForLocalGame(playerName: player2Name, turn: player2SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
+            player1.initPlayer(playerName: player1Name, turn: player1SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
+            player2.initPlayer(playerName: player2Name, turn: player2SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
             
             self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: false)
         }

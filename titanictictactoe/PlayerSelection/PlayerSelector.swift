@@ -9,9 +9,10 @@
 import UIKit
 import XLPagerTabStrip
 
-class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDelegate, FacebookGameSelectedDelegate {
+class PlayerSelector: ButtonBarPagerTabStripViewController, AIGameSelectedDelegate, LocalGameSelectedDelegate, FacebookGameSelectedDelegate {
     
     var level : Int = 1
+    var aiGameSelected : AIGameSelected!
     var localGameSelected : LocalGameSelected!
     var facebookGameSelected : FacebookGameSelected!
     
@@ -52,7 +53,7 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
     
     // Added this just to make sure the button bar cell width is correct
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width/2, height: self.buttonBarView.frame.height)
+        return CGSize(width: self.view.frame.width/3, height: self.buttonBarView.frame.height)
     }
     
     // Added this to make sure the view looks correct
@@ -62,11 +63,13 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, LocalGameSelectedDel
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        facebookGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "facebookGameSelected") as! FacebookGameSelected)
+        aiGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "aiGameSelected") as! AIGameSelected)
         localGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "localGameSelected") as! LocalGameSelected)
+        facebookGameSelected = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "facebookGameSelected") as! FacebookGameSelected)
+        aiGameSelected.delegate = self
         localGameSelected.delegate = self
         facebookGameSelected.delegate = self
-        return [localGameSelected, facebookGameSelected]
+        return [aiGameSelected, localGameSelected, facebookGameSelected]
     }
     
     func beginGame(player1: Player, player2: Player, isMultiplayer: Bool) {

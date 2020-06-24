@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		571F464E196D3021CCC0B94A /* Pods_titanictictactoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */; };
+		8B0A32CF24A063E400308DB9 /* AIGameSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A32CE24A063E400308DB9 /* AIGameSelected.swift */; };
 		8B1F80A2242EC84100904DEB /* FacebookGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F80A0242EC84100904DEB /* FacebookGame.swift */; };
 		8B1F80A3242EC84100904DEB /* FacebookGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1F80A1242EC84100904DEB /* FacebookGame.xib */; };
 		8B1F80A5242EE98900904DEB /* SavedLocalGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F80A4242EE98900904DEB /* SavedLocalGames.swift */; };
@@ -51,6 +52,7 @@
 		171ED76AD68BD124FEDFEE1F /* Pods-titanictictactoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.release.xcconfig"; sourceTree = "<group>"; };
 		1ED5204F0CB0C101ECF2FEDC /* Pods_titanictictactoe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_titanictictactoe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C745EA2978A64A426007A80 /* Pods-titanictictactoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-titanictictactoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-titanictictactoe/Pods-titanictictactoe.debug.xcconfig"; sourceTree = "<group>"; };
+		8B0A32CE24A063E400308DB9 /* AIGameSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGameSelected.swift; sourceTree = "<group>"; };
 		8B1F80A0242EC84100904DEB /* FacebookGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookGame.swift; sourceTree = "<group>"; };
 		8B1F80A1242EC84100904DEB /* FacebookGame.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookGame.xib; sourceTree = "<group>"; };
 		8B1F80A4242EE98900904DEB /* SavedLocalGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocalGames.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				8B90777E20CC463E00EFBFAB /* LocalGameSelected.swift */,
 				8B90778020CCD07300EFBFAB /* FacebookFriend.xib */,
 				8B90778220CCD0A400EFBFAB /* FacebookFriend.swift */,
+				8B0A32CE24A063E400308DB9 /* AIGameSelected.swift */,
 			);
 			path = PlayerSelection;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				8B90777F20CC463E00EFBFAB /* LocalGameSelected.swift in Sources */,
 				8B90777D20CC460200EFBFAB /* FacebookGameSelected.swift in Sources */,
 				8B90778320CCD0A400EFBFAB /* FacebookFriend.swift in Sources */,
+				8B0A32CF24A063E400308DB9 /* AIGameSelected.swift in Sources */,
 				8BE72867242DAE6100BFD873 /* CurrentFacebookGames.swift in Sources */,
 				8BAB4A421E80CA2100B64D6D /* Winner.swift in Sources */,
 				8B1F80A5242EE98900904DEB /* SavedLocalGames.swift in Sources */,

@@ -35,10 +35,10 @@ class Winner: UIViewController {
                     if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
                         playerWinsLabel.text = "You WIN!!!"
                     } else {
-                        playerWinsLabel.text = winnerName + "has won"
+                        playerWinsLabel.text = winnerName + " has won"
                     }
                 } else {
-                    playerWinsLabel.text = winnerName + " WINS!!!"
+                    playerWinsLabel.text = winnerName == "Your" ? "YOU WIN!!!" : winnerName + " WINS!!!"
                 }
             }
         }

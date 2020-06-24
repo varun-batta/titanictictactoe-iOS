@@ -18,6 +18,7 @@ class Board: UIViewController {
     static var isMultiplayer : Bool! // Will come from game
     static var gameID : Int64 = 0 // Will come from game
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>() // TODO: Required for the buttons - does it need to be here or could it move to the BasicBoard?
+    static var enabledKeys : [NSNumber] = []
     
     @IBOutlet var board: BasicBoard!
     @IBOutlet var currentPlayerLabel: UILabel!
@@ -59,6 +60,17 @@ class Board: UIViewController {
             board.boardChanger(row: row, column: column, level: level, clickable: true)
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Handle AI Player
+        if currentPlayerLabel.text == "AI's Turn" {
+            // Determine which of the enabledKeys will be chosen
+            let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
+            Board.keys.object(forKey: chosenKey)?.sendActions(for: .touchUpInside)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,10 +79,10 @@ class Board: UIViewController {
     func setCurrentPlayerLabel() {
         // TODO: Fix all this unnecessary static logic
         if BasicBoard.currentTurn == "X" {
-            currentPlayerLabel.text = Board.player2.playerName + "'s Turn"
+            currentPlayerLabel.text = Board.player2.playerName == "Your" ? "Your Turn" : Board.player2.playerName + "'s Turn"
             BasicBoard.currentTurn = "O"
         } else {
-            currentPlayerLabel.text = Board.player1.playerName + "'s Turn"
+            currentPlayerLabel.text = Board.player1.playerName == "Your" ? "Your Turn" :  Board.player1.playerName + "'s Turn"
             BasicBoard.currentTurn = "X"
         }
     }
