@@ -67,6 +67,7 @@ class Board: UIViewController {
         // Handle AI Player
         if currentPlayerLabel.text == "AI's Turn" {
             // Determine which of the enabledKeys will be chosen
+            populateEnabledKeys()
             let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
             Board.keys.object(forKey: chosenKey)?.sendActions(for: .touchUpInside)
         }
@@ -74,6 +75,17 @@ class Board: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func populateEnabledKeys() {
+        Board.enabledKeys = []
+        for key in Board.keys.keyEnumerator() {
+            let button : UIButton = Board.keys.object(forKey: (key.self as! NSNumber))!
+            
+            if button.isEnabled {
+                Board.enabledKeys.append(key.self as! NSNumber)
+            }
+        }
     }
     
     func setCurrentPlayerLabel() {
