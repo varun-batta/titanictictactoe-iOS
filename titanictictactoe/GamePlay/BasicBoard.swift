@@ -34,6 +34,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     static var currentTurn : String = "X"
     var turn : String!
     var board : Board!
+    var curInstructionsStep : Int = 1
     static var wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
     static var metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
     static var firstTurn : Bool = true
@@ -215,7 +216,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
 
         self.winOrTie = winChecker(row: row, column: column, level: metaLevel, actual: level, winchecker: BasicBoard.wincheck, turnValue: turn, recreatingGame: false)
 
-        if Board.isMultiplayer {
+        if Board.isMultiplayerMode {
             var toPlayer : Player = Player()
             var fromPlayer : Player = Player()
             if turn == "X" {
@@ -242,12 +243,296 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             let game = Game.createGameString()
             let params : [String : Any] = ["data" : game, "message" : messageText, "title" : titleText]
             makeTurn(to: toPlayer.playerFBID, params: params)
-        } else if board.currentPlayerLabel.text == "AI's Turn" {
+        } else if Board.isAIMode && board.currentPlayerLabel.text == "AI's Turn" {
             // Determine which of the enabledKeys will be chosen
             board.populateEnabledKeys()
             let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
             buttonClicked(sender: Board.keys.object(forKey: chosenKey)!)
+        } else if Board.isInstructionalMode && board.currentPlayerLabel.text != "AI's Turn" {
+            if level == 1 {
+                if curInstructionsStep == 2 {
+                    let alert = UIAlertController(title: nil, message: "Now, before we continue, let's clarify what your goal is.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Next", comment: "Next"), style: .default, handler: showRows))
+                    board.present(alert, animated: true, completion: nil)
+                } else if curInstructionsStep == 3 {
+                    // Check if potential win is there for the opponent
+                    let (isPotentialWin, _, _) = checkForPotentialWin(playerTurn: "O")
+                    if isPotentialWin {
+                        let alert = UIAlertController(title: nil, message: "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will be doing the same.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
+                        board.present(alert, animated: true, completion: nil)
+                    }
+                }
+                curInstructionsStep += 1
+            }
+        } else if Board.isInstructionalMode && board.currentPlayerLabel.text == "AI's Turn" {
+            if level == 1 {
+                if curInstructionsStep == 1 {
+                    board.populateEnabledKeys()
+                    let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
+                    let alert = UIAlertController(title: nil, message: "Since you started off the game, you are X this time around. Your opponent can now make a move in any one of the remaining squares and they are O.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: {(alert: UIAlertAction!) in self.buttonClicked(sender: Board.keys.object(forKey: chosenKey)!)}))
+                    board.present(alert, animated: true, completion: nil)
+                } else if curInstructionsStep == 3 {
+                    // Check if potential win is there for the opponent
+                    let (isPotentialWin, rowIndex, colIndex) = checkForPotentialWin(playerTurn: "X")
+                    if isPotentialWin {
+                        let alert = UIAlertController(title: nil, message: "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will be doing the same.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: {(alert: UIAlertAction!) in
+                            self.buttonClicked(sender: Board.keys.object(forKey: NSNumber.init(value: rowIndex*3 + colIndex))!)
+                        }))
+                        board.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    board.populateEnabledKeys()
+                    let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
+                    buttonClicked(sender: Board.keys.object(forKey: chosenKey)!)
+                }
+                curInstructionsStep += 1
+            }
         }
+    }
+    
+    func checkForPotentialWin(playerTurn: String) -> (Bool, Int, Int) {
+        var isPotentialWin = false
+        var rowIndex = -1
+        var colIndex = -1
+        for i in 0..<3 {
+            for j in 0..<3 {
+                if BasicBoard.wincheck[i][j] == playerTurn {
+                    // Check all row options
+                    if j == 0 && BasicBoard.wincheck[i][1] == playerTurn && BasicBoard.wincheck[i][2] == "" {
+                        isPotentialWin = true
+                        rowIndex = i
+                        colIndex = 2
+                        break
+                    } else if j == 1 && BasicBoard.wincheck[i][0] == playerTurn && BasicBoard.wincheck[i][2] == "" {
+                        isPotentialWin = true
+                        rowIndex = i
+                        colIndex = 2
+                        break
+                    } else if j == 1 && BasicBoard.wincheck[i][0] == "" && BasicBoard.wincheck[i][2] == playerTurn {
+                        isPotentialWin = true
+                        rowIndex = i
+                        colIndex = 0
+                        break
+                    } else if j == 2 && BasicBoard.wincheck[i][1] == playerTurn && BasicBoard.wincheck[i][0] == "" {
+                        isPotentialWin = true
+                        rowIndex = i
+                        colIndex = 0
+                        break
+                    }
+                    
+                    // Check all column options
+                    if i == 0 && BasicBoard.wincheck[1][j] == playerTurn && BasicBoard.wincheck[2][j] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = j
+                        break
+                    } else if i == 1 && BasicBoard.wincheck[0][j] == playerTurn && BasicBoard.wincheck[2][j] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = j
+                        break
+                    } else if i == 1 && BasicBoard.wincheck[0][j] == "" && BasicBoard.wincheck[2][j] == playerTurn {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = j
+                        break
+                    } else if i == 2 && BasicBoard.wincheck[1][j] == playerTurn && BasicBoard.wincheck[0][j] == "" {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = j
+                        break
+                    }
+                    
+                    // Check both diagonal options
+                    if i == 0 && j == 0 && BasicBoard.wincheck[1][1] == playerTurn && BasicBoard.wincheck[2][2] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = 2
+                        break
+                    } else if i == 1 && j == 1 && BasicBoard.wincheck[0][0] == playerTurn && BasicBoard.wincheck[2][2] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = 2
+                        break
+                    } else if i == 1 && j == 1 && BasicBoard.wincheck[0][0] == "" && BasicBoard.wincheck[2][2] == playerTurn {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = 0
+                        break
+                    } else if i == 2 && j == 2 && BasicBoard.wincheck[1][1] == playerTurn && BasicBoard.wincheck[0][0] == "" {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = 0
+                        break
+                    } else if i == 0 && j == 2 && BasicBoard.wincheck[1][1] == playerTurn && BasicBoard.wincheck[2][0] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = 0
+                        break
+                    } else if i == 1 && j == 1 && BasicBoard.wincheck[0][2] == playerTurn && BasicBoard.wincheck[2][0] == "" {
+                        isPotentialWin = true
+                        rowIndex = 2
+                        colIndex = 0
+                        break
+                    } else if i == 1 && j == 1 && BasicBoard.wincheck[0][2] == "" && BasicBoard.wincheck[2][0] == playerTurn {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = 2
+                        break
+                    } else if i == 2 && j == 0 && BasicBoard.wincheck[1][1] == playerTurn && BasicBoard.wincheck[0][2] == "" {
+                        isPotentialWin = true
+                        rowIndex = 0
+                        colIndex = 0
+                        break
+                    }
+                }
+            }
+            if isPotentialWin {
+                break
+            }
+        }
+        return (isPotentialWin, rowIndex, colIndex)
+    }
+    
+    func showRows(action : UIAlertAction) {
+        // Find the rowIndex of the last selection
+        var rowIndex : Int = -1;
+        for i in 0..<3 {
+            for j in 0..<3 {
+                if BasicBoard.wincheck[i][j] == "X" {
+                    rowIndex = i
+                    break
+                }
+            }
+            if rowIndex != -1 {
+                break
+            }
+        }
+        // Highlight that row of buttons
+        for i in 0..<3 {
+            let key : Int = rowIndex*3 + i
+            let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+            
+            button.backgroundColor = .yellow
+        }
+        // Present the alert
+        let alert = UIAlertController(title: nil, message: "You are trying to get your symbol, X in this case, to be either 3 in a row", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Next", comment: "Next"), style: .default, handler: showColumns))
+        board.present(alert, animated: true, completion: nil)
+    }
+    
+    func showColumns(action: UIAlertAction) {
+        // Find the colIndex of the last selection
+        var colIndex : Int = -1
+        for i in 0..<3 {
+            for j in 0..<3 {
+                if BasicBoard.wincheck[i][j] == "X" {
+                    colIndex = j
+                    break
+                }
+            }
+            if colIndex != -1 {
+                break
+            }
+        }
+        // Reset all the buttons to their original state
+        for i in 0..<3 {
+            for j in 0..<3 {
+                let key : Int = i*3 + j
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .clear
+            }
+        }
+        // Highlight that column of buttons
+        for i in 0..<3 {
+            let key : Int = i*3 + colIndex
+            let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+            
+            button.backgroundColor = .yellow
+        }
+        // Present the alert
+        let alert = UIAlertController(title: nil, message: "You are trying to get your symbol, X in this case, to be either 3 in a row, 3 in a column", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Next", comment: "Next"), style: .default, handler: showDiagonals))
+        board.present(alert, animated: true, completion: nil)
+    }
+    
+    func showDiagonals(action : UIAlertAction) {
+        // Find the rowIndex and colIndex of the last selection
+        var rowIndex : Int = -1
+        var colIndex : Int = -1
+        for i in 0..<3 {
+            for j in 0..<3 {
+                if BasicBoard.wincheck[i][j] == "X" {
+                    rowIndex = i
+                    colIndex = j
+                    break
+                }
+            }
+            if rowIndex != -1 && colIndex != -1 {
+                break
+            }
+        }
+        // Reset all the buttons to their original state
+        for i in 0..<3 {
+            for j in 0..<3 {
+                let key : Int = i*3 + j
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .clear
+            }
+        }
+        // Determine if the selection is in one of the 2 diagonals and highlight accordingly
+        if rowIndex == colIndex {
+            // Top Left to Bottom Right Diagonal
+            for i in 0..<3 {
+                let key : Int = i*3 + i
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .yellow
+            }
+        } else if abs(rowIndex - colIndex) == 2 {
+            // Top Right to Bottom Left Diagonal
+            var c = 2
+            for r in 0..<3 {
+                let key : Int = r*3 + colIndex
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .yellow
+                c -= 1
+            }
+        } else {
+            // Not in a diagonal, so just any of the two
+            for i in 0..<3 {
+                let key : Int = i*3 + i
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .yellow
+            }
+        }
+        // Present the alert
+        let alert = UIAlertController(title: nil, message: "You are trying to get your symbol, X in this case, to be either 3 in a row, 3 in a column, or 3 in a diagonal.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Got it", comment: "Got it"), style: .default, handler: finishShowingGuide))
+        board.present(alert, animated: true, completion: nil)
+    }
+    
+    func finishShowingGuide(action: UIAlertAction) {
+        // Reset all the buttons to their original state
+        for i in 0..<3 {
+            for j in 0..<3 {
+                let key : Int = i*3 + j
+                let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
+                
+                button.backgroundColor = .clear
+            }
+        }
+        
+        let alert = UIAlertController(title: nil, message: "Now let's play a bit!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
+        board.present(alert, animated: true, completion: nil)
     }
     
     func boardChanger( row : Int, column : Int, level : Int, clickable : Bool) {
@@ -441,7 +726,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             }
             switch(level) {
             case 1:
-                if (!Board.isMultiplayer) {
+                if (!Board.isMultiplayerMode) {
                     board.finish(won: true, winnerName: winningPlayer)
                 }
                 winOrTie = true

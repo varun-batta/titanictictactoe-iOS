@@ -15,7 +15,9 @@ class Board: UIViewController {
     var level : Int = 1 // Will come from game
     static var player1 : Player = Player() // Will come from game
     static var player2 : Player = Player() // Will come from game
-    static var isMultiplayer : Bool! // Will come from game
+    static var isMultiplayerMode : Bool! = false // Will come from game
+    static var isAIMode: Bool! = false // Will come from game
+    static var isInstructionalMode: Bool! = false // Will come from game
     static var gameID : Int64 = 0 // Will come from game
     static var keys : NSMapTable<NSNumber, UIButton> = NSMapTable<NSNumber, UIButton>() // TODO: Required for the buttons - does it need to be here or could it move to the BasicBoard?
     static var enabledKeys : [NSNumber] = []
@@ -29,17 +31,18 @@ class Board: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UI Setup
+        // TODO: Is a title even necessary?
         if level == 1 {
             titleLabel.text = "Tic"
         } else {
             titleLabel.text = "Tic Tac"
         }
         
-        // UI Setup
-        currentPlayerLabel.text = Board.player1.playerName + "'s Turn"
+        currentPlayerLabel.text = Board.player1.playerName == "Your" ? "Your Turn" :  Board.player1.playerName + "'s Turn"
         
         // TODO: Does "isMultiplayer" need to be static?
-        if (Board.isMultiplayer) {
+        if Board.isMultiplayerMode || Board.isInstructionalMode {
             saveButton.isEnabled = false
             saveButton.isHidden = true
         }
@@ -70,6 +73,93 @@ class Board: UIViewController {
             populateEnabledKeys()
             let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
             Board.keys.object(forKey: chosenKey)?.sendActions(for: .touchUpInside)
+        }
+        
+        // Handle Instructional Mode
+        if Board.isInstructionalMode {
+            if level == 1 {
+                // Instruction Set
+                _ = [
+                    [
+                        "message": "No worries! Since you don't know how Tic Tac Toe works, let's give you a quick intro. Start by tapping on any one of the available squares.",
+                        "action": "Dismiss to allow user to tap on one of the squares"
+                    ],
+                    [
+                        "message": "Since you started off the game, you are X this time around. Your opponent can now make a move in any one of the remaining squares and they are O.",
+                        "action": "Have the AI make a turn in the background"
+                    ],
+                    [
+                        "message": "Now, before we continue, let's clarify what your goal is.",
+                        "action": "Click next"
+                    ],
+                    [
+                        "message": "You are trying to get your symbol, X in this case, to be either 3 in a row",
+                        "action": "Highlight the 3 squares in the same row as selected"
+                    ],
+                    [
+                        "message": "You are trying to get your symbol, X in this case, to be either 3 in a row, 3 in a column",
+                        "action": "Highlight the 3 squares in the same column as selected"
+                    ],
+                    [
+                        "message": "You are trying to get your symbol, X in this case, to be either 3 in a row, 3 in a column, or 3 in a diagonal",
+                        "action": "Highlight the 3 squares in the same diagonal as selected if possible, else either of the 2 choices"
+                    ],
+                    [
+                        "message": "Now let's play a bit",
+                        "action": "Dismiss and allow a couple moves until 2 in a row column or diagonal for either of the two players"
+                    ],
+                    [
+                        "message": "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will  be doing the same",
+                        "action": "Dismiss and, if AI turn, make sure to choose the option to block the opponent. Let game continue to end"
+                    ],
+                    [
+                        "message": "Hope you enjoyed! If you'd like to try to learn how we make Tic Tac Toe a little more complicated, please click Next. If you'd like to continue practicing for now and perhaps try later, feel free to look at the instructions again (just click Yes when asking whether you know Tic Tac Toe already since now you do!)",
+                        "action": "If they click Next, show level 2 instructions. If not, just dismiss to the main menu"
+                    ]
+                ]
+                let alert = UIAlertController(title: nil, message: "No worries! Since you don't know how Tic Tac Toe works, let's give you a quick intro. Start by tapping on any one of the available squares.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else if level == 2 {
+                // Instruction Set
+                _ = [
+                    [
+                        "message": "Great! Let's show you the next level of Tic Tac Toe. Start by tapping on any one of the available squares.",
+                        "action": "Dismiss to allow user to tap on one of the squares"
+                    ],
+                    [
+                        "message": "Oh, look at that! Since you picked the <<their selection>> square, your opponent is only allowed to play in the <<their selection>> section of the board (everything that is red cannot be clicked on). Let's let them make a move.",
+                        "action": "Have the AI make a turn in the background"
+                    ],
+                    [
+                        "message": "As you can see, this is more complicated since we are moving around the entire board. But the goal is the same as regular tic tac toe. You keep moving around and try to win the different sections by getting 3 in a row, column or diagonal.",
+                        "action": "Let the user continue playing until the next move will win one of the sections (maybe guide the user to that state by highlighting the best option and making it the only clickable option)"
+                    ],
+                    [
+                        "message": "Now click here (highlight the ideal choice and make it the only clickable option)",
+                        "action": "Allow user to click there"
+                    ],
+                    [
+                        "message": "Brilliant! You just won the <<their selection>> section! As you can see, it became a giant X! To win the game, you have to continue playing and try to win 3 sections in a row, column or diagonal. So you can think of this as Tic Tac Toe in Tic Tac Toe :)",
+                        "action": "Click next and have the AI make a move that would direct back to the won square (if possible, else just show the next instruction)"
+                    ],
+                    [
+                        "message": "Oh, and one more thing you should be aware of. If you or your opponent click here (highlight the squares that would lead them back to the won square) at any point, since that particular section is not available, the entire game board would be available. So it would look like this (click there if possible, else just demo it)",
+                        "action": "Have them click OK"
+                    ],
+                    [
+                        "message": "Now let's play!",
+                        "action": "Dismiss and allow user to play until there's a victor"
+                    ],
+                    [
+                        "message": "Well done! Hope you enjoyed the game and keep practicing, perhaps try playing with a friend via Faceboook or in person. If your friend doesn't have the app yet, just share it with them!",
+                        "action": "Click done"
+                    ]
+                ]
+                let alert = UIAlertController(title: nil, message: "Great! Let's show you the next level of Tic Tac Toe. Start by tapping on any one of the available squares.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 

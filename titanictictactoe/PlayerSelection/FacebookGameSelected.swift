@@ -11,13 +11,14 @@ import XLPagerTabStrip
 import FBSDKLoginKit
 
 protocol FacebookGameSelectedDelegate: AnyObject {
-    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool)
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool, isAI: Bool)
 }
 
 class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider, LoginButtonDelegate {
     
     weak var delegate: FacebookGameSelectedDelegate?
     
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet var inviteFriendsLabel: UILabel!
     @IBOutlet var friendsTableView: UITableView!
     @IBOutlet var fbLoginButtonView: UIView!
@@ -78,10 +79,19 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
             dispatchGroup.wait()
             
             DispatchQueue.main.async {
-                // Finally, display all friends for selection using table view data source
-                self.friendsTableView.dataSource = self
-                self.friendsTableView.delegate = self
-                self.friendsTableView.reloadData()
+                // Finally, load the view as necessary
+                self.activityIndicatorView.stopAnimating()
+                
+                if self.friends.count > 0 {
+                    // If friends found, display for selection
+                    self.friendsTableView.isHidden = false
+                    self.friendsTableView.dataSource = self
+                    self.friendsTableView.delegate = self
+                    self.friendsTableView.reloadData()
+                } else {
+                    // If no friends, show the invite label
+                    self.inviteFriendsLabel.isHidden = false
+                }
                 
                 // Assign LoginButton Delegate
                 let loginButton = FBLoginButton()
@@ -124,7 +134,7 @@ class FacebookGameSelected: UIViewController, UITableViewDelegate, UITableViewDa
         let selectedPlayerCell = tableView.cellForRow(at: indexPath) as! FacebookFriend
         let player2 = selectedPlayerCell.facebookFriend!
         
-        self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: true)
+        self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: true, isAI: false)
     }
     
     // MARK: FBLoginButtonDelegate

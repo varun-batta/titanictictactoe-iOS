@@ -72,8 +72,8 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, AIGameSelectedDelega
         return [aiGameSelected, localGameSelected, facebookGameSelected]
     }
     
-    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool) {
-        performSegue(withIdentifier: "BeginGame", sender: [level, player1, player2, isMultiplayer])
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool, isAI: Bool) {
+        performSegue(withIdentifier: "BeginGame", sender: [level, player1, player2, isMultiplayer, isAI])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,7 +82,9 @@ class PlayerSelector: ButtonBarPagerTabStripViewController, AIGameSelectedDelega
             let extras = sender as! [Any]
             board.level = extras[0] as! Int
             board.setPlayers(player1: extras[1] as! Player, player2: extras[2] as! Player)
-            Board.isMultiplayer = extras[3] as? Bool
+            Board.isMultiplayerMode = extras[3] as? Bool
+            Board.isAIMode = extras[4] as? Bool
+            Board.isInstructionalMode = false
         }
     }
 }

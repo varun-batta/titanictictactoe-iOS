@@ -1,28 +1,24 @@
 PODS:
-  - FBSDKCoreKit (6.3.0):
-    - FBSDKCoreKit/Basics (= 6.3.0)
-    - FBSDKCoreKit/Core (= 6.3.0)
-  - FBSDKCoreKit/Basics (6.3.0)
-  - FBSDKCoreKit/Core (6.3.0):
+  - FBSDKCoreKit (8.0.0):
+    - FBSDKCoreKit/Basics (= 8.0.0)
+    - FBSDKCoreKit/Core (= 8.0.0)
+  - FBSDKCoreKit/Basics (8.0.0)
+  - FBSDKCoreKit/Core (8.0.0):
     - FBSDKCoreKit/Basics
-  - FBSDKCoreKit/Swift (6.3.0):
-    - FBSDKCoreKit/Core
-  - FBSDKLoginKit/Login (6.3.0):
-    - FBSDKCoreKit (~> 6.3.0)
-  - FBSDKLoginKit/Swift (6.3.0):
-    - FBSDKCoreKit/Swift (~> 6.3.0)
-    - FBSDKLoginKit/Login
-  - FBSDKShareKit/Share (6.3.0):
-    - FBSDKCoreKit (~> 6.3.0)
-  - FBSDKShareKit/Swift (6.3.0):
-    - FBSDKCoreKit/Swift (~> 6.3.0)
-    - FBSDKShareKit/Share
+  - FBSDKLoginKit (8.0.0):
+    - FBSDKLoginKit/Login (= 8.0.0)
+  - FBSDKLoginKit/Login (8.0.0):
+    - FBSDKCoreKit (~> 8.0.0)
+  - FBSDKShareKit (8.0.0):
+    - FBSDKShareKit/Share (= 8.0.0)
+  - FBSDKShareKit/Share (8.0.0):
+    - FBSDKCoreKit (~> 8.0.0)
   - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
-  - FBSDKCoreKit/Swift
-  - FBSDKLoginKit/Swift
-  - FBSDKShareKit/Swift
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - XLPagerTabStrip
 
 SPEC REPOS:
@@ -33,11 +29,11 @@ SPEC REPOS:
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
-  FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
-  FBSDKLoginKit: d46aa04d9bb9990a4deb6441736fae24a8c94496
-  FBSDKShareKit: cbd309f29d00e596bc28319724a7519940e804fa
+  FBSDKCoreKit: 9d27fe97a2fa2abe5eeefea8240e837623ab88e0
+  FBSDKLoginKit: 2cbaf5405379731b22f2ebc224f7c30f62378171
+  FBSDKShareKit: bf3705fc42b660c3da9f15223db791b3c9c2acde
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: c62d971b6101a69447434202d839274f0108e071
+PODFILE CHECKSUM: b98510eb477feb2fd4ee1a0ea8f79e303a499f7b
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
