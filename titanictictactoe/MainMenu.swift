@@ -69,7 +69,7 @@ class MainMenu: UIViewController {
             playerSelector.level = extras[0] as! Int
         } else if (segue.identifier == "BeginInstructionalGame") {
             let board : Board = segue.destination as! Board
-            let extras = sender as! [Any]
+             let extras = sender as! [Any]
             let player1 : Player = Player()
             let player2 : Player = Player()
             board.level = extras[0] as! Int
