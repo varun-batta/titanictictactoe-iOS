@@ -70,7 +70,7 @@ class Board: UIViewController {
         // Handle AI Player
         if currentPlayerLabel.text == "AI's Turn" {
             // Determine which of the enabledKeys will be chosen
-            populateEnabledKeys()
+            populateEnabledKeys(metaRow: -1, metaColumn: -1)
             let chosenKey = Board.enabledKeys[Int.random(in: 0..<Board.enabledKeys.count)]
             Board.keys.object(forKey: chosenKey)?.sendActions(for: .touchUpInside)
         }
@@ -109,7 +109,7 @@ class Board: UIViewController {
                         "action": "Dismiss and allow a couple moves until 2 in a row column or diagonal for either of the two players"
                     ],
                     [
-                        "message": "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will  be doing the same",
+                        "message": "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will be doing the same",
                         "action": "Dismiss and, if AI turn, make sure to choose the option to block the opponent. Let game continue to end"
                     ],
                     [
@@ -136,16 +136,17 @@ class Board: UIViewController {
                         "action": "Let the user continue playing until the next move will win one of the sections (maybe guide the user to that state by highlighting the best option and making it the only clickable option)"
                     ],
                     [
-                        "message": "Now click here (highlight the ideal choice and make it the only clickable option)",
-                        "action": "Allow user to click there"
+                        "message": "Now you'll want to click here",
+                        "action": "Highlight the ideal choice and make it the only clickable option. Allow user to click there. If it ends up being the opponent, show the alert and say 'It looks like your opponent will win this section of the board.' then highlight the button and say 'They'll want to click here', and then click it."
                     ],
                     [
+                        // TODO: Edit this text a bit based on whether the opponent or you clicked there
                         "message": "Brilliant! You just won the <<their selection>> section! As you can see, it became a giant X! To win the game, you have to continue playing and try to win 3 sections in a row, column or diagonal. So you can think of this as Tic Tac Toe in Tic Tac Toe :)",
-                        "action": "Click next and have the AI make a move that would direct back to the won square (if possible, else just show the next instruction)"
+                        "action": "Show the next instruction"
                     ],
                     [
-                        "message": "Oh, and one more thing you should be aware of. If you or your opponent click here (highlight the squares that would lead them back to the won square) at any point, since that particular section is not available, the entire game board would be available. So it would look like this (click there if possible, else just demo it)",
-                        "action": "Have them click OK"
+                        "message": "Oh, and one more thing you should be aware of. If you or your opponent click here (highlight all the squares that would lead them back to the won square) at any point, since that particular section is not available, the entire game board would be available. So it would look like this",
+                        "action": "Force the user to select that square (make everything unselectable) or make the AI select that square"
                     ],
                     [
                         "message": "Now let's play!",
@@ -167,12 +168,15 @@ class Board: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func populateEnabledKeys() {
+    func populateEnabledKeys(metaRow: Int, metaColumn: Int) {
         Board.enabledKeys = []
         for key in Board.keys.keyEnumerator() {
             let button : UIButton = Board.keys.object(forKey: (key.self as! NSNumber))!
-            
-            if button.isEnabled {
+            // Check for whether key should no tbe put into enabledKeys (it's the same as the section, so users won't see any movement)
+            let keyInt = key.self as! Int
+            let keyMetaColumn = keyInt % 3
+            let keyMetaRow = (keyInt / 9) % 3
+            if button.isEnabled && keyMetaRow != metaRow && keyMetaColumn != metaColumn {
                 Board.enabledKeys.append(key.self as! NSNumber)
             }
         }
@@ -213,10 +217,12 @@ class Board: UIViewController {
         case 409:
             BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
             BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+            BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
             BasicBoard.firstTurn = true
             BasicBoard.metaBoard = [[BasicBoard]](repeating: [BasicBoard](repeating: BasicBoard(), count: 3), count: 3)
             BasicBoard.lastMoveRow = -1
             BasicBoard.lastMoveColumn = -1
+            BasicBoard.currentTurn = "X"
             self.dismiss(animated: true, completion: nil)
             break
         default:
@@ -247,6 +253,22 @@ class Board: UIViewController {
             let extras = [winnerName]
             self.performSegue(withIdentifier: "ToWinner", sender: extras)
         }
+    }
+    
+    func dismiss(action: UIAlertAction) {
+        BasicBoard.wincheck = [[String]](repeating: [String](repeating: "", count: 9), count: 10)
+        BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+        BasicBoard.metawincheck = [[String]](repeating: [String](repeating: "", count: 3), count: 3)
+        BasicBoard.firstTurn = true
+        BasicBoard.metaBoard = [[BasicBoard]](repeating: [BasicBoard](repeating: BasicBoard(), count: 3), count: 3)
+        BasicBoard.lastMoveRow = -1
+        BasicBoard.lastMoveColumn = -1
+        BasicBoard.currentTurn = "X"
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showNextLevelInstructions(action: UIAlertAction) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
