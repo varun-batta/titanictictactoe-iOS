@@ -34,6 +34,10 @@
 	<string>267430880368292</string>
 	<key>FacebookDisplayName</key>
 	<string>Titanic Tic Tac Toe</string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <false/>
+    <key>FacebookAdvertiserIDCollectionEnabled</key>
+    <false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

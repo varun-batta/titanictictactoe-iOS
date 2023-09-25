@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -335,11 +335,12 @@
                         <outlet property="welcomeLabel" destination="F1l-q3-b0v" id="ZKe-Qh-jsH"/>
                         <segue destination="x40-NS-Qtp" kind="show" identifier="SelectPlayers" id="0vu-y6-nUt"/>
                         <segue destination="xQL-Z6-AhB" kind="show" identifier="ViewCurrentGames" id="sZ9-cy-lea"/>
+                        <segue destination="85Z-43-oKX" kind="show" identifier="BeginInstructionalGame" id="QiC-mx-BUz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMM-9z-BJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950.72463768115949" y="138.58695652173915"/>
+            <point key="canvasLocation" x="951" y="135"/>
         </scene>
         <!--Player Selector-->
         <scene sceneID="4pf-Ky-jxE">
@@ -406,7 +407,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IfB-Qj-RaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743.4782608695652" y="134.5108695652174"/>
+            <point key="canvasLocation" x="1742" y="-619"/>
         </scene>
         <!--Board-->
         <scene sceneID="9CL-sO-G4K">
@@ -656,8 +657,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YUh-bc-0m9">
                                 <rect key="frame" x="16" y="16" width="382" height="656"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to play with friends over Facebook? Invite them to install the app too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-HK-ltM">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="large" id="QuH-3U-bhV">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to play with friends over Facebook? Invite them to install the app too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-HK-ltM">
+                                        <rect key="frame" x="0.0" y="606" width="382" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Kds-9o-EJw"/>
                                         </constraints>
@@ -665,12 +670,12 @@
                                         <color key="textColor" name="mainColorBlack"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shH-EC-tWq">
-                                        <rect key="frame" x="0.0" y="60" width="382" height="548"/>
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shH-EC-tWq">
+                                        <rect key="frame" x="0.0" y="606" width="382" height="0.0"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wi-xB-8BO">
-                                        <rect key="frame" x="0.0" y="608" width="382" height="48"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0wi-xB-8BO">
+                                        <rect key="frame" x="0.0" y="606" width="382" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Ypf-jv-V94"/>
@@ -688,6 +693,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="QuH-3U-bhV" id="fm5-8M-AoB"/>
                         <outlet property="fbLoginButtonView" destination="0wi-xB-8BO" id="gak-1S-Kro"/>
                         <outlet property="friendsTableView" destination="shH-EC-tWq" id="ghZ-St-hee"/>
                         <outlet property="inviteFriendsLabel" destination="vJU-HK-ltM" id="RH6-Ff-vpd"/>
@@ -969,7 +975,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="d02-Nr-0SJ"/>
+        <segue reference="QiC-mx-BUz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="127.33333587646484" height="46.666667938232422"/>

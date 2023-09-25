@@ -29,7 +29,7 @@ class Winner: UIViewController {
             if winnerName == "Tie" {
                 playerWinsLabel.text = "It's a Tie!"
             } else {
-                if (Board.isMultiplayer && AccessToken.current != nil) {
+                if (Board.isMultiplayerMode && AccessToken.current != nil) {
                     // For facebook, we need to verify that you are the winning player
                     // TODO: Once game is available, just use game.opponentWon
                     if ((Board.player1.playerName == winnerName && AccessToken.current?.userID == String(Board.player1.playerFBID)) || (Board.player2.playerName == winnerName && AccessToken.current?.userID == String(Board.player2.playerFBID))) {
@@ -57,12 +57,12 @@ class Winner: UIViewController {
     // TODO: Handle button clicks better if possible
     @objc func rematchButtonTapped(sender: UIButton) {
         // TODO: What is this for?
-        if (Board.isMultiplayer) {
+        if (Board.isMultiplayerMode) {
             AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         
         // Switch players since we are player 2 and we will become player 1
-        if (Board.isMultiplayer && AccessToken.current?.userID == String(Board.player2.playerFBID)) {
+        if (Board.isMultiplayerMode && AccessToken.current?.userID == String(Board.player2.playerFBID)) {
             let temp : Player = Board.player1
             Board.player1 = Board.player2
             Board.player2 = temp
@@ -88,7 +88,7 @@ class Winner: UIViewController {
     @objc func mainMenuButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         
-        if (Board.isMultiplayer) {
+        if (Board.isMultiplayerMode) {
             AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         
@@ -110,7 +110,7 @@ class Winner: UIViewController {
     @objc func newGameButtonTapped(sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         
-        if (Board.isMultiplayer) {
+        if (Board.isMultiplayerMode) {
             AppDelegate.deleteGameRequest(request_id: String(Board.gameID))
         }
         

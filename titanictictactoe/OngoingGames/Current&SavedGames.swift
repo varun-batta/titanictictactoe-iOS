@@ -107,7 +107,7 @@ class CurrentGames: ButtonBarPagerTabStripViewController, SavedLocalGamesDelegat
         Board.player1 = game.player1
         Board.player2 = game.player2
         Board.gameID  = game.requestID
-        Board.isMultiplayer = isMultiplayer
+        Board.isMultiplayerMode = isMultiplayer
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let board : Board = mainStoryboard.instantiateViewController(withIdentifier: "Board") as! Board
         board.level = game.level

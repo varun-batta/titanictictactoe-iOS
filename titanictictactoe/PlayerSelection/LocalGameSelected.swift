@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 protocol LocalGameSelectedDelegate: AnyObject {
-    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool)
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool, isAI: Bool)
 }
 
 class LocalGameSelected: UIViewController, IndicatorInfoProvider {
@@ -71,7 +71,7 @@ class LocalGameSelected: UIViewController, IndicatorInfoProvider {
             player1.initPlayer(playerName: player1Name, turn: player1SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
             player2.initPlayer(playerName: player2Name, turn: player2SymbolSelector.selectedSegmentIndex == 0 ? "X" : "O")
             
-            self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: false)
+            self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: false, isAI: false)
         }
     }
 }

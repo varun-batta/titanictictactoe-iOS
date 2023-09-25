@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 protocol AIGameSelectedDelegate: AnyObject {
-    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool)
+    func beginGame(player1: Player, player2: Player, isMultiplayer: Bool, isAI: Bool)
 }
 
 class AIGameSelected: UIViewController, IndicatorInfoProvider {
@@ -51,6 +51,6 @@ class AIGameSelected: UIViewController, IndicatorInfoProvider {
             player2.initPlayer(playerName: "Your", turn: "O")
         }
         
-        self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: false)
+        self.delegate!.beginGame(player1: player1, player2: player2, isMultiplayer: false, isAI: true)
     }
 }

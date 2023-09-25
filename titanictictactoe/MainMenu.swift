@@ -32,9 +32,13 @@ class MainMenu: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 201:
-            let alert = UIAlertController(title: "Sorry!", message: "Instructions not available", preferredStyle: UIAlertController.Style.alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(defaultAction)
+            let alert = UIAlertController(title: nil, message: "Do you already know how Tic Tac Toe works?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Yes"), style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "BeginInstructionalGame", sender: [2])
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "BeginInstructionalGame", sender: [1])
+            }))
             self.present(alert, animated: true, completion: nil)
             break
         case 303:
@@ -63,6 +67,18 @@ class MainMenu: UIViewController {
             let playerSelector = segue.destination as! PlayerSelector
             let extras = sender as! [Any]
             playerSelector.level = extras[0] as! Int
+        } else if (segue.identifier == "BeginInstructionalGame") {
+            let board : Board = segue.destination as! Board
+            let extras = sender as! [Any]
+            let player1 : Player = Player()
+            let player2 : Player = Player()
+            board.level = extras[0] as! Int
+            player1.initPlayer(playerName: "Your", turn: "X")
+            player2.initAI(turn: "O")
+            board.setPlayers(player1: player1, player2: player2)
+            Board.isMultiplayerMode = false
+            Board.isInstructionalMode = true
+            Board.isAIMode = false
         }
     }
 }

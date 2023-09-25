@@ -130,7 +130,7 @@ class Start: UIViewController, UICollectionViewDelegate, UICollectionViewDataSou
         Board.player1 = game.player1
         Board.player2 = game.player2
         Board.gameID  = game.requestID
-        Board.isMultiplayer = true
+        Board.isMultiplayerMode = true
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         if (game.opponentWon) {
             let winner : Winner = mainStoryboard.instantiateViewController(withIdentifier: "Winner") as! Winner
