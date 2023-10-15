@@ -319,7 +319,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                     board.present(alert, animated: true, completion: nil)
                     BasicBoard.curInstructionsStep += 1
                 } else if BasicBoard.curInstructionsStep == 3 {
-                    // Check if potential win is there for the opponent
+                    // Check if potential win is there for you
                     let (isPotentialWin, rowIndex, colIndex) = checkForPotentialWin(playerTurn: "X", row: row, column: column)
                     if isPotentialWin {
                         let alert = UIAlertController(title: nil, message: "Well done! Remember to make sure your opponent doesn't get 3 in a row and they will be doing the same.", preferredStyle: .alert)
@@ -366,7 +366,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
                 } else if BasicBoard.curInstructionsStep == 4 {
                     let playerTurn = "X"
                     let (selectionName, metaRow, metaColumn) = getMetaboardSelectionName(playerTurn: playerTurn)
-                    let alert = UIAlertController(title: nil, message: "Awesome! Youjust won the \(selectionName) section! As you can see, it became a giant \(playerTurn)! To win the game, you have to continue playing and try to win 3 sections in a row, column or diagonal. So you can think of this as Tic Tac Toe in Tic Tac Toe :)", preferredStyle: .alert)
+                    let alert = UIAlertController(title: nil, message: "Awesome! You just won the \(selectionName) section! As you can see, it became a giant \(playerTurn)! To win the game, you have to continue playing and try to win 3 sections in a row, column or diagonal. So you can think of this as Tic Tac Toe in Tic Tac Toe :)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: {(alert: UIAlertAction!) in
                         self.showWarning(metaRow: metaRow, metaColumn: metaColumn, selectedMetaRow: row % 3, selectedMetaColumn: column % 3)
                     }))
@@ -529,7 +529,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             emptyRows = [Int]()
             emptyColumns = [Int]()
             c = metaColumn*3 + 2
-            for r in 0..<3 {
+            for r in metaRow*3+0..<metaRow*3+3 {
                 if BasicBoard.wincheck[r][c] == playerTurn {
                     foundRows.append(r)
                     foundColumns.append(c)
@@ -588,10 +588,10 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
     }
     
     func isInTopRightToBottomLeftDiagonal(row: Int, column: Int) -> Bool {
-        let isTopLeft = row == 0 && column == 2
+        let isTopRight = row == 0 && column == 2
         let isCenter = row == 1 && column == 1
         let isBottomLeft = row == 2 && column == 0
-        return isTopLeft || isCenter || isBottomLeft
+        return isTopRight || isCenter || isBottomLeft
     }
     
     func showRows(action : UIAlertAction) {
@@ -695,7 +695,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
             // Top Right to Bottom Left Diagonal
             var c = 2
             for r in 0..<3 {
-                let key : Int = r*3 + colIndex
+                let key : Int = r*3 + c
                 let button : UIButton = Board.keys.object(forKey: NSNumber.init(value: key))!
                 
                 button.backgroundColor = .yellow
@@ -805,7 +805,7 @@ class BasicBoard: UIView, GameRequestDialogDelegate {
         
         // TODO: Fix logic to determine AI or player turn
         let isAITurn = board.currentPlayerLabel.text == "AI's Turn"
-        let alert = UIAlertController(title: nil, message: isAITurn ? "They'll want to click here" : "Now you'll want to click here.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: isAITurn ? "They'll want to click here" : "Now you'll want to click here", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: isAITurn ? {(action: UIAlertAction) in self.buttonClicked(sender: button)} : nil ))
         board.present(alert, animated: true, completion: nil)
     }

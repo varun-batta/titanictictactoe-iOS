@@ -117,7 +117,7 @@ class Board: UIViewController {
                         "action": "If they click Next, show level 2 instructions. If not, just dismiss to the main menu"
                     ]
                 ]
-                let alert = UIAlertController(title: nil, message: "No worries! Since you don't know how Tic Tac Toe works, let's give you a quick intro. Start by tapping on any one of the available squares.", preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: "No worries! Since you don't know how Tic Tac Toe works, let's give you a quick intro. Start by tapping on any one of the available squares", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else if level == 2 {
@@ -172,7 +172,7 @@ class Board: UIViewController {
         Board.enabledKeys = []
         for key in Board.keys.keyEnumerator() {
             let button : UIButton = Board.keys.object(forKey: (key.self as! NSNumber))!
-            // Check for whether key should no tbe put into enabledKeys (it's the same as the section, so users won't see any movement)
+            // Check for whether key should not be put into enabledKeys (it's the same as the section, so users won't see any movement)
             let keyInt = key.self as! Int
             let keyMetaColumn = keyInt % 3
             let keyMetaRow = (keyInt / 9) % 3
