@@ -516,9 +516,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Titanic Tic Tac Toe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -538,9 +540,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = titanictictactoe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Titanic Tic Tac Toe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunbatta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
